@@ -69,6 +69,10 @@ export class ObservatoryController {
   @Get('weekly')
   weekly() { return this.observatory.weekly(); }
 
+  @Get('rivers')
+  @Header('Cache-Control', 'public, max-age=3600')
+  rivers() { return this.observatory.rivers(); }
+
   @Get('fires/map')
   fireMap() { return this.observatory.fireMap(); }
 

@@ -75,9 +75,17 @@ def _loss_by_cause(main: list[dict]) -> None:
         for k, v in r["decomposition_ha"].items():
             totals[k] = totals.get(k, 0.0) + min(v, 0.0)  # solo perdidas
     color = {"Lluvia menos evaporacion": "#ffa26b", "El Nino": "#ffd166", "Huella humana": "#ff7a7a",
+             "Menos agua desde aguas arriba": "#60a5fa",
              "Incalculable": "#8b93b8"}
     items = [(k, -v, color.get(k, th.MUTED)) for k, v in sorted(totals.items(), key=lambda kv: kv[1]) if v < 0]
     ui.md(ui.bars(items, " ha"))
+    splits = [r["upstream_split"] for r in main if r.get("upstream_split")]
+    if splits:
+        hi = sum(x["human_max_ha"] for x in splits)
+        lo = sum(x["human_min_ha"] for x in splits)
+        ui.md(f"<div class='why' style='margin-top:6px'>De lo que deja de llegar aguas arriba, la parte humana va de "
+              f"<b>{lo:,} a {hi:,} ha</b>. Es un rango porque la fuente (el Titicaca) tiene un veredicto de confianza "
+              "baja; se cierra con el nivel medido del lago y el caudal del Desaguadero en estaciones.</div>")
     ui.md("<div class='muted'>Suma de las perdidas de todos los cuerpos de agua con analisis completo. "
           "\"Incalculable\" es agua perdida cuya causa no se puede calcular con los datos actuales.</div>")
 
@@ -98,7 +106,13 @@ def _cards(rows: list[dict]) -> None:
                 with c2:
                     ui.md(ui.ring(r["n_pass"] / 3, color, f"{r['n_pass']}/3", 70))
                 ui.md(ui.sparkline(r["observed"], color))
-                if top:
+                rb = r.get("robustness")
+                if rb:
+                    ui.md(f"<div class='muted'>Se mantiene en {rb['agree']} de {rb['of']} configuraciones"
+                          + (" · robusto" if rb["agree"] >= 5 else " · fragil" if rb["agree"] <= 3 else "") + "</div>")
+                if r.get("upstream_source"):
+                    ui.md(ui.chip(f"Fuente: {r['upstream_source']['name'].split(' (')[0]}", "waves", "#60a5fa"))
+                elif top:
                     ui.md(ui.chip(f"{top['label']} · {top['evidence']}", "search"))
                 nav.open_button(r["body_id"], f"card_{r['body_id']}")
 

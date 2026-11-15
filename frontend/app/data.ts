@@ -1,6 +1,7 @@
 export const states = {
   'Huella humana': { label: 'Huella humana', rgb: [255, 122, 122], action: 'Prevenir. Controlar la actividad sospechosa, proteger la cuenca y restaurar.' },
   'Alerta temprana': { label: 'Alerta temprana', rgb: [196, 161, 255], action: 'Actuar temprano para proteger la cuenca.' },
+  'Aguas arriba': { label: 'Causa aguas arriba', rgb: [96, 190, 250], action: 'Coordinar la gestión con la cuenca que la alimenta: el agua deja de llegar por el río.' },
   Incalculable: { label: 'Incalculable', rgb: [255, 209, 102], action: 'Revisar qué datos o pruebas faltan para calcular la causa de la pérdida.' },
   'Sin explicar': { label: 'Sin explicar', rgb: [255, 209, 102], action: 'Revisar qué datos o pruebas faltan para calcular la causa de la pérdida.' },
   'Causa climatica': { label: 'Causa climática', rgb: [255, 162, 107], action: 'Adaptarse con cosecha de agua, reservorios y planes de sequía.' },
@@ -16,6 +17,7 @@ export type State = keyof typeof states;
 export const diagnosisMeaning: Record<State, string> = {
   'Huella humana': 'El análisis encontró señales de actividad humana compatibles con la pérdida de agua. El diagnóstico necesita contrastarse con evidencia de campo.',
   'Alerta temprana': 'Se detectaron cambios o presiones que vale la pena seguir antes de que la pérdida de agua sea mayor.',
+  'Aguas arriba': 'La laguna pierde agua sobre todo porque llega menos por el río desde el lago que la alimenta. La causa hay que buscarla aguas arriba; mira el módulo de ríos.',
   Incalculable: 'Hay señales de pérdida, pero los datos disponibles no permiten estimar con confianza qué la explica.',
   'Sin explicar': 'El agua disminuyó y las pruebas disponibles aún no permiten identificar la causa.',
   'Causa climatica': 'La pérdida de agua observada es coherente con las variaciones del clima incluidas en el análisis.',
@@ -31,7 +33,7 @@ export const searchKey = (value: string) => value.normalize('NFD').replace(/\p{D
 export type Method = 'balance' | 'conservative';
 export const methodNames: Record<Method, string> = { balance: 'Balance hídrico', conservative: 'Modelo conservador' };
 export const methodStates: Record<Method, State[]> = {
-  balance: ['Huella humana', 'Alerta temprana', 'Incalculable', 'Causa climatica', 'Intacto'],
+  balance: ['Huella humana', 'Alerta temprana', 'Aguas arriba', 'Incalculable', 'Causa climatica', 'Intacto'],
   conservative: ['Evidencia reforzada de intervencion', 'Indicios de intervencion humana', 'Perdida no explicada',
     'Evidencia insuficiente', 'Sin perdida anomala detectada'],
 };
@@ -100,6 +102,10 @@ export interface WaterBody {
   independent_evidence?: { source: string; suspect: string; year: number }[];
   suspects: Suspect[];
   ha?: number;
+  upstream_source?: { body_id: string; name: string; state: State; confidence: string };
+  upstream_split?: { upstream_ha: number; source_human_share: number | null; human_min_ha: number | null;
+    human_max_ha: number | null; source_confidence: string } | null;
+  robustness?: { agree: number; of: number; memory_used: number; states: Record<string, State> };
 }
 
 export interface Place {
@@ -225,7 +231,7 @@ export async function api<T>(path: string, options?: RequestInit): Promise<T> {
   return response.json();
 }
 
-export function downloadCsv(rows: Row[]) {
+export function downloadCsv(rows: Row[], filename = 'uma_monitoreo.csv') {
   if (!rows.length) return;
   const columns = Object.keys(rows[0]);
   const cell = (value: string | number | null) => '"' + String(value ?? '').replaceAll('"', '""') + '"';
@@ -233,7 +239,30 @@ export function downloadCsv(rows: Row[]) {
   const url = URL.createObjectURL(new Blob(['\uFEFF', csv], { type: 'text/csv;charset=utf-8' }));
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'uma_monitoreo.csv';
+  link.download = filename;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+export interface Change { base: number | null; recent: number | null; delta: number | null; pct: number | null }
+export type OsmKind = 'Canal o acequia' | 'Represa o toma' | 'Reservorio' | 'Mina o cantera' | 'Planta de tratamiento' | 'Piletas de sal';
+export interface RiverSummary {
+  generated: string;
+  period: { base: [number, number]; recent: [number, number]; years: [number, number] };
+  years: number[];
+  reaches: { id: string; name: string; km: [number, number] | null; consumptive_use_pct: number | null; regulation_pct: number | null;
+    water: Change; green: Change; artificial: Change; crops: Change; osm: Record<OsmKind, number> }[];
+  series: Record<string, { water: (number | null)[]; green: (number | null)[]; green_filled: (number | null)[] }>;
+  lakes: { id: string; name: string; reaches: string[]; state: State | null; confidence: string | null; change_pct: number | null;
+    climate_share: number | null; upstream_source: WaterBody['upstream_source'] | null; upstream_split: WaterBody['upstream_split'];
+    decomposition_ha: Record<string, number | null>; robustness: WaterBody['robustness'] | null; why: string[];
+    green_base_ha: number | null; green_recent_ha: number | null; osm: Record<OsmKind, number> }[];
+  diversion: { from: string; to: string; to_name: string; missing_pct: number | null; p: number | null; n_eff: number;
+    green_delta_ha: number | null; canals: number; verdict: string; expected: (number | null)[]; observed: (number | null)[] }[];
+  geometry: { reach: string; name: string; paths: [number, number][][] }[];
+  osm_points: { kind: OsmKind | 'Otro'; name: string; lat: number; lon: number; reach: string | null; lake: string | null;
+    dist_river_km: number; url: string }[];
+  osm_totals: Record<OsmKind, number>;
+  quality: { label: string; ok: boolean; warn?: boolean; detail: string }[];
+  sources: { name: string; use: string; url: string }[];
 }

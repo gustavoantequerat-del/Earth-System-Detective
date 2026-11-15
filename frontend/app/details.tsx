@@ -2,11 +2,12 @@
 
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
-import { ArrowLeft, CircleCheck, CircleDashed, Download, Droplets, ExternalLink, ScanSearch } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, CircleCheck, CircleDashed, Download, Droplets, ExternalLink, ScanSearch } from 'lucide-react';
 import { api, diagnosisMeaning, firstSuspect, imageUrl, modelUrl, number, reviewOutcomes, signed, states, waterChange,
   type Audit, type BodyDetail, type Method, type WaterBody } from './data';
 import { ClimateCharts, CrossChecks, WaterCharts } from './charts';
-import { DataTable, Status } from './ui';
+import { DataTable, InfoTip, Status } from './ui';
+import Link from 'next/link';
 import { LakeSearch } from './lake-search';
 const ClimateArchive = dynamic(() => import('./environment').then((mod) => mod.ClimateArchive));
 const NasaObservations = dynamic(() => import('./environment').then((mod) => mod.NasaObservations));
@@ -81,13 +82,19 @@ export function Details({ bodies, id, method, select, back, alerts }: {
       </section>
       {alerts}
       <div className="metrics">
-        <div className="panel"><span>Superficie de referencia</span><strong>{number(body.baseline_mean_ha)} ha</strong></div>
-        <div className="panel"><span>Cambio estimado por año</span><strong>{signed(body.trend.sen_ha_per_year, 1)} ha/año</strong></div>
-        <div className="panel"><span>{body.method_version ? 'Nivel de evidencia' : 'Confianza'}</span><strong>{body.confidence}</strong><small>{body.n_pass} de 3 pruebas favorables</small></div>
-        <div className="panel"><span>Último año analizado</span><strong>{body.years.at(-1) ?? '—'}</strong></div>
+        <div className="panel"><span>Superficie de referencia <InfoTip label="Superficie de referencia" align="start">Promedio de la superficie de agua del lago en el periodo base (hasta {body.baseline_end}), medida con imágenes Landsat. Es el punto de comparación.</InfoTip></span><strong>{number(body.baseline_mean_ha)} ha</strong></div>
+        <div className="panel"><span>Cambio estimado por año <InfoTip label="Cambio por año">Pendiente de Theil–Sen: cuántas hectáreas gana o pierde el lago por año en promedio. Es robusta frente a años extremos.</InfoTip></span><strong>{signed(body.trend.sen_ha_per_year, 1)} ha/año</strong></div>
+        <div className="panel"><span>{body.method_version ? 'Nivel de evidencia' : 'Confianza'} <InfoTip label="Confianza">Resume cuántas de las 3 pruebas independientes (clima, lago de control y momento del cambio) respaldan el diagnóstico{body.robustness ? ` y si el veredicto se mantiene con distintas memorias de lluvia (${body.robustness.agree} de ${body.robustness.of})` : ''}.</InfoTip></span><strong>{body.confidence}</strong><small>{body.n_pass} de 3 pruebas favorables</small></div>
+        <div className="panel"><span>Último año analizado <InfoTip label="Último año" align="end">Año más reciente con imagen de agua procesada en el análisis.</InfoTip></span><strong>{body.years.at(-1) ?? '—'}</strong></div>
       </div>
       <div className="notice"><div>{states[body.state].action}
-        {body.climate_share != null && <p>El cambio atribuible al clima equivale al {number(100 * Math.min(body.climate_share, 9.99))} % de la pérdida entre el periodo base y los últimos cinco años.</p>}
+        {body.state === 'Aguas arriba' ? <>
+          {body.upstream_split && <p>Por el río dejan de llegar unas {number(body.upstream_split.upstream_ha)} ha de agua desde {body.upstream_source?.name ?? 'la fuente'}.
+            {body.upstream_split.human_max_ha == null
+              ? ' Qué parte de eso es humana todavía no se puede acotar: la fuente no tiene un veredicto atribuible.'
+              : ` La parte humana es como mucho ${number(body.upstream_split.human_max_ha)} ha.`}</p>}
+          <p><Link href={`/?vista=rios&laguna=${body.body_id}`}>Ver el río tramo a tramo <ArrowUpRight size={14} aria-hidden="true" /></Link></p>
+        </> : body.climate_share != null && <p>El cambio atribuible al clima equivale al {number(100 * Math.min(body.climate_share, 9.99))} % de la pérdida entre el periodo base y los últimos cinco años.</p>}
       </div></div>
       <details className="panel detail-method">
         <summary>Cómo se llegó al diagnóstico</summary>

@@ -7,3 +7,7 @@ pozuelos,Laguna de Pozuelos (gemela altiplano; Argentina),-22.36,-66.00,8,natura
 chiquitania_este,Laguna de la Chiquitanía este (hallazgo),-16.53,-59.60,2.5,natural,san_matias,Santa Cruz,"Elegida como gemela por gHM bajo, pero el motor detecto huella humana (ganadería y desmonte desde 2001): pasa a ser caso"
 andino_peru,Lago altoandino de Puno (gemela; Perú),-16.73,-70.20,6,natural,,Puno (Perú),Gemela: lago natural fuera de la cuenca del Titicaca (r lluvia=0.58); elegida sin mirar su tendencia
 san_matias,Laguna del ANMI San Matías (gemela),-17.77,-57.80,3,natural,,Santa Cruz,"Gemela: dentro del área protegida San Matías (WDPA), gHM 0.09, lluvia r=0.54; elegida sin mirar su tendencia"
+alalay,Laguna Alalay (calibración),-17.408,-66.139,2,natural,,Cochabamba,"Calibración: causa publicada humana (aguas servidas, cultivos que tapan la entrada, sedimentos) más sequía (Los Tiempos 2016-2023)"
+caceres,Laguna Cáceres (calibración),-18.958,-57.776,5,natural,san_matias,Santa Cruz,"Calibración: sedimentación por deforestación y sequía (seminario Puerto Suárez 2023; eju.tv 2021)"
+colorada,Laguna Colorada (calibración),-22.206,-67.779,6,natural,pozuelos,Potosí,"Calibración: área protegida (Ramsar), se seca en las sequías; causa esperada climática"
+verde,Laguna Verde (calibración),-22.795,-67.835,3,natural,pozuelos,Potosí,"Calibración: área protegida, se seca en las sequías; causa esperada climática"

@@ -31,6 +31,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "real"
 YEARS = list(range(1985, 2025))
 CROPS = [18, 19, 20, 21, 39, 40, 41, 62]
+# lagos de pocos metros de profundidad: pierden agua sobre todo por evaporacion de su propio espejo,
+# asi que importa la evaporacion sobre el lago, no el promedio de toda la cuenca
+SHALLOW = ["poopo", "uru_uru", "pozuelos", "alalay", "colorada", "verde"]
 
 
 def pet_series(geom) -> pd.Series:
@@ -77,12 +80,29 @@ def river_water(geom) -> pd.Series:
     return pd.Series({y: v.get(f"y{y}") or 0.0 for y in YEARS}, dtype=float)
 
 
+def lake_pet(s: pd.DataFrame, cfg: pd.DataFrame) -> pd.DataFrame:
+    """Evaporacion potencial sobre el espejo de los lagos poco profundos -> series.csv `pet_lake_mm`."""
+    rows = []
+    for bid in SHALLOW:
+        b = cfg.loc[bid]
+        p = pet_series(ee.Geometry.Point([b.lon, b.lat]).buffer(float(b.radius_km) * 1000))
+        rows.append(pd.DataFrame({"body_id": bid, "year": p.index, "pet_lake_mm": p.values.round(1)}))
+        print("evaporacion sobre el lago", bid, round(p.loc[:2000].mean()), "->", round(p.iloc[-5:].mean()), "mm/ano")
+    s = s.drop(columns=[c for c in ("pet_lake_mm",) if c in s])
+    return s.merge(pd.concat(rows), on=["body_id", "year"], how="left")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--project", required=True)
+    ap.add_argument("--lake-pet", action="store_true", help="solo la evaporacion sobre los lagos poco profundos")
     a = ap.parse_args(argv)
     ee.Initialize(project=a.project)
     s = pd.read_csv(DATA / "series.csv")
+    if a.lake_pet:
+        lake_pet(s, pd.read_csv(ROOT / "config" / "bodies.csv").set_index("body_id")).to_csv(DATA / "series.csv",
+                                                                                             index=False)
+        return
     sus = pd.read_csv(DATA / "suspects.csv")
     cfg = pd.read_csv(ROOT / "config" / "bodies.csv").set_index("body_id")
 
@@ -99,7 +119,8 @@ def main(argv=None):
 
     # 2. agua consumida por cultivos (solo cuerpos de agua con analisis completo)
     rows = []
-    targets = [b for b in ("poopo", "uru_uru", "concepcion", "titicaca_menor", "chiquitania_este") if b in cfg.index]
+    targets = [b for b in ("poopo", "uru_uru", "concepcion", "titicaca_menor", "chiquitania_este", "alalay", "caceres",
+                           "colorada", "verde") if b in cfg.index]
     for bid in targets:
         b = cfg.loc[bid]
         pt = ee.Geometry.Point([b.lon, b.lat])

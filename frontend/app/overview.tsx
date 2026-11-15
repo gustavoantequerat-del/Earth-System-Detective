@@ -5,7 +5,8 @@ import dynamic from 'next/dynamic';
 import { ArrowUpRight, Box, Circle, Droplets, Flame, Footprints, Gauge, ScanSearch, TrendingDown } from 'lucide-react';
 import { diagnosisMeaning, firstSuspect, humanEvidenceStates, number, signed, states, visibleStates,
   type Method, type Snapshot, type State, type WaterBody, type Weekly } from './data';
-import { Status } from './ui';
+import { InfoTip, Status } from './ui';
+import { Donut } from './donut';
 import type { DonutSlice } from './glass-donut';
 
 const GlassDonut = dynamic(() => import('./glass-donut'), {
@@ -14,10 +15,11 @@ const GlassDonut = dynamic(() => import('./glass-donut'), {
 
 const color = (state: State) => `rgb(${states[state].rgb.join(',')})`;
 const lossColors: Record<string, string> = {
-  'Lluvia menos evaporacion': '#ffa26b', 'El Nino': '#ffd166', 'Huella humana': '#ff7a7a',
+  'Lluvia menos evaporacion': '#ffa26b', 'El Nino': '#ffd166', 'Huella humana': '#ff7a7a', 'Menos agua desde aguas arriba': '#60befa',
   Incalculable: '#a5b4fc', 'Cambio esperado por modelo': '#86a9ff', 'Diferencia de tendencias no atribuida': '#a5b4fc',
 };
-const lossLabels: Record<string, string> = { 'Lluvia menos evaporacion': 'Lluvia menos evaporación', 'El Nino': 'El Niño' };
+const lossLabels: Record<string, string> = { 'Lluvia menos evaporacion': 'Lluvia menos evaporación', 'El Nino': 'El Niño',
+  'Menos agua desde aguas arriba': 'Menos agua por el río (aguas arriba)' };
 
 function counts(bodies: WaterBody[], order: State[]) {
   return order.map((state) => ({
@@ -126,13 +128,19 @@ export default function Overview({ bodies, snapshot, weekly, method, openDetails
   const lost = bodies.reduce((total, body) => total + Math.max(0, body.baseline_mean_ha * -body.trend.change_pct / 100), 0);
   const fires = weekly?.report?.rows.filter((entry) => entry.alerta).length;
   const kpis = [
-    { label: 'Análisis completos', value: number(bodies.length), icon: Droplets },
-    { label: 'Con evidencia de intervención', value: number(bodies.filter((body) => humanEvidenceStates.includes(body.state)).length), icon: Footprints },
+    { label: 'Análisis completos', value: number(bodies.length), icon: Droplets,
+      info: 'Lagos con serie de agua anual 1985–2024 (Landsat), modelo de clima (lluvia, evaporación y El Niño), un lago de control y actividades humanas medidas en su cuenca.' },
+    { label: 'Con evidencia de intervención', value: number(bodies.filter((body) => humanEvidenceStates.includes(body.state)).length), icon: Footprints,
+      info: 'Lagos donde la pérdida no la explica el clima, es mayor que en su lago de control y coincide en el tiempo con una actividad humana que creció antes.' },
     { label: method === 'balance' ? 'Incalculables' : 'Pérdidas no explicadas', value: number(bodies.filter((body) =>
-      method === 'balance' ? body.state === 'Incalculable' || body.state === 'Sin explicar' : body.state === 'Perdida no explicada').length), icon: Gauge },
-    { label: 'Agua perdida en los últimos cinco años', value: `${number(lost)} ha`, icon: TrendingDown },
-    { label: 'Alertas de incendio', value: fires == null ? '—' : number(fires), icon: Flame },
-    ...(method === 'balance' ? [{ label: 'Lagunas en el barrido nacional', value: number(snapshot.national.length), icon: ScanSearch }] : []),
+      method === 'balance' ? body.state === 'Incalculable' || body.state === 'Sin explicar' : body.state === 'Perdida no explicada').length), icon: Gauge,
+      info: 'Pierden agua, pero los datos disponibles no alcanzan para decir con confianza por qué. Son prioridades para medir en campo.' },
+    { label: 'Agua perdida en los últimos cinco años', value: `${number(lost)} ha`, icon: TrendingDown,
+      info: 'Suma de las hectáreas de agua que faltan hoy (promedio de los últimos 5 años) respecto del periodo base, en los lagos que pierden agua. 100 ha = 1 km².' },
+    { label: 'Alertas de incendio', value: fires == null ? '—' : number(fires), icon: Flame,
+      info: 'Lagos en riesgo con 5 focos de calor o más (NASA FIRMS) y al menos el doble de lo habitual para esa semana del año.' },
+    ...(method === 'balance' ? [{ label: 'Lagunas en el barrido nacional', value: number(snapshot.national.length), icon: ScanSearch,
+      info: 'Lagunas de toda Bolivia revisadas con un balance hídrico simplificado. Sirve para priorizar, no reemplaza al análisis completo.' }] : []),
   ];
   const losses = new Map<string, number>();
   for (const body of bodies) {
@@ -152,16 +160,19 @@ export default function Overview({ bodies, snapshot, weekly, method, openDetails
     artificial.set(item.tipo, total);
   }
   return <>
-    <div className="overview-kpis">{kpis.map(({ label, value, icon: Icon }) => <article key={label} className="panel overview-kpi">
-      <Icon size={19} aria-hidden="true" /><strong>{value}</strong><span>{label}</span>
+    <div className="overview-kpis">{kpis.map(({ label, value, icon: Icon, info }, index) => <article key={label} className="panel overview-kpi">
+      <div className="overview-kpi-top"><Icon size={19} aria-hidden="true" /><InfoTip label={label} align={index % 3 === 2 ? 'end' : 'start'}>{info}</InfoTip></div>
+      <strong>{value}</strong><span>{label}</span>
     </article>)}</div>
     <VerdictDistribution key={method} bodies={bodies} national={snapshot.national} method={method} />
     <div className="overview-grid overview-loss">
       <section className="panel overview-panel">
-        <h2>{method === 'balance' ? 'De dónde viene el agua perdida' : 'Cambio modelado y diferencia no atribuida'}</h2>
-        {losses.size ? <Bars items={[...losses].sort((a, b) => b[1] - a[1]).map(([label, value]) => ({
-          label: lossLabels[label] ?? label, value, color: lossColors[label] ?? '#a5abc9',
-        }))} /> : <p className="muted">Sin pérdidas registradas en los casos visibles.</p>}
+        <h2 className="with-info">{method === 'balance' ? 'De dónde viene el agua perdida' : 'Cambio modelado y diferencia no atribuida'}
+          <InfoTip label="De dónde viene el agua perdida" align="start">El modelo separa la pérdida de cada lago en partes: la que explican la lluvia y la evaporación, El Niño, el agua que deja de llegar por el río y la huella humana. Lo que no se puede asignar queda como incalculable. Aquí se suman todos los lagos.</InfoTip></h2>
+        {losses.size ? <Donut label="Origen del agua perdida" unit="ha" centerLabel="hectáreas perdidas" size={210}
+          slices={[...losses].sort((a, b) => b[1] - a[1]).map(([key, value]) => ({
+            key, label: lossLabels[key] ?? key, value, color: lossColors[key] ?? '#a5abc9',
+          }))} /> : <p className="muted">Sin pérdidas registradas en los casos visibles.</p>}
         <p className="muted">Suma de los componentes negativos de los casos con análisis completo.</p>
       </section>
     </div>

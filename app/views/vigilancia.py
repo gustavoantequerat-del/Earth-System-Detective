@@ -13,6 +13,42 @@ import ui
 FIRE = "#ff8a65"
 
 
+def _secret(name: str) -> str | None:
+    import os
+    try:
+        if name in st.secrets:
+            return str(st.secrets[name])
+    except Exception:  # sin archivo de secretos
+        pass
+    return os.environ.get(name)
+
+
+def _telegram(wk: dict) -> None:
+    """Envia el resumen de la semana al canal de Telegram configurado (token en secretos o en .env)."""
+    import os
+    import sys
+    sys.path.insert(0, str(data.ROOT))
+    from uma import alerts
+    alerts.load_env()
+    tok, chat = _secret("TELEGRAM_BOT_TOKEN"), _secret("TELEGRAM_CHAT_ID")
+    with st.container(border=True):
+        c1, c2 = st.columns([3, 1], gap="medium")
+        with c1:
+            ui.md(ui.heading("bell-ring", "Alertas en vivo por Telegram", 3) +
+                  ("<div class='muted'>Canal configurado. El boton envia el resumen de esta semana.</div>" if tok and chat
+                   else "<div class='muted'>Sin configurar. Crea un bot con @BotFather, agregalo a un canal y guarda "
+                        "TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID en .env (local) o en los secretos de Streamlit.</div>"))
+        with c2:
+            if st.button("Enviar alerta de prueba", disabled=not (tok and chat), width="stretch", type="primary"):
+                os.environ["TELEGRAM_BOT_TOKEN"], os.environ["TELEGRAM_CHAT_ID"] = tok, chat
+                import datetime as dt
+                text = "[PRUEBA] " + alerts.message(wk["rows"], dt.date.fromisoformat(wk["week_end"]))
+                try:
+                    st.success(f"Enviado ({alerts.send_telegram(text)}).")
+                except OSError as e:
+                    st.error(f"No se pudo enviar: {e}")
+
+
 def render() -> None:
     ui.md(ui.heading("flame", "Vigilancia semanal de incendios", 2, FIRE))
     wk = data.weekly()
@@ -43,6 +79,7 @@ def render() -> None:
                     items += [(f"Focos esta semana ({where})", a["focos"], FIRE if a["alerta"] else "#ffb59e"),
                               (f"Normal para esta semana ({where})", a["normal"], "#4a5378")]
                 ui.md(ui.bars(items, "", m))
+    _telegram(wk)
     st.caption("Alerta si un cuerpo de agua en riesgo tiene al menos 5 focos y el doble de lo normal (promedio de la "
                "misma semana en los 5 anos anteriores). Prueba retroactiva: la semana al 2019-08-25 dispara la alerta "
                "en la laguna de la Chiquitania este (163 focos cerca contra 1.2 normales).")

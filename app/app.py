@@ -19,7 +19,7 @@ import data  # noqa: E402
 import nav  # noqa: E402
 import theme  # noqa: E402
 import ui  # noqa: E402
-from views import ficha, mapa, monitoreo, panorama, vigilancia  # noqa: E402
+from views import asistente, cerca, ficha, mapa, monitoreo, panorama, verificacion, vigilancia  # noqa: E402
 
 theme.apply()
 nav.init()
@@ -51,6 +51,12 @@ if view == "Panorama":
     panorama.render(results, visible, national)
 elif view == "Mapa":
     mapa.render(visible, by_id, national)
+elif view == "Cerca de mi":
+    cerca.render(results, national, by_id)
+elif view == "Pregunta":
+    asistente.render(results, national, by_id)
+elif view == "Verificacion":
+    verificacion.render(results)
 elif view == "Monitoreo":
     monitoreo.render(results, national)
 elif view == "Ficha":

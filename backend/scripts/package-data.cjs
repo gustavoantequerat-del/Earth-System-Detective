@@ -13,6 +13,7 @@ const files = [
   'Naseros/data/bol_admin2_simplified.geojson.gz',
   'data/real/verificacion.json',
   'data/real/desaguadero.json',
+  'data/real/rio_resumen.json',
 ];
 
 for (const mode of ['real', 'sample']) {

@@ -278,6 +278,12 @@ export class ObservatoryService {
     return { saved };
   }
 
+  rivers() {
+    const summary = this.json(join(this.root, 'data', 'real', 'rio_resumen.json'), null);
+    if (!summary) throw new NotFoundException('El análisis del río por tramos no está disponible. Ejecuta python -m uma.river_summary.');
+    return summary;
+  }
+
   fireMap() {
     const archive = this.json(join(this.root, 'data', 'real', 'fires-map.json'), null);
     if (!archive) throw new NotFoundException('El archivo histórico de focos MODIS no está disponible.');

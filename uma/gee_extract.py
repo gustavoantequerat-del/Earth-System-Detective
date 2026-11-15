@@ -123,7 +123,18 @@ def has_landsat(year, region) -> bool:
     return retry(lambda: landsat_col(year, region).size().getInfo()) > 0
 
 
-def landsat_col(year, region):
+# Roy et al. 2016 (Remote Sensing of Environment 185), regresion por banda OLI = c + k * ETM+. Se invierte para
+# llevar Landsat 8/9 a la escala de Landsat 5/7 y que las series 1985-2024 no salten al cambiar de satelite.
+ETM_TO_OLI = {"R": (0.9047, 0.0061), "G": (0.8483, 0.0088), "B": (0.8474, 0.0003),
+              "NIR": (0.8462, 0.0412), "SWIR1": (0.8937, 0.0254)}
+
+
+def _to_etm(img):
+    bands = [img.select(b).subtract(c).divide(k).rename(b) for b, (k, c) in ETM_TO_OLI.items()]
+    return ee.Image.cat(bands).copyProperties(img, img.propertyNames())
+
+
+def landsat_col(year, region, harmonize: bool = False):
     start, end = f"{year}-06-01", f"{year}-10-31"
     parts = []
     if year <= 2012:
@@ -134,8 +145,10 @@ def landsat_col(year, region):
                      .map(lambda i: _prep_landsat(i, ["SR_B3", "SR_B2", "SR_B1"], "SR_B4", "SR_B5")))
     if year >= 2013:
         for k in ("l8", "l9"):
-            parts.append(ee.ImageCollection(DS[k]).filterDate(start, end).filterBounds(region)
-                         .map(lambda i: _prep_landsat(i, ["SR_B4", "SR_B3", "SR_B2"], "SR_B5", "SR_B6")))
+            oli = ee.ImageCollection(DS[k]).filterDate(start, end).filterBounds(region)                 .map(lambda i: _prep_landsat(i, ["SR_B4", "SR_B3", "SR_B2"], "SR_B5", "SR_B6"))
+            parts.append(oli.map(_to_etm) if harmonize else oli)
+    if harmonize:  # mismo tipo numerico en todas las imagenes para poder mezclar sensores
+        parts = [c.map(lambda i: i.toFloat()) for c in parts]
     col = parts[0]
     for p in parts[1:]:
         col = col.merge(p)

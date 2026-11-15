@@ -6,7 +6,7 @@ import { ArrowDown, ArrowLeft, ArrowRight, CircleHelp, Compass, X } from 'lucide
 const guides = {
   panorama: [
     { title: 'Revisa las alertas', text: 'Las tarjetas indican qué lago o cuenca merece revisión, cuándo cambió y qué fuente lo registró.', target: 'watch-title' },
-    { title: 'Elige qué explorar', text: 'Lagos reúne el mapa, la tabla y las fichas. Incendios muestra focos térmicos. Vegetación explica qué cambió en el suelo alrededor del agua.', target: 'explorar' },
+    { title: 'Elige qué explorar', text: 'En «Cuerpos de agua» elige Lagos (mapa, tabla y fichas) o Ríos (el Desaguadero tramo a tramo). Incendios muestra focos térmicos. Vegetación explica qué cambió en el suelo alrededor del agua.', target: 'explorar' },
     { title: 'Lee los diagnósticos en conjunto', text: 'El gráfico muestra cuántos cuerpos de agua hay en cada categoría. Puedes elegir entre el análisis completo y el barrido nacional.', target: 'diagnosticos-inicio' },
     { title: 'Abre un caso', text: 'Cada caso reúne el cambio en la superficie de agua y su diagnóstico. Entra a la ficha para ver imágenes y pruebas.', target: 'casos-lagos' },
   ],
@@ -33,6 +33,12 @@ const guides = {
   vegetacion: [
     { title: 'Elige un lago y un indicador', text: 'Cada serie cuenta una parte del paisaje. Selecciona pérdida de bosque, superficie quemada, pasturas o cultivos y el área que quieres ver.', target: 'vegetation-series' },
     { title: 'Compara las imágenes', text: 'Las fotos muestran el paisaje en dos fechas. El mapa de cambios indica dónde aparecieron cambios de cobertura y cuántas hectáreas abarca cada tipo.', target: 'land-cover-images' },
+  ],
+  rios: [
+    { title: 'Empieza por la respuesta', text: 'El veredicto dice por qué le falta agua a la laguna. La torta muestra qué parte de la pérdida explica cada factor; pasa el mouse sobre los colores.', target: 'rivers-verdict-title' },
+    { title: 'Sigue el viaje del agua', text: 'Cada tarjeta es un tramo del río. El nivel azul muestra cuánta agua queda en el cauce. Toca un tramo para ver su evolución.', target: 'rivers-flow-title' },
+    { title: 'Mira qué hay alrededor', text: 'El mapa muestra canales, tomas, minas y reservorios registrados. Usa los botones para mostrar u ocultar cada tipo.', target: 'rivers-map-title' },
+    { title: 'Revisa la confiabilidad', text: 'Antes de usar los datos, revisa los controles de calidad y las fuentes. Puedes descargar la tabla en CSV o el análisis completo.', target: 'rivers-quality-title' },
   ],
   provincias: [
     { title: 'Elige una provincia', text: 'Toca el mapa o usa el selector. Verás su diagnóstico de largo plazo, la relación entre la lluvia y el verdor y los periodos de mayor déficit.', target: 'atlas-region' },

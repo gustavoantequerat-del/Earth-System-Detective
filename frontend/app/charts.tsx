@@ -13,6 +13,7 @@ const causes: Record<string, { label: string; color: string }> = {
   'Sequia y calor': { label: 'Sequía y calor', color: '#ff9734' },
   'Lluvia menos evaporacion': { label: 'Lluvia menos evaporación', color: '#ffa26b' },
   'El Nino': { label: 'El Niño', color: '#ffd647' },
+  'Menos agua desde aguas arriba': { label: 'Menos agua por el río', color: '#60befa' },
   'Huella humana': { label: 'Huella humana', color: '#ff3d66' },
   'Sin explicar': { label: 'Sin explicar', color: '#9daeb4' },
   Incalculable: { label: 'Incalculable', color: '#a5b4fc' },
