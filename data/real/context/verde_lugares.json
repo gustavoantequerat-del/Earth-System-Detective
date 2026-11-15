@@ -1,0 +1,74 @@
+[
+ {
+  "kind": "Industria",
+  "name": "Telescopio de Cosmología de Atacama",
+  "detail": "communication",
+  "lat": -22.9584,
+  "lon": -67.78683,
+  "dist_km": 18.8,
+  "osm": "https://www.openstreetmap.org/way/88742246"
+ },
+ {
+  "kind": "Industria",
+  "name": "Observatorio Simons",
+  "detail": "",
+  "lat": -22.96049,
+  "lon": -67.78814,
+  "dist_km": 19.0,
+  "osm": "https://www.openstreetmap.org/way/1313892468"
+ },
+ {
+  "kind": "Industria",
+  "name": "Mina Horsu",
+  "detail": "mine",
+  "lat": -22.75118,
+  "lon": -67.6489,
+  "dist_km": 19.7,
+  "osm": "https://www.openstreetmap.org/way/685978022"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "",
+  "lat": -22.66043,
+  "lon": -67.73785,
+  "dist_km": 17.9,
+  "osm": "https://www.openstreetmap.org/way/1122113478"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "",
+  "lat": -22.66048,
+  "lon": -67.73928,
+  "dist_km": 17.9,
+  "osm": "https://www.openstreetmap.org/way/1122113479"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Azufrera Purico",
+  "detail": "sulfur",
+  "lat": -22.9558,
+  "lon": -67.76331,
+  "dist_km": 19.3,
+  "osm": "https://www.openstreetmap.org/node/9265154857"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "",
+  "lat": -22.75098,
+  "lon": -67.65102,
+  "dist_km": 19.5,
+  "osm": "https://www.openstreetmap.org/way/685978025"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Mina Horsu",
+  "detail": "mine",
+  "lat": -22.75118,
+  "lon": -67.6489,
+  "dist_km": 19.7,
+  "osm": "https://www.openstreetmap.org/way/685978022"
+ }
+]

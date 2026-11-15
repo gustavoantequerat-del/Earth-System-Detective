@@ -48,5 +48,34 @@
   "areas": [
    "San Matías (Área Natural de Manejo Integrado)"
   ]
+ },
+ "alalay": {
+  "ramsar": null,
+  "ramsar_aprox": false,
+  "areas": [
+   "Laguna Alalay (Área de Protección Ambiental)"
+  ]
+ },
+ "caceres": {
+  "ramsar": null,
+  "ramsar_aprox": false,
+  "areas": [
+   "Otuquis (Parque Nacional)"
+  ]
+ },
+ "colorada": {
+  "ramsar": "Los Lípez",
+  "ramsar_aprox": false,
+  "areas": [
+   "Los Lípez (Wetland of International Importance (Ramsar Site))",
+   "Eduardo Avaroa (Reserva Nacional de Fauna Andina)"
+  ]
+ },
+ "verde": {
+  "ramsar": null,
+  "ramsar_aprox": false,
+  "areas": [
+   "Eduardo Avaroa (Reserva Nacional de Fauna Andina)"
+  ]
  }
 }

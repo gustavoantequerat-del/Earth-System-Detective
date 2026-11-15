@@ -270,3 +270,23 @@ Landsat 8/9 llevado a la escala de 5/7 (Roy et al. 2016) en el verde del rio.
 Cuando una laguna es "Aguas arriba", la parte humana de lo que deja de llegar se acota con el veredicto de la
 fuente: como mucho, la fracción humana de la pérdida de la fuente. Si la fuente tiene confianza baja (hoy el
 Titicaca), se informa un rango desde 0. Poopó: de 0 a 87,907 ha de 110,460 ha; Uru Uru: de 0 a 3,739 ha.
+
+## Robustez y calibración
+
+- **Robustez**: el motor corre con 6 memorias del lago (1 a 8 años de lluvia acumulada) y vota. Un veredicto que se
+  mantiene en 5 o 6 es robusto; en 3 o menos, frágil (confianza baja).
+- **Sospechosos con datos desde 2001** (Hansen, MODIS): se analizan solo desde que tienen datos; antes se rellenaban
+  con ceros y parecían "empezar a crecer" en 2001.
+- **Calibración** con 9 lagunas de causa publicada (Concepción, Pozuelos, Colorada, Verde, Poopó, Uru Uru, Titicaca,
+  Alalay, Cáceres): 4 aciertos, 2 parciales, 3 sin respuesta (incalculable) y 0 errores. Tres resultados se apoyan en
+  series de agua de calidad baja (lagunas chicas o de agua roja).
+- **Series mensuales** (`uma/monthly.py`, `uma/monthly_model.py`): JRC mensual 1985-2021 con Mann-Kendall corregido
+  por autocorrelación. Los 194-327 meses por laguna equivalen a 18-60 datos independientes, así que se usan como
+  validación y no en el motor.
+
+## Interfaz
+
+Seis entradas: **Inicio** (estado del agua de un vistazo), **Mapa** (2D/3D, Sentinel-2 reciente, incendios),
+**Cerca de mí** (fuentes de agua alrededor de una ubicación), **Ficha** (veredicto, explicación fácil, PDF, antes y
+después, por qué, alrededores, el río, auditoría), **Pregunta** (asistente con IA) y **Datos y método**
+(verificación y calibración, todas las lagunas, vigilancia de incendios).

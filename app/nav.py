@@ -3,10 +3,12 @@ from __future__ import annotations
 
 import streamlit as st
 
-VIEWS = ["Panorama", "Mapa", "Cerca de mi", "Pregunta", "Monitoreo", "Ficha", "Vigilancia", "Verificacion"]
-ICONS = ["layout-dashboard", "map", "crosshair", "search", "list", "scan-search", "flame", "shield-check"]
-ALIASES = {"cerca": "Cerca de mi", "verificacion": "Verificacion", "pregunta": "Pregunta", "mapa": "Mapa", "ficha": "Ficha",
-           "monitoreo": "Monitoreo", "vigilancia": "Vigilancia", "panorama": "Panorama"}
+# seis entradas: lo que usa cualquier persona primero; el detalle tecnico va junto en "Datos y metodo"
+VIEWS = ["Inicio", "Mapa", "Cerca de mi", "Ficha", "Pregunta", "Datos y metodo"]
+ICONS = ["layout-dashboard", "map", "crosshair", "scan-search", "search", "shield-check"]
+ALIASES = {"cerca": "Cerca de mi", "pregunta": "Pregunta", "mapa": "Mapa", "ficha": "Ficha", "inicio": "Inicio",
+           "panorama": "Inicio", "datos": "Datos y metodo", "verificacion": "Datos y metodo",
+           "monitoreo": "Datos y metodo", "vigilancia": "Datos y metodo"}
 
 
 def init() -> None:

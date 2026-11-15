@@ -84,6 +84,14 @@ def controls(res: list[dict]) -> set[str]:
     return {r["control_id"] for r in res if r.get("control_id")}
 
 
+CALIBRATION = {"alalay", "caceres", "colorada", "verde"}  # lagunas con causa publicada para medir aciertos
+
+
+def is_main(r: dict, ctrl: set[str]) -> bool:
+    """Casos principales: no son gemelas de control (salvo que tengan huella) ni lagunas de calibracion."""
+    return r["body_id"] not in CALIBRATION and (r["body_id"] not in ctrl or r["state"] == "Huella humana")
+
+
 def region(lat: float, lon: float) -> str:
     """Region aproximada para vistas agregadas."""
     if lon < -65.6 and lat < -14.5:

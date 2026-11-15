@@ -27,13 +27,14 @@ def render(results: list[dict], visible: list[dict], national: list[dict]) -> No
     ui.md(ui.heading("droplets", "Cuerpos de agua con analisis completo"))
     _cards(sorted(main, key=lambda r: (th.SEVERITY[r["state"]], r["trend"]["change_pct"])))
     st.write("")
-    left, right = st.columns([1, 1], gap="large")
-    with left, st.container(border=True):
-        ui.md(ui.heading("mountain", "Por region", 3))
-        _by_region(main, national)
-    with right, st.container(border=True):
-        ui.md(ui.heading("factory", "Agua artificial en Bolivia", 3, th.ARTIFICIAL))
-        _artificial()
+    with st.expander(f"Mas datos del pais: {len(national)} lagunas del barrido nacional, por region y agua artificial"):
+        left, right = st.columns([1, 1], gap="large")
+        with left:
+            ui.md(ui.heading("mountain", "Por region", 3))
+            _by_region(main, national)
+        with right:
+            ui.md(ui.heading("factory", "Agua artificial en Bolivia", 3, th.ARTIFICIAL))
+            _artificial()
 
 
 def _kpis(main: list[dict], national: list[dict]) -> None:
@@ -42,16 +43,15 @@ def _kpis(main: list[dict], national: list[dict]) -> None:
     fires = sum(1 for x in (wk or {}).get("rows", []) if x["alerta"])
     count = lambda s: sum(1 for r in main if r["state"] == s)  # noqa: E731
     items = [
-        ("droplets", f"{len(main)}", "Analisis completos", th.ACCENT),
+        ("trending-down", f"{lost / 1000:,.0f} mil ha", f"Agua perdida en {len(main)} lagos y lagunas analizados",
+         th.ACCENT_2),
         ("footprints", f"{count('Huella humana')}", "Con huella humana", th.state_color("Huella humana")),
-        ("circle-help", f"{count('Incalculable')}", "Incalculables (con motivo)", th.state_color("Incalculable")),
-        ("trending-down", f"{lost / 1000:,.0f} mil ha", "Agua perdida (ultimos 5 anos)", th.ACCENT_2),
+        ("waves", f"{count('Aguas arriba')}", "Les llega menos agua por el rio", th.state_color("Aguas arriba")),
         ("flame", f"{fires}", "Alertas de incendio esta semana", "#ff8a65"),
-        ("scan", f"{len(national)}", "Lagunas en el barrido nacional", th.NATURAL if national else th.MUTED),
     ]
-    cols = st.columns(3)
+    cols = st.columns([1.4, 1, 1, 1])
     for i, (icon, value, label, color) in enumerate(items):
-        with cols[i % 3]:
+        with cols[i]:
             ui.md(ui.kpi(icon, value, label, color, delay=i * 0.07))
 
 
@@ -99,17 +99,10 @@ def _cards(rows: list[dict]) -> None:
                 top = next((s for s in r["suspects"] if not s.get("indirect")), None)
                 ui.md(f"<div style='font-weight:800;font-size:1.05rem'>{r['name'].split(' (')[0]}</div>"
                       f"<div style='margin:6px 0'>{ui.pill(r['state'])}</div>")
-                c1, c2 = st.columns([3, 2])
-                with c1:
-                    ui.md(f"<div style='font-size:1.8rem;font-weight:900;color:{color}'>"
-                          f"{r['trend']['change_pct']:+.0f}%</div><div class='muted'>agua vs 1985-2000</div>")
-                with c2:
-                    ui.md(ui.ring(r["n_pass"] / 3, color, f"{r['n_pass']}/3", 70))
+                ui.md(f"<div style='font-size:1.8rem;font-weight:900;color:{color}'>"
+                      f"{r['trend']['change_pct']:+.0f}% <span class='muted' style='font-size:.85rem;font-weight:600'>"
+                      f"de agua · confianza {r['confidence'].lower()}</span></div>")
                 ui.md(ui.sparkline(r["observed"], color))
-                rb = r.get("robustness")
-                if rb:
-                    ui.md(f"<div class='muted'>Se mantiene en {rb['agree']} de {rb['of']} configuraciones"
-                          + (" · robusto" if rb["agree"] >= 5 else " · fragil" if rb["agree"] <= 3 else "") + "</div>")
                 if r.get("upstream_source"):
                     ui.md(ui.chip(f"Fuente: {r['upstream_source']['name'].split(' (')[0]}", "waves", "#60a5fa"))
                 elif top:

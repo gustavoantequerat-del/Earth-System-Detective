@@ -612,7 +612,10 @@ def run(bodies: pd.DataFrame, series: pd.DataFrame, suspects: pd.DataFrame, base
                 "upstream_ha": round(up_loss), "source_human_share": round(share, 2),
                 "human_min_ha": round(up_loss * share) if point else 0, "human_max_ha": round(up_loss * share),
                 "source_confidence": s["confidence"]}
-            if up_loss:
+            if up_loss and share <= 0:
+                r["why"].insert(1, f"La fuente no muestra una parte humana demostrada: las {up_loss:,.0f} ha que dejan "
+                                   "de llegar no se atribuyen a la accion humana.")
+            elif up_loss:
                 rng = (f"unas {up_loss * share:,.0f} ha" if point else
                        f"entre 0 y {up_loss * share:,.0f} ha ({100 * share:.0f}% como maximo)")
                 r["why"].insert(1, f"De las {up_loss:,.0f} ha que dejan de llegar, la parte humana es {rng}: la fuente "

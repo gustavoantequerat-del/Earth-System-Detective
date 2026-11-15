@@ -32,22 +32,19 @@ by_id = {r["body_id"]: r for r in results}
 controls = data.controls(results)
 national = data.national()
 
-top_l, top_r = st.columns([5, 2])
-with top_l:
-    st.segmented_control("Vista", nav.VIEWS, key="nav", label_visibility="collapsed")
-    ui.md(ui.nav_icon_css("nav", nav.ICONS))
-with top_r:
-    show_ctrl = st.toggle("Mostrar gemelas de control", value=False)
+st.segmented_control("Vista", nav.VIEWS, key="nav", label_visibility="collapsed")
+ui.md(ui.nav_icon_css("nav", nav.ICONS))
 if data.DATA.name == "sample":
     st.warning("Datos de prueba ficticios. No usar estos numeros en el pitch.")
 
-visible = [r for r in results if show_ctrl or r["body_id"] not in controls or r["state"] == "Huella humana"]
-options = [r["body_id"] for r in visible]
+visible = [r for r in results if data.is_main(r, controls)]
+# en la ficha se puede abrir todo: casos principales primero, despues gemelas y lagunas de calibracion
+options = [r["body_id"] for r in visible] + [r["body_id"] for r in results if r not in visible]
 if st.session_state.sel not in options:
     st.session_state.sel = None
 
 view = st.session_state.nav or nav.VIEWS[0]
-if view == "Panorama":
+if view == "Inicio":
     panorama.render(results, visible, national)
 elif view == "Mapa":
     mapa.render(visible, by_id, national)
@@ -55,16 +52,16 @@ elif view == "Cerca de mi":
     cerca.render(results, national, by_id)
 elif view == "Pregunta":
     asistente.render(results, national, by_id)
-elif view == "Verificacion":
-    verificacion.render(results)
-elif view == "Monitoreo":
-    monitoreo.render(results, national)
 elif view == "Ficha":
     ficha.render(options, by_id)
 else:
-    vigilancia.render()
+    t1, t2, t3 = st.tabs(["Como lo verificamos", "Todas las lagunas", "Vigilancia de incendios"])
+    with t1:
+        verificacion.render(results)
+    with t2:
+        monitoreo.render(results, national)
+    with t3:
+        vigilancia.render()
 
-st.caption("El detector prueba coincidencia y consistencia, no causalidad estricta. Datos: Landsat 5/7/8/9 (NASA/USGS), "
-           "NASA POWER, NASA FIRMS, MODIS MCD64A1 y MOD16, GRACE, NASADEM, NOAA ONI, CHIRPS, ERA5-Land, JRC Global "
-           "Surface Water, MapBiomas Bolivia y MapBiomas Agua, Hansen GFC 2025, DMSP/VIIRS, WorldPop, HydroBASINS, "
-           "OpenStreetMap.")
+st.caption("Muestra coincidencias y consistencia en el tiempo, no prueba causalidad estricta. Datos satelitales de la "
+           "NASA y otras 15 fuentes abiertas: el detalle esta en Datos y metodo.")

@@ -1,0 +1,191 @@
+[
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Puerto Suárez",
+  "detail": "city",
+  "lat": -18.96318,
+  "lon": -57.79746,
+  "dist_km": 2.3,
+  "osm": "https://www.openstreetmap.org/node/313795146"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Puerto Quijarro",
+  "detail": "city",
+  "lat": -19.00441,
+  "lon": -57.71571,
+  "dist_km": 8.2,
+  "osm": "https://www.openstreetmap.org/node/313799826"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Arroyo Concepción",
+  "detail": "town",
+  "lat": -19.02292,
+  "lon": -57.70963,
+  "dist_km": 10.0,
+  "osm": "https://www.openstreetmap.org/node/795668307"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Corumbá",
+  "detail": "city",
+  "lat": -19.0006,
+  "lon": -57.65075,
+  "dist_km": 14.0,
+  "osm": "https://www.openstreetmap.org/node/313785551"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Ladário",
+  "detail": "town",
+  "lat": -19.00366,
+  "lon": -57.60283,
+  "dist_km": 18.9,
+  "osm": "https://www.openstreetmap.org/node/415522634"
+ },
+ {
+  "kind": "Industria",
+  "name": "Zona Franca Industrial Puerto Quijarro",
+  "detail": "",
+  "lat": -18.99273,
+  "lon": -57.75898,
+  "dist_km": 4.2,
+  "osm": "https://www.openstreetmap.org/way/410679101"
+ },
+ {
+  "kind": "Industria",
+  "name": "Puerto Jennefer",
+  "detail": "port",
+  "lat": -18.98502,
+  "lon": -57.73608,
+  "dist_km": 5.2,
+  "osm": "https://www.openstreetmap.org/way/684812318"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -18.97969,
+  "lon": -57.71905,
+  "dist_km": 6.4,
+  "osm": "https://www.openstreetmap.org/way/789129944"
+ },
+ {
+  "kind": "Industria",
+  "name": "Puerto Central Aguirre",
+  "detail": "port",
+  "lat": -18.9919,
+  "lon": -57.70808,
+  "dist_km": 8.1,
+  "osm": "https://www.openstreetmap.org/way/670292727"
+ },
+ {
+  "kind": "Industria",
+  "name": "Puerto Gravetal Bolivia",
+  "detail": "port",
+  "lat": -19.01496,
+  "lon": -57.70477,
+  "dist_km": 9.8,
+  "osm": "https://www.openstreetmap.org/way/184187359"
+ },
+ {
+  "kind": "Industria",
+  "name": "Itacamba Cemento",
+  "detail": "cement",
+  "lat": -19.02619,
+  "lon": -57.71546,
+  "dist_km": 9.9,
+  "osm": "https://www.openstreetmap.org/way/147973061"
+ },
+ {
+  "kind": "Industria",
+  "name": "Fábrica de Cimento Itaú",
+  "detail": "factory",
+  "lat": -19.00314,
+  "lon": -57.62399,
+  "dist_km": 16.7,
+  "osm": "https://www.openstreetmap.org/way/149084502"
+ },
+ {
+  "kind": "Industria",
+  "name": "Estación de Medición Mutún",
+  "detail": "",
+  "lat": -19.10789,
+  "lon": -57.82275,
+  "dist_km": 17.3,
+  "osm": "https://www.openstreetmap.org/way/405355468"
+ },
+ {
+  "kind": "Industria",
+  "name": "Estação de Medição Operacional de Corumbá",
+  "detail": "",
+  "lat": -19.1106,
+  "lon": -57.81836,
+  "dist_km": 17.5,
+  "osm": "https://www.openstreetmap.org/way/405355469"
+ },
+ {
+  "kind": "Industria",
+  "name": "P. B. Lopes / Scania",
+  "detail": "depot",
+  "lat": -19.0496,
+  "lon": -57.62177,
+  "dist_km": 19.1,
+  "osm": "https://www.openstreetmap.org/way/673677294"
+ },
+ {
+  "kind": "Industria",
+  "name": "Porto de Ladário",
+  "detail": "port",
+  "lat": -19.00571,
+  "lon": -57.58458,
+  "dist_km": 20.8,
+  "osm": "https://www.openstreetmap.org/way/161380908"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Arroyo de Alimentación",
+  "detail": "",
+  "lat": -18.95863,
+  "lon": -57.7187,
+  "dist_km": 6.0,
+  "osm": "https://www.openstreetmap.org/way/733800759"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal Tamengo",
+  "detail": "",
+  "lat": -18.97873,
+  "lon": -57.72216,
+  "dist_km": 6.1,
+  "osm": "https://www.openstreetmap.org/way/686543974"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal Tamengo",
+  "detail": "",
+  "lat": -18.99405,
+  "lon": -57.70511,
+  "dist_km": 8.4,
+  "osm": "https://www.openstreetmap.org/way/28564676"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal Tamengo",
+  "detail": "",
+  "lat": -19.00259,
+  "lon": -57.67493,
+  "dist_km": 11.7,
+  "osm": "https://www.openstreetmap.org/way/552422509"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal Sicurí",
+  "detail": "",
+  "lat": -18.86783,
+  "lon": -57.70257,
+  "dist_km": 12.6,
+  "osm": "https://www.openstreetmap.org/way/545856436"
+ }
+]

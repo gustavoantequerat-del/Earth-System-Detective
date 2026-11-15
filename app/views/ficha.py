@@ -11,9 +11,8 @@ import map3d
 import theme as th
 import ui
 
-TABS = ["Antes y despues", "Clima y causas", "Agua natural vs artificial", "Pruebas y sospechosos", "Alrededores",
-        "Auditoria"]
-TAB_ICONS = ["satellite", "chart-line", "droplets", "search", "map-pin", "scroll-text"]
+TABS = ["Antes y despues", "Por que", "Alrededores", "Auditoria"]
+TAB_ICONS = ["satellite", "chart-line", "map-pin", "scroll-text"]
 TEST_NAMES = {"clima": "1. Lo que el clima no explica", "control": "2. Gemela de control",
               "coincidencia": "3. Coincidencia en el tiempo"}
 SUSPECT_PLACE = {"mining_ha": ["Mina o cantera"], "mining_water_ha": ["Mina o cantera"],
@@ -36,29 +35,30 @@ def render(options: list[str], by_id: dict) -> None:
                        format_func=lambda i: f"{by_id[i]['name']} · {by_id[i]['state']}")
     r = by_id[sel]
     _header(r)
-    _explain(r)
-    _pdf_button(r)
+    c1, c2 = st.columns([3, 1], gap="medium")
+    with c1:
+        _explain(r)
+    with c2:
+        _pdf_button(r)
     from views import rio
     has_rio = rio.available(sel)
     names, icons_ = TABS + (["El rio"] if has_rio else []), TAB_ICONS + (["waves"] if has_rio else [])
     ui.md(ic.css_rules([(f'[data-testid="stTabs"] [role="tab"]:nth-of-type({i + 1}) [data-testid="stMarkdownContainer"] p',
                          n, th.ACCENT_2, 16) for i, n in enumerate(icons_)]))
     tabs = st.tabs(names)
-    if has_rio:
-        with tabs[6]:
-            rio.render(sel)
     with tabs[0]:
         _before_after(sel, r)
     with tabs[1]:
+        _tests(r)
         _climate(r)
     with tabs[2]:
+        _surroundings(sel, r)
         _opposite_trends(sel, r)
     with tabs[3]:
-        _tests(r)
-    with tabs[4]:
-        _surroundings(sel, r)
-    with tabs[5]:
         _audit(sel, r)
+    if has_rio:
+        with tabs[4]:
+            rio.render(sel)
 
 
 def _header(r: dict) -> None:
@@ -78,21 +78,16 @@ def _header(r: dict) -> None:
             ui.md(f"<div style='display:flex;justify-content:space-between'><span class='muted'>Agua 1985-2024</span>"
                   f"<b style='color:{color};font-size:1.4rem'>{r['trend']['change_pct']:+.0f}%</b></div>"
                   + ui.sparkline(r["observed"], color, height=70))
-            chips = [ui.chip(f"Tendencia {r['trend']['sen_ha_per_year']:+,.0f} ha/ano", "trending-down")]
+            chips = []
             if r.get("upstream_source"):
                 chips.append(ui.chip(f"Fuente: {r['upstream_source']['name'].split(' (')[0]}", "waves", "#60a5fa"))
             elif top:
                 chips.append(ui.chip(top["label"], "search"))
-            q = r.get("data_quality") or {}
-            if q.get("r_jrc") is not None:
-                chips.append(ui.chip(f"Calidad {q['level']} (r={q['r_jrc']:.2f})", "gauge"))
-            if data.share_pct(r) is not None:
-                chips.append(ui.chip(("Fuente y clima explican" if r.get("upstream_source") else "Clima explica")
-                                     + f" {data.share_pct(r)}%", "cloud-sun-rain"))
             rb = r.get("robustness")
             if rb:
-                chips.append(ui.chip(f"Robustez {rb['agree']}/{rb['of']} memorias", "gauge",
-                                     "#5ee6a8" if rb["agree"] >= 5 else "#ffd166"))
+                chips.append(ui.chip("Veredicto robusto" if rb["agree"] >= 5 else "Veredicto fragil"
+                                     if rb["agree"] <= 3 else f"Se mantiene en {rb['agree']} de {rb['of']}",
+                                     "gauge", "#5ee6a8" if rb["agree"] >= 5 else "#ffd166"))
             prot = data.protection(r["body_id"])
             if prot["ramsar"]:
                 chips.append(ui.chip(f"Sitio Ramsar: {prot['ramsar']}", "shield-check", "#5ee6a8"))
@@ -102,7 +97,18 @@ def _header(r: dict) -> None:
         if r.get("why"):
             title = "Por que es incalculable" if r["state"] == "Incalculable" else "Lo que hay que saber"
             ui.md(f"<div class='why'><div class='h' style='margin:0'>{ic.svg('triangle-alert', '#ffd166', 18, 2.4)}"
-                  f"{title}</div><ul>" + "".join(f"<li>{w}</li>" for w in r["why"]) + "</ul></div>")
+                  f"{title}</div><ul>" + "".join(f"<li>{w}</li>" for w in r["why"][:2]) + "</ul></div>")
+        q = r.get("data_quality") or {}
+        tech = [f"Tendencia {r['trend']['sen_ha_per_year']:+,.0f} ha/ano"]
+        if q.get("r_jrc") is not None:
+            tech.append(f"calidad de la serie {q['level']} (Landsat vs JRC r={q['r_jrc']:.2f})")
+        if data.share_pct(r) is not None:
+            tech.append(f"clima{' y fuente' if r.get('upstream_source') else ''} explican {data.share_pct(r)}%")
+        if r.get("robustness"):
+            tech.append(f"robustez {r['robustness']['agree']}/{r['robustness']['of']} memorias")
+        with st.expander(f"Todos los motivos ({len(r.get('why', []))}) y datos tecnicos"):
+            st.markdown("\n".join(f"- {w}" for w in r.get("why", [])[2:]) or "Sin otros motivos.")
+            st.caption(" · ".join(tech))
 
 
 def _explain(r: dict) -> None:
@@ -139,19 +145,15 @@ def _pdf(body_id: str, results_mtime: float) -> bytes:
 
 
 def _pdf_button(r: dict) -> None:
-    c1, c2 = st.columns([1, 3])
-    with c1:
-        if st.button("Preparar ficha PDF", width="stretch", key=f"pdfprep_{r['body_id']}"):
-            st.session_state[f"pdf_{r['body_id']}"] = True
-    with c2:
-        if st.session_state.get(f"pdf_{r['body_id']}"):
-            with st.spinner("Armando el PDF..."):
-                pdf = _pdf(r["body_id"], data._mtime(data.DATA / "results.json"))
-            st.download_button("Descargar ficha PDF", pdf, file_name=f"ficha_{r['body_id']}.pdf",
-                               mime="application/pdf", type="primary", key=f"pdfdl_{r['body_id']}")
-        else:
-            ui.md("<div class='muted' style='padding-top:8px'>Una pagina para llevar a la reunion: veredicto, pruebas, "
-                  "sospechosos, proteccion legal, antes y despues, y fuentes.</div>")
+    if st.session_state.get(f"pdf_{r['body_id']}"):
+        with st.spinner("Armando el PDF..."):
+            pdf = _pdf(r["body_id"], data._mtime(data.DATA / "results.json"))
+        st.download_button("Descargar ficha PDF", pdf, file_name=f"ficha_{r['body_id']}.pdf", mime="application/pdf",
+                           type="primary", key=f"pdfdl_{r['body_id']}", width="stretch")
+    elif st.button("Ficha en PDF", width="stretch", key=f"pdfprep_{r['body_id']}",
+                   help="Una pagina para llevar a una reunion: veredicto, pruebas, proteccion legal, antes y despues"):
+        st.session_state[f"pdf_{r['body_id']}"] = True
+        st.rerun()
 
 
 def _before_after(sel: str, r: dict) -> None:

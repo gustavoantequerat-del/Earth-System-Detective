@@ -43,6 +43,37 @@ PUBLISHED = [
      "Coincide", "Intacta y casi seca en 1994-1996."),
 ]
 VERDICT_COLOR = {"Coincide": OK, "Parcial": PART, "En tension": BAD}
+
+# Calibracion: lagunas con causa publicada. Esperado: "humana", "natural" (clima, sin tendencia humana) o "mixta".
+CALIBRATION = [
+    ("concepcion", "humana", "Desmonte y agricultura; desvio de un rio a un arrozal",
+     "https://es.mongabay.com/2025/10/bolivia-sitios-ramsar-amenazados/"),
+    ("pozuelos", "natural", "Ciclos naturales de sequia en un area protegida",
+     "https://www.argentina.travel/actividades/monumento-natural-laguna-de-los-pozuelos"),
+    ("colorada", "natural", "Area protegida (Ramsar); baja en las sequias",
+     "https://eju.tv/?p=714654"),
+    ("verde", "natural", "Area protegida; baja en las sequias", "https://eju.tv/?p=714654"),
+    ("poopo", "mixta", "Clima mas riego y desvio del Desaguadero", "https://www.mdpi.com/2072-4292/9/3/218"),
+    ("uru_uru", "mixta", "Desvios, sedimentos, aguas servidas de Oruro y mineria",
+     "https://www.eldiario.es/sociedad/lago-boliviano-declarado-sitio-ramsar-ahora-desertico-basurero_1_7370264.html"),
+    ("titicaca_menor", "natural", "Lluvia y evaporacion dominan; minimo de 2023 por sequia",
+     "https://hess.copernicus.org/articles/29/655/2025/hess-29-655-2025.pdf"),
+    ("alalay", "mixta", "Aguas servidas, cultivos que tapan la entrada, sedimentos y sequia",
+     "https://www.lostiempos.com/actualidad/local/20161012/alalay-se-seca-llegan-menos-aves"),
+    ("caceres", "mixta", "Sedimentacion por deforestacion y sequia",
+     "https://noticiasfides.com/docs/news/2023/12/conclusiones-segundo-seminario-internacional__1701811989.pdf"),
+]
+
+
+def score(expected: str, state: str) -> str:
+    """Acierto, parcial, sin respuesta o error, segun la causa publicada."""
+    if state == "Incalculable":
+        return "Sin respuesta"
+    if expected == "humana":
+        return "Acierto" if state == "Huella humana" else "Parcial" if state == "Aguas arriba" else "Error"
+    if expected == "natural":
+        return "Acierto" if state in ("Intacto", "Causa climatica") else "Error"
+    return "Parcial" if state in ("Huella humana", "Aguas arriba", "Causa climatica") else "Error"
 # robustez: cuantas de las 6 memorias del lago dan el mismo veredicto (uma/engine.py run_ensemble)
 
 
@@ -55,18 +86,36 @@ def render(results: list[dict]) -> None:
     lag = v.get("lagunas", {})
     r_water = [x["r_agua_landsat_mapbiomas"] for x in lag.values() if _num(x.get("r_agua_landsat_mapbiomas"))]
     r_rain = [x["r_lluvia_power_chirps"] for x in lag.values() if _num(x.get("r_lluvia_power_chirps"))]
-    n_ok = sum(1 for p in PUBLISHED if p[3] == "Coincide")
+    cal = [(by_id[b], exp, fact, url, score(exp, by_id[b]["state"])) for b, exp, fact, url in CALIBRATION if b in by_id]
+    tally = {k: sum(1 for c in cal if c[4] == k) for k in ("Acierto", "Parcial", "Sin respuesta", "Error")}
     cols = st.columns(4)
     kp = [("satellite", f"{min(r_water):.2f}-{max(r_water):.2f}" if r_water else "-", "Agua Landsat vs MapBiomas (r)", OK),
           ("cloud-sun-rain", f"{min(r_rain):.2f}-{max(r_rain):.2f}" if r_rain else "-", "Lluvia NASA POWER vs CHIRPS (r)",
            PART),
-          ("circle-check", f"{n_ok}/{len(PUBLISHED)}", "Veredictos que coinciden con lo publicado", th.ACCENT),
+          ("circle-check", f"{tally['Error']} errores", f"En {len(cal)} lagunas con causa publicada "
+           f"({tally['Acierto']} aciertos, {tally['Parcial']} parciales)", th.ACCENT),
           ("circle-help", str(sum(1 for r in results if r["state"] == "Incalculable")), "Incalculables, con su motivo",
            th.state_color("Incalculable"))]
     for col, (icon, val, txt, c) in zip(cols, kp):
         with col:
             ui.md(ui.kpi(icon, val, txt, c))
 
+    st.write("")
+    ui.md(ui.heading("gauge", "Calibracion: que tanto acierta", 3))
+    colors = {"Acierto": OK, "Parcial": PART, "Sin respuesta": "#8b93b8", "Error": BAD}
+    rows = "".join(
+        f"<tr><td><b>{r['name'].split(' (')[0]}</b></td><td>{exp}</td><td>{ui.pill(r['state'])}</td>"
+        f"<td style='color:{colors[sc]};font-weight:800'>{sc}</td>"
+        f"<td class='muted'>{fact} (<a href='{url}' target='_blank'>fuente</a>)"
+        + (" · datos de agua de calidad baja" if (r.get("data_quality") or {}).get("level") == "baja" else "")
+        + "</td></tr>" for r, exp, fact, url, sc in cal)
+    ui.md("<div style='overflow-x:auto'><table style='width:100%;border-collapse:collapse'>"
+          "<tr class='muted'><th align='left'>Laguna</th><th align='left'>Causa publicada</th><th align='left'>"
+          "Detector</th><th align='left'>Resultado</th><th align='left'>Detalle</th></tr>" + rows + "</table></div>")
+    st.caption("Acierto: coincide con la causa publicada. Parcial: reconoce una causa no climatica pero no la nombra "
+               "entera. Sin respuesta: el detector dice incalculable en vez de adivinar. Error: culpa a la accion humana "
+               "cuando es natural, o al reves. Tres de los aciertos o parciales se apoyan en series de agua de calidad "
+               "baja: lagunas chicas o con agua de color (la Colorada es roja).")
     st.write("")
     ui.md(ui.heading("scroll-text", "Veredictos frente a estudios y prensa", 3))
     for bid, fact, links, verdict, note in PUBLISHED:

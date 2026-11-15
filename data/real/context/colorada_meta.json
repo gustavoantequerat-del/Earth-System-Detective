@@ -1,0 +1,36 @@
+{
+ "years": [
+  1990,
+  2023
+ ],
+ "window_km": 20.0,
+ "changes_ha": {
+  "forest_loss": 11,
+  "pasture": 0,
+  "agri": 0,
+  "urban": 0,
+  "mining": 0
+ },
+ "legend": {
+  "mining": {
+   "color": "#ff1744",
+   "label": "Mineria nueva"
+  },
+  "urban": {
+   "color": "#d500f9",
+   "label": "Ciudad nueva"
+  },
+  "agri": {
+   "color": "#ffd600",
+   "label": "Cultivos nuevos"
+  },
+  "pasture": {
+   "color": "#ff9100",
+   "label": "Pasto nuevo"
+  },
+  "forest_loss": {
+   "color": "#8d6e63",
+   "label": "Bosque perdido"
+  }
+ }
+}

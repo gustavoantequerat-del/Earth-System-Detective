@@ -1,0 +1,3818 @@
+[
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Cochabamba",
+  "detail": "city",
+  "lat": -17.39361,
+  "lon": -66.1569,
+  "dist_km": 2.5,
+  "osm": "https://www.openstreetmap.org/node/313811401"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Sacaba",
+  "detail": "city",
+  "lat": -17.40383,
+  "lon": -66.04029,
+  "dist_km": 10.5,
+  "osm": "https://www.openstreetmap.org/node/415162589"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Colcapirhua",
+  "detail": "city",
+  "lat": -17.38851,
+  "lon": -66.24078,
+  "dist_km": 11.0,
+  "osm": "https://www.openstreetmap.org/node/792641816"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Tiquipaya",
+  "detail": "city",
+  "lat": -17.33817,
+  "lon": -66.21889,
+  "dist_km": 11.5,
+  "osm": "https://www.openstreetmap.org/node/3139139192"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Pandoja",
+  "detail": "town",
+  "lat": -17.36426,
+  "lon": -66.26848,
+  "dist_km": 14.5,
+  "osm": "https://www.openstreetmap.org/node/796498693"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Quillacollo",
+  "detail": "city",
+  "lat": -17.39766,
+  "lon": -66.28148,
+  "dist_km": 15.1,
+  "osm": "https://www.openstreetmap.org/node/319761585"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "El Paso",
+  "detail": "town",
+  "lat": -17.33813,
+  "lon": -66.26555,
+  "dist_km": 15.5,
+  "osm": "https://www.openstreetmap.org/node/795675619"
+ },
+ {
+  "kind": "Ciudad o pueblo",
+  "name": "Vinto",
+  "detail": "city",
+  "lat": -17.39679,
+  "lon": -66.31358,
+  "dist_km": 18.5,
+  "osm": "https://www.openstreetmap.org/node/794376713"
+ },
+ {
+  "kind": "Industria",
+  "name": "Calaminas",
+  "detail": "metal_tiles",
+  "lat": -17.39959,
+  "lon": -66.14026,
+  "dist_km": 0.9,
+  "osm": "https://www.openstreetmap.org/way/517497462"
+ },
+ {
+  "kind": "Industria",
+  "name": "Capra",
+  "detail": "beverage;food;fruit;muesli",
+  "lat": -17.39456,
+  "lon": -66.13976,
+  "dist_km": 1.5,
+  "osm": "https://www.openstreetmap.org/node/12095972043"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "clothes",
+  "lat": -17.39215,
+  "lon": -66.14542,
+  "dist_km": 1.9,
+  "osm": "https://www.openstreetmap.org/node/11227658931"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -17.42695,
+  "lon": -66.13104,
+  "dist_km": 2.3,
+  "osm": "https://www.openstreetmap.org/way/582733907"
+ },
+ {
+  "kind": "Industria",
+  "name": "Atlas FabLab",
+  "detail": "",
+  "lat": -17.41445,
+  "lon": -66.16098,
+  "dist_km": 2.4,
+  "osm": "https://www.openstreetmap.org/node/3342712016"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas Residuales El Abra",
+  "detail": "",
+  "lat": -17.39495,
+  "lon": -66.11796,
+  "dist_km": 2.7,
+  "osm": "https://www.openstreetmap.org/way/462905969"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -17.39118,
+  "lon": -66.11954,
+  "dist_km": 2.8,
+  "osm": "https://www.openstreetmap.org/way/577865491"
+ },
+ {
+  "kind": "Industria",
+  "name": "Centro de Operaciones COMTECO",
+  "detail": "depot",
+  "lat": -17.38251,
+  "lon": -66.14342,
+  "dist_km": 2.9,
+  "osm": "https://www.openstreetmap.org/way/399576405"
+ },
+ {
+  "kind": "Industria",
+  "name": "Ecomet",
+  "detail": "furniture",
+  "lat": -17.39053,
+  "lon": -66.11846,
+  "dist_km": 2.9,
+  "osm": "https://www.openstreetmap.org/way/409411278"
+ },
+ {
+  "kind": "Industria",
+  "name": "Instrumentos Gamboa",
+  "detail": "guitars",
+  "lat": -17.39845,
+  "lon": -66.16629,
+  "dist_km": 3.1,
+  "osm": "https://www.openstreetmap.org/node/4981436373"
+ },
+ {
+  "kind": "Industria",
+  "name": "Compañía Importadora Exportadora Nacional Sud Americana",
+  "detail": "leather;shoes;leather_goods",
+  "lat": -17.39935,
+  "lon": -66.16708,
+  "dist_km": 3.1,
+  "osm": "https://www.openstreetmap.org/way/504583402"
+ },
+ {
+  "kind": "Industria",
+  "name": "Curtiembre CURMA",
+  "detail": "leather",
+  "lat": -17.40321,
+  "lon": -66.16834,
+  "dist_km": 3.2,
+  "osm": "https://www.openstreetmap.org/way/265746934"
+ },
+ {
+  "kind": "Industria",
+  "name": "Ingenio Azucarero Guabira",
+  "detail": "depot",
+  "lat": -17.4358,
+  "lon": -66.14746,
+  "dist_km": 3.2,
+  "osm": "https://www.openstreetmap.org/way/639405996"
+ },
+ {
+  "kind": "Industria",
+  "name": "Central Termoeléctrica Valle Hermoso",
+  "detail": "",
+  "lat": -17.42918,
+  "lon": -66.11687,
+  "dist_km": 3.3,
+  "osm": "https://www.openstreetmap.org/way/208238608"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aceros Industriales Ferrufino & Gardilcic",
+  "detail": "roof",
+  "lat": -17.40165,
+  "lon": -66.10889,
+  "dist_km": 3.3,
+  "osm": "https://www.openstreetmap.org/way/467394229"
+ },
+ {
+  "kind": "Industria",
+  "name": "Empresa Nacional Automotriz",
+  "detail": "car_bodies;cylinders;tanks;containers",
+  "lat": -17.37921,
+  "lon": -66.14685,
+  "dist_km": 3.3,
+  "osm": "https://www.openstreetmap.org/way/506888133"
+ },
+ {
+  "kind": "Industria",
+  "name": "Distrito Comercial Centro",
+  "detail": "",
+  "lat": -17.41456,
+  "lon": -66.16975,
+  "dist_km": 3.3,
+  "osm": "https://www.openstreetmap.org/way/524820665"
+ },
+ {
+  "kind": "Industria",
+  "name": "Compañía de Materiales de Construcción",
+  "detail": "",
+  "lat": -17.37786,
+  "lon": -66.14834,
+  "dist_km": 3.5,
+  "osm": "https://www.openstreetmap.org/way/400692531"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -17.43352,
+  "lon": -66.15876,
+  "dist_km": 3.5,
+  "osm": "https://www.openstreetmap.org/way/581948272"
+ },
+ {
+  "kind": "Industria",
+  "name": "Sumaj Yapay",
+  "detail": "food",
+  "lat": -17.38148,
+  "lon": -66.11863,
+  "dist_km": 3.6,
+  "osm": "https://www.openstreetmap.org/node/10254846268"
+ },
+ {
+  "kind": "Industria",
+  "name": "Embotelladora Tunari",
+  "detail": "factory",
+  "lat": -17.37658,
+  "lon": -66.1463,
+  "dist_km": 3.6,
+  "osm": "https://www.openstreetmap.org/way/394449677"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.4092,
+  "lon": -66.17271,
+  "dist_km": 3.6,
+  "osm": "https://www.openstreetmap.org/way/545602268"
+ },
+ {
+  "kind": "Industria",
+  "name": "Téllez",
+  "detail": "",
+  "lat": -17.37655,
+  "lon": -66.12665,
+  "dist_km": 3.7,
+  "osm": "https://www.openstreetmap.org/node/4965336223"
+ },
+ {
+  "kind": "Industria",
+  "name": "Fideos Coronilla",
+  "detail": "noodle;pasta",
+  "lat": -17.38162,
+  "lon": -66.11728,
+  "dist_km": 3.7,
+  "osm": "https://www.openstreetmap.org/way/237059306"
+ },
+ {
+  "kind": "Industria",
+  "name": "Cerámica CIMCO",
+  "detail": "bricks",
+  "lat": -17.39379,
+  "lon": -66.10785,
+  "dist_km": 3.7,
+  "osm": "https://www.openstreetmap.org/way/403566118"
+ },
+ {
+  "kind": "Industria",
+  "name": "IRBA",
+  "detail": "furniture",
+  "lat": -17.38312,
+  "lon": -66.11527,
+  "dist_km": 3.7,
+  "osm": "https://www.openstreetmap.org/way/582941226"
+ },
+ {
+  "kind": "Industria",
+  "name": "Metal Mecánica de Obras y Partes",
+  "detail": "bus",
+  "lat": -17.38158,
+  "lon": -66.11614,
+  "dist_km": 3.8,
+  "osm": "https://www.openstreetmap.org/way/237059307"
+ },
+ {
+  "kind": "Industria",
+  "name": "Compañía Papelera de Industria y Comercio Mendoza",
+  "detail": "paper",
+  "lat": -17.39704,
+  "lon": -66.10455,
+  "dist_km": 3.8,
+  "osm": "https://www.openstreetmap.org/way/403479144"
+ },
+ {
+  "kind": "Industria",
+  "name": "Frial Villa Galindo",
+  "detail": "slaughterhouse",
+  "lat": -17.39076,
+  "lon": -66.17071,
+  "dist_km": 3.9,
+  "osm": "https://www.openstreetmap.org/node/9873568930"
+ },
+ {
+  "kind": "Industria",
+  "name": "IPC",
+  "detail": "sawmill",
+  "lat": -17.38391,
+  "lon": -66.11095,
+  "dist_km": 4.0,
+  "osm": "https://www.openstreetmap.org/way/514699300"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.39472,
+  "lon": -66.10326,
+  "dist_km": 4.1,
+  "osm": "https://www.openstreetmap.org/way/585505856"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industria Boliviana de Tejas y Complementos",
+  "detail": "bricks;roof_tiles",
+  "lat": -17.39469,
+  "lon": -66.10219,
+  "dist_km": 4.2,
+  "osm": "https://www.openstreetmap.org/way/403479175"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "food",
+  "lat": -17.44691,
+  "lon": -66.13099,
+  "dist_km": 4.4,
+  "osm": "https://www.openstreetmap.org/way/432046253"
+ },
+ {
+  "kind": "Industria",
+  "name": "Plaxburg",
+  "detail": "containers",
+  "lat": -17.44775,
+  "lon": -66.13956,
+  "dist_km": 4.4,
+  "osm": "https://www.openstreetmap.org/way/516000312"
+ },
+ {
+  "kind": "Industria",
+  "name": "MILCAR",
+  "detail": "factory",
+  "lat": -17.38365,
+  "lon": -66.10475,
+  "dist_km": 4.5,
+  "osm": "https://www.openstreetmap.org/way/337472160"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aserradero",
+  "detail": "sawmill",
+  "lat": -17.4421,
+  "lon": -66.16279,
+  "dist_km": 4.5,
+  "osm": "https://www.openstreetmap.org/way/523169960"
+ },
+ {
+  "kind": "Industria",
+  "name": "Colchones Panda Flex",
+  "detail": "furniture",
+  "lat": -17.4315,
+  "lon": -66.1751,
+  "dist_km": 4.6,
+  "osm": "https://www.openstreetmap.org/node/12023181632"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aserradero DI & PA",
+  "detail": "sawmill",
+  "lat": -17.38467,
+  "lon": -66.10283,
+  "dist_km": 4.6,
+  "osm": "https://www.openstreetmap.org/way/591614134"
+ },
+ {
+  "kind": "Industria",
+  "name": "COPELME",
+  "detail": "paper",
+  "lat": -17.38403,
+  "lon": -66.10119,
+  "dist_km": 4.8,
+  "osm": "https://www.openstreetmap.org/way/340062509"
+ },
+ {
+  "kind": "Industria",
+  "name": "Ceramica Nacional",
+  "detail": "building_materials",
+  "lat": -17.38695,
+  "lon": -66.09933,
+  "dist_km": 4.8,
+  "osm": "https://www.openstreetmap.org/way/425864595"
+ },
+ {
+  "kind": "Industria",
+  "name": "Sofía",
+  "detail": "meat;chicken;pork;sausage",
+  "lat": -17.38418,
+  "lon": -66.10059,
+  "dist_km": 4.9,
+  "osm": "https://www.openstreetmap.org/way/533519532"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.38776,
+  "lon": -66.09748,
+  "dist_km": 4.9,
+  "osm": "https://www.openstreetmap.org/way/585505866"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta Engarrafadora de Gas Licuado de Petróleo  Valle Hermoso",
+  "detail": "lpg_cylinder",
+  "lat": -17.45079,
+  "lon": -66.12409,
+  "dist_km": 5.0,
+  "osm": "https://www.openstreetmap.org/node/12109322090"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "bricks",
+  "lat": -17.37873,
+  "lon": -66.10275,
+  "dist_km": 5.0,
+  "osm": "https://www.openstreetmap.org/way/340062505"
+ },
+ {
+  "kind": "Industria",
+  "name": "EcoGrupo",
+  "detail": "tubes;food",
+  "lat": -17.388,
+  "lon": -66.09618,
+  "dist_km": 5.0,
+  "osm": "https://www.openstreetmap.org/way/591614136"
+ },
+ {
+  "kind": "Industria",
+  "name": "Matadero Municipal",
+  "detail": "slaughterhouse",
+  "lat": -17.4432,
+  "lon": -66.16847,
+  "dist_km": 5.0,
+  "osm": "https://www.openstreetmap.org/way/680213723"
+ },
+ {
+  "kind": "Industria",
+  "name": "Transforma",
+  "detail": "tube;bag",
+  "lat": -17.38793,
+  "lon": -66.09628,
+  "dist_km": 5.0,
+  "osm": "https://www.openstreetmap.org/way/687288621"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -17.37085,
+  "lon": -66.11086,
+  "dist_km": 5.1,
+  "osm": "https://www.openstreetmap.org/node/6441484863"
+ },
+ {
+  "kind": "Industria",
+  "name": "Refinería Gualberto Villarroel",
+  "detail": "fuel;oil;lubricants;solvents;asphalt",
+  "lat": -17.45262,
+  "lon": -66.12248,
+  "dist_km": 5.3,
+  "osm": "https://www.openstreetmap.org/way/97087355"
+ },
+ {
+  "kind": "Industria",
+  "name": "Arvesal",
+  "detail": "warehouse",
+  "lat": -17.38528,
+  "lon": -66.09497,
+  "dist_km": 5.3,
+  "osm": "https://www.openstreetmap.org/way/425864654"
+ },
+ {
+  "kind": "Industria",
+  "name": "Naturaleza",
+  "detail": "water",
+  "lat": -17.3654,
+  "lon": -66.16345,
+  "dist_km": 5.4,
+  "osm": "https://www.openstreetmap.org/node/11016393234"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas Cala Cala",
+  "detail": "water_works",
+  "lat": -17.36365,
+  "lon": -66.16263,
+  "dist_km": 5.5,
+  "osm": "https://www.openstreetmap.org/way/70904398"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.39375,
+  "lon": -66.08966,
+  "dist_km": 5.5,
+  "osm": "https://www.openstreetmap.org/way/317710745"
+ },
+ {
+  "kind": "Industria",
+  "name": "La Azteca",
+  "detail": "food",
+  "lat": -17.39528,
+  "lon": -66.19016,
+  "dist_km": 5.6,
+  "osm": "https://www.openstreetmap.org/node/4117983576"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias Multiples de Acero Textil",
+  "detail": "",
+  "lat": -17.39216,
+  "lon": -66.08924,
+  "dist_km": 5.6,
+  "osm": "https://www.openstreetmap.org/way/317530883"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta Reparadora y Recalificadora Gualberto Villarroel",
+  "detail": "steel_cylinder",
+  "lat": -17.45754,
+  "lon": -66.12415,
+  "dist_km": 5.7,
+  "osm": "https://www.openstreetmap.org/node/12109321926"
+ },
+ {
+  "kind": "Industria",
+  "name": "Crisol",
+  "detail": "",
+  "lat": -17.39347,
+  "lon": -66.19164,
+  "dist_km": 5.8,
+  "osm": "https://www.openstreetmap.org/way/245013949"
+ },
+ {
+  "kind": "Industria",
+  "name": "Campero",
+  "detail": "warehouse",
+  "lat": -17.3875,
+  "lon": -66.08674,
+  "dist_km": 6.0,
+  "osm": "https://www.openstreetmap.org/way/425864659"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.39031,
+  "lon": -66.19206,
+  "dist_km": 6.0,
+  "osm": "https://www.openstreetmap.org/way/580287863"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas Residuales Lomas del Pagador",
+  "detail": "wastewater_plant",
+  "lat": -17.45078,
+  "lon": -66.1045,
+  "dist_km": 6.0,
+  "osm": "https://www.openstreetmap.org/way/595172743"
+ },
+ {
+  "kind": "Industria",
+  "name": "Hornos de Ladrillos",
+  "detail": "brick",
+  "lat": -17.39431,
+  "lon": -66.0844,
+  "dist_km": 6.0,
+  "osm": "https://www.openstreetmap.org/way/605030846"
+ },
+ {
+  "kind": "Industria",
+  "name": "Marmolera",
+  "detail": "building_materials",
+  "lat": -17.39363,
+  "lon": -66.19422,
+  "dist_km": 6.1,
+  "osm": "https://www.openstreetmap.org/way/582705116"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta PEPSI Cochabamba",
+  "detail": "beverage;soda;juice",
+  "lat": -17.38488,
+  "lon": -66.08554,
+  "dist_km": 6.2,
+  "osm": "https://www.openstreetmap.org/way/425864647"
+ },
+ {
+  "kind": "Industria",
+  "name": "FEMCO",
+  "detail": "building_supplies",
+  "lat": -17.38571,
+  "lon": -66.08515,
+  "dist_km": 6.2,
+  "osm": "https://www.openstreetmap.org/way/425864657"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industria Molinera de Alimentos Balanceados",
+  "detail": "chicken",
+  "lat": -17.39965,
+  "lon": -66.19698,
+  "dist_km": 6.2,
+  "osm": "https://www.openstreetmap.org/way/462903201"
+ },
+ {
+  "kind": "Industria",
+  "name": "Norland",
+  "detail": "food;beverage;soy_milk;ice_cream",
+  "lat": -17.38715,
+  "lon": -66.08362,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/way/425864645"
+ },
+ {
+  "kind": "Industria",
+  "name": "Curtiembre América",
+  "detail": "leather;wet_blue",
+  "lat": -17.39129,
+  "lon": -66.19599,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/way/509139309"
+ },
+ {
+  "kind": "Industria",
+  "name": "Fábrica de Cielo Falso",
+  "detail": "false_ceiling",
+  "lat": -17.38574,
+  "lon": -66.19467,
+  "dist_km": 6.4,
+  "osm": "https://www.openstreetmap.org/node/3706871955"
+ },
+ {
+  "kind": "Industria",
+  "name": "ENAVAO",
+  "detail": "poultry_processing",
+  "lat": -17.40116,
+  "lon": -66.19928,
+  "dist_km": 6.4,
+  "osm": "https://www.openstreetmap.org/way/410767613"
+ },
+ {
+  "kind": "Industria",
+  "name": "galpon",
+  "detail": "",
+  "lat": -17.40528,
+  "lon": -66.19968,
+  "dist_km": 6.4,
+  "osm": "https://www.openstreetmap.org/way/578461889"
+ },
+ {
+  "kind": "Industria",
+  "name": "Incerpaz",
+  "detail": "bricks;pottery",
+  "lat": -17.40518,
+  "lon": -66.0769,
+  "dist_km": 6.6,
+  "osm": "https://www.openstreetmap.org/way/350494914"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industria Molinera Concordia",
+  "detail": "food;wheat flour;pasta;noodles",
+  "lat": -17.39962,
+  "lon": -66.20104,
+  "dist_km": 6.6,
+  "osm": "https://www.openstreetmap.org/way/410767594"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias Ravi",
+  "detail": "packaging",
+  "lat": -17.40137,
+  "lon": -66.20097,
+  "dist_km": 6.6,
+  "osm": "https://www.openstreetmap.org/way/410767601"
+ },
+ {
+  "kind": "Industria",
+  "name": "Coboce Hormigón",
+  "detail": "concrete_plant",
+  "lat": -17.39832,
+  "lon": -66.20092,
+  "dist_km": 6.6,
+  "osm": "https://www.openstreetmap.org/way/653180150"
+ },
+ {
+  "kind": "Industria",
+  "name": "Delizia",
+  "detail": "icecream",
+  "lat": -17.38647,
+  "lon": -66.08114,
+  "dist_km": 6.6,
+  "osm": "https://www.openstreetmap.org/way/687288616"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas Residuales Albarancho",
+  "detail": "",
+  "lat": -17.43164,
+  "lon": -66.19679,
+  "dist_km": 6.7,
+  "osm": "https://www.openstreetmap.org/way/293944613"
+ },
+ {
+  "kind": "Industria",
+  "name": "Importadora Campero",
+  "detail": "warehouse",
+  "lat": -17.3979,
+  "lon": -66.20118,
+  "dist_km": 6.7,
+  "osm": "https://www.openstreetmap.org/way/410767615"
+ },
+ {
+  "kind": "Industria",
+  "name": "galpon",
+  "detail": "",
+  "lat": -17.41259,
+  "lon": -66.20217,
+  "dist_km": 6.7,
+  "osm": "https://www.openstreetmap.org/way/578261184"
+ },
+ {
+  "kind": "Industria",
+  "name": "Galpon",
+  "detail": "",
+  "lat": -17.45458,
+  "lon": -66.17879,
+  "dist_km": 6.7,
+  "osm": "https://www.openstreetmap.org/way/620222529"
+ },
+ {
+  "kind": "Industria",
+  "name": "Brenntag Bolivia",
+  "detail": "warehouse",
+  "lat": -17.40171,
+  "lon": -66.20224,
+  "dist_km": 6.7,
+  "osm": "https://www.openstreetmap.org/way/653180160"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta Potabilizadora de Agua Aranjuez",
+  "detail": "",
+  "lat": -17.3472,
+  "lon": -66.1426,
+  "dist_km": 6.8,
+  "osm": "https://www.openstreetmap.org/way/325138955"
+ },
+ {
+  "kind": "Industria",
+  "name": "Incerco",
+  "detail": "pottery",
+  "lat": -17.40378,
+  "lon": -66.07474,
+  "dist_km": 6.8,
+  "osm": "https://www.openstreetmap.org/way/350494919"
+ },
+ {
+  "kind": "Industria",
+  "name": "Ferrari Ghezzi",
+  "detail": "warehouse",
+  "lat": -17.39771,
+  "lon": -66.20247,
+  "dist_km": 6.8,
+  "osm": "https://www.openstreetmap.org/way/410767619"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "bricks",
+  "lat": -17.40568,
+  "lon": -66.07516,
+  "dist_km": 6.8,
+  "osm": "https://www.openstreetmap.org/way/517111539"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrial Almanza",
+  "detail": "clothes",
+  "lat": -17.37399,
+  "lon": -66.1932,
+  "dist_km": 6.9,
+  "osm": "https://www.openstreetmap.org/way/249846677"
+ },
+ {
+  "kind": "Industria",
+  "name": "galpón",
+  "detail": "",
+  "lat": -17.41157,
+  "lon": -66.20433,
+  "dist_km": 6.9,
+  "osm": "https://www.openstreetmap.org/way/578261211"
+ },
+ {
+  "kind": "Industria",
+  "name": "Galpon",
+  "detail": "",
+  "lat": -17.4572,
+  "lon": -66.17846,
+  "dist_km": 6.9,
+  "osm": "https://www.openstreetmap.org/way/620227919"
+ },
+ {
+  "kind": "Industria",
+  "name": "Galpon",
+  "detail": "",
+  "lat": -17.45702,
+  "lon": -66.17886,
+  "dist_km": 6.9,
+  "osm": "https://www.openstreetmap.org/way/620227920"
+ },
+ {
+  "kind": "Industria",
+  "name": "Albaco",
+  "detail": "animal_feed",
+  "lat": -17.3978,
+  "lon": -66.20314,
+  "dist_km": 6.9,
+  "osm": "https://www.openstreetmap.org/way/653180153"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aserradero La Fuente",
+  "detail": "sawmill",
+  "lat": -17.39164,
+  "lon": -66.20338,
+  "dist_km": 7.1,
+  "osm": "https://www.openstreetmap.org/way/586715869"
+ },
+ {
+  "kind": "Industria",
+  "name": "galpón",
+  "detail": "",
+  "lat": -17.41273,
+  "lon": -66.20637,
+  "dist_km": 7.2,
+  "osm": "https://www.openstreetmap.org/way/578261229"
+ },
+ {
+  "kind": "Industria",
+  "name": "FABOCE",
+  "detail": "",
+  "lat": -17.39355,
+  "lon": -66.07221,
+  "dist_km": 7.3,
+  "osm": "https://www.openstreetmap.org/way/422765173"
+ },
+ {
+  "kind": "Industria",
+  "name": "Depósitos Empresa de Luz y Fuerza Cochabamba",
+  "detail": "depot",
+  "lat": -17.38031,
+  "lon": -66.20184,
+  "dist_km": 7.3,
+  "osm": "https://www.openstreetmap.org/way/582738906"
+ },
+ {
+  "kind": "Industria",
+  "name": "Cemvi",
+  "detail": "water",
+  "lat": -17.38998,
+  "lon": -66.21115,
+  "dist_km": 7.9,
+  "osm": "https://www.openstreetmap.org/way/403482532"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -17.39775,
+  "lon": -66.21285,
+  "dist_km": 7.9,
+  "osm": "https://www.openstreetmap.org/way/538455381"
+ },
+ {
+  "kind": "Industria",
+  "name": "Servicio Municipal de Agua Potable y Alcantarillado",
+  "detail": "water_works",
+  "lat": -17.38785,
+  "lon": -66.2126,
+  "dist_km": 8.1,
+  "osm": "https://www.openstreetmap.org/way/246407570"
+ },
+ {
+  "kind": "Industria",
+  "name": "Laboratorios IFARBO",
+  "detail": "pharmaceuticals;drugs",
+  "lat": -17.39485,
+  "lon": -66.21399,
+  "dist_km": 8.1,
+  "osm": "https://www.openstreetmap.org/way/592119199"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -17.39607,
+  "lon": -66.21513,
+  "dist_km": 8.2,
+  "osm": "https://www.openstreetmap.org/way/592119196"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas Residuales Miraflores Sivingani",
+  "detail": "wastewater_plant",
+  "lat": -17.47414,
+  "lon": -66.17329,
+  "dist_km": 8.2,
+  "osm": "https://www.openstreetmap.org/way/595172746"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "wheat",
+  "lat": -17.47654,
+  "lon": -66.10883,
+  "dist_km": 8.3,
+  "osm": "https://www.openstreetmap.org/way/622180972"
+ },
+ {
+  "kind": "Industria",
+  "name": "Fábrica Boliviana de Envases",
+  "detail": "packaging;can",
+  "lat": -17.34557,
+  "lon": -66.18426,
+  "dist_km": 8.4,
+  "osm": "https://www.openstreetmap.org/way/393227337"
+ },
+ {
+  "kind": "Industria",
+  "name": "HilSend",
+  "detail": "textil;yarn",
+  "lat": -17.39374,
+  "lon": -66.21784,
+  "dist_km": 8.5,
+  "osm": "https://www.openstreetmap.org/way/436175912"
+ },
+ {
+  "kind": "Industria",
+  "name": "Las Lomas",
+  "detail": "distributor",
+  "lat": -17.39123,
+  "lon": -66.21734,
+  "dist_km": 8.5,
+  "osm": "https://www.openstreetmap.org/way/582635027"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta SOBOCE Ready Mix",
+  "detail": "cement",
+  "lat": -17.39432,
+  "lon": -66.21903,
+  "dist_km": 8.6,
+  "osm": "https://www.openstreetmap.org/way/430109690"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias Venado",
+  "detail": "distributor",
+  "lat": -17.39606,
+  "lon": -66.21948,
+  "dist_km": 8.6,
+  "osm": "https://www.openstreetmap.org/way/505745225"
+ },
+ {
+  "kind": "Industria",
+  "name": "MADISA",
+  "detail": "food",
+  "lat": -17.39613,
+  "lon": -66.21896,
+  "dist_km": 8.6,
+  "osm": "https://www.openstreetmap.org/way/505745227"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -17.3926,
+  "lon": -66.21889,
+  "dist_km": 8.6,
+  "osm": "https://www.openstreetmap.org/way/505745231"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas Residuales María Auxiliadora",
+  "detail": "wastewater_plant",
+  "lat": -17.47346,
+  "lon": -66.18311,
+  "dist_km": 8.6,
+  "osm": "https://www.openstreetmap.org/way/595230163"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.39639,
+  "lon": -66.22047,
+  "dist_km": 8.7,
+  "osm": "https://www.openstreetmap.org/way/430109688"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias Alimenticias Del Valle",
+  "detail": "food;marmalade;ketchup;juice;nectar",
+  "lat": -17.39428,
+  "lon": -66.22026,
+  "dist_km": 8.7,
+  "osm": "https://www.openstreetmap.org/way/505745235"
+ },
+ {
+  "kind": "Industria",
+  "name": "Cerámica GLADIMAR",
+  "detail": "distributor",
+  "lat": -17.39482,
+  "lon": -66.22036,
+  "dist_km": 8.7,
+  "osm": "https://www.openstreetmap.org/way/505745238"
+ },
+ {
+  "kind": "Industria",
+  "name": "COBOCE Ceramil",
+  "detail": "bricks;roof_tiles;floor_tiles",
+  "lat": -17.39285,
+  "lon": -66.22047,
+  "dist_km": 8.8,
+  "osm": "https://www.openstreetmap.org/way/226166583"
+ },
+ {
+  "kind": "Industria",
+  "name": "COBOCE",
+  "detail": "",
+  "lat": -17.39226,
+  "lon": -66.22118,
+  "dist_km": 8.9,
+  "osm": "https://www.openstreetmap.org/way/227362240"
+ },
+ {
+  "kind": "Industria",
+  "name": "INCOPLAST",
+  "detail": "rope",
+  "lat": -17.39328,
+  "lon": -66.22262,
+  "dist_km": 9.0,
+  "osm": "https://www.openstreetmap.org/way/436175909"
+ },
+ {
+  "kind": "Industria",
+  "name": "Galpon",
+  "detail": "",
+  "lat": -17.46536,
+  "lon": -66.20276,
+  "dist_km": 9.3,
+  "osm": "https://www.openstreetmap.org/way/620632437"
+ },
+ {
+  "kind": "Industria",
+  "name": "Galpon",
+  "detail": "",
+  "lat": -17.46543,
+  "lon": -66.20234,
+  "dist_km": 9.3,
+  "osm": "https://www.openstreetmap.org/way/620632439"
+ },
+ {
+  "kind": "Industria",
+  "name": "Galpon",
+  "detail": "",
+  "lat": -17.46582,
+  "lon": -66.20253,
+  "dist_km": 9.3,
+  "osm": "https://www.openstreetmap.org/way/620632440"
+ },
+ {
+  "kind": "Industria",
+  "name": "Duralit",
+  "detail": "building_material;roof;wall",
+  "lat": -17.38954,
+  "lon": -66.22582,
+  "dist_km": 9.4,
+  "osm": "https://www.openstreetmap.org/way/586695515"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.392,
+  "lon": -66.22701,
+  "dist_km": 9.5,
+  "osm": "https://www.openstreetmap.org/way/588786817"
+ },
+ {
+  "kind": "Industria",
+  "name": "Cerámica COBOCE",
+  "detail": "tile_floor;toilet;sink",
+  "lat": -17.39808,
+  "lon": -66.04899,
+  "dist_km": 9.6,
+  "osm": "https://www.openstreetmap.org/way/403480072"
+ },
+ {
+  "kind": "Industria",
+  "name": "La Papelera",
+  "detail": "packaging",
+  "lat": -17.39474,
+  "lon": -66.22952,
+  "dist_km": 9.7,
+  "osm": "https://www.openstreetmap.org/way/243735302"
+ },
+ {
+  "kind": "Industria",
+  "name": "Metalin",
+  "detail": "factory",
+  "lat": -17.36774,
+  "lon": -66.22002,
+  "dist_km": 9.7,
+  "osm": "https://www.openstreetmap.org/way/450926057"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta Taquiña",
+  "detail": "beer;malt_beer",
+  "lat": -17.32761,
+  "lon": -66.18429,
+  "dist_km": 10.1,
+  "osm": "https://www.openstreetmap.org/way/228170249"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas Residuales Taquiña",
+  "detail": "wastewater_plant",
+  "lat": -17.32861,
+  "lon": -66.18564,
+  "dist_km": 10.1,
+  "osm": "https://www.openstreetmap.org/way/424325086"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias Protex",
+  "detail": "factory",
+  "lat": -17.39422,
+  "lon": -66.23556,
+  "dist_km": 10.3,
+  "osm": "https://www.openstreetmap.org/way/250575845"
+ },
+ {
+  "kind": "Industria",
+  "name": "Granja Avícola",
+  "detail": "poultry_farm",
+  "lat": -17.36054,
+  "lon": -66.22281,
+  "dist_km": 10.3,
+  "osm": "https://www.openstreetmap.org/way/423732147"
+ },
+ {
+  "kind": "Industria",
+  "name": "Golden Seeds",
+  "detail": "food;quinoa",
+  "lat": -17.39705,
+  "lon": -66.23538,
+  "dist_km": 10.3,
+  "osm": "https://www.openstreetmap.org/way/526903538"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta Potabilización de Aguas Taquiña",
+  "detail": "",
+  "lat": -17.32934,
+  "lon": -66.19041,
+  "dist_km": 10.3,
+  "osm": "https://www.openstreetmap.org/way/545784524"
+ },
+ {
+  "kind": "Industria",
+  "name": "CONCRETEC",
+  "detail": "building_materials",
+  "lat": -17.395,
+  "lon": -66.23549,
+  "dist_km": 10.3,
+  "osm": "https://www.openstreetmap.org/way/621393468"
+ },
+ {
+  "kind": "Industria",
+  "name": "Foods Company",
+  "detail": "cereals;food",
+  "lat": -17.39592,
+  "lon": -66.23541,
+  "dist_km": 10.3,
+  "osm": "https://www.openstreetmap.org/way/621393470"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.39537,
+  "lon": -66.23526,
+  "dist_km": 10.3,
+  "osm": "https://www.openstreetmap.org/way/621393471"
+ },
+ {
+  "kind": "Industria",
+  "name": "Orgánica del Sur",
+  "detail": "snacks;food",
+  "lat": -17.39571,
+  "lon": -66.23642,
+  "dist_km": 10.4,
+  "osm": "https://www.openstreetmap.org/way/250575849"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aserradero Ramón",
+  "detail": "sawmill",
+  "lat": -17.34243,
+  "lon": -66.21186,
+  "dist_km": 10.6,
+  "osm": "https://www.openstreetmap.org/way/429009052"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aserradero",
+  "detail": "sawmill",
+  "lat": -17.34166,
+  "lon": -66.21162,
+  "dist_km": 10.6,
+  "osm": "https://www.openstreetmap.org/way/429009055"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aserradero D y A",
+  "detail": "sawmill",
+  "lat": -17.34253,
+  "lon": -66.21285,
+  "dist_km": 10.7,
+  "osm": "https://www.openstreetmap.org/way/429009056"
+ },
+ {
+  "kind": "Industria",
+  "name": "Avícola Rolón",
+  "detail": "poultry_farm",
+  "lat": -17.34924,
+  "lon": -66.22085,
+  "dist_km": 10.8,
+  "osm": "https://www.openstreetmap.org/way/549053617"
+ },
+ {
+  "kind": "Industria",
+  "name": "Fabrica de Colchones",
+  "detail": "furniture",
+  "lat": -17.34331,
+  "lon": -66.21644,
+  "dist_km": 10.9,
+  "osm": "https://www.openstreetmap.org/node/4238852783"
+ },
+ {
+  "kind": "Industria",
+  "name": "Fabrica de Colchones Señor de Mayo",
+  "detail": "furniture",
+  "lat": -17.341,
+  "lon": -66.21663,
+  "dist_km": 11.1,
+  "osm": "https://www.openstreetmap.org/node/4582125290"
+ },
+ {
+  "kind": "Industria",
+  "name": "Matadero Tiquipaya",
+  "detail": "slaughterhouse",
+  "lat": -17.33633,
+  "lon": -66.21143,
+  "dist_km": 11.1,
+  "osm": "https://www.openstreetmap.org/way/429009016"
+ },
+ {
+  "kind": "Industria",
+  "name": "Sociedad Industrial y Comercial Salchichería Hass",
+  "detail": "food",
+  "lat": -17.34642,
+  "lon": -66.22366,
+  "dist_km": 11.3,
+  "osm": "https://www.openstreetmap.org/way/549053600"
+ },
+ {
+  "kind": "Industria",
+  "name": "Jugos del Valle",
+  "detail": "factory",
+  "lat": -17.32297,
+  "lon": -66.20116,
+  "dist_km": 11.5,
+  "osm": "https://www.openstreetmap.org/way/620411497"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.40463,
+  "lon": -66.24918,
+  "dist_km": 11.7,
+  "osm": "https://www.openstreetmap.org/way/588799821"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aserradero",
+  "detail": "sawmill",
+  "lat": -17.38978,
+  "lon": -66.24933,
+  "dist_km": 11.9,
+  "osm": "https://www.openstreetmap.org/way/510628303"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "",
+  "lat": -17.3907,
+  "lon": -66.2511,
+  "dist_km": 12.0,
+  "osm": "https://www.openstreetmap.org/way/226825232"
+ },
+ {
+  "kind": "Industria",
+  "name": "Embotelladoras Bolivianas Unidas",
+  "detail": "soft drink;water;juice;sports drink",
+  "lat": -17.38852,
+  "lon": -66.25128,
+  "dist_km": 12.1,
+  "osm": "https://www.openstreetmap.org/way/186901702"
+ },
+ {
+  "kind": "Industria",
+  "name": "Inquibol",
+  "detail": "medicines",
+  "lat": -17.3859,
+  "lon": -66.2521,
+  "dist_km": 12.2,
+  "osm": "https://www.openstreetmap.org/node/10685725057"
+ },
+ {
+  "kind": "Industria",
+  "name": "PIL Andina",
+  "detail": "food;beverage;milk;cheese;yogurt;butter;ice cream",
+  "lat": -17.38954,
+  "lon": -66.25451,
+  "dist_km": 12.4,
+  "osm": "https://www.openstreetmap.org/way/206476358"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta PET",
+  "detail": "bottle",
+  "lat": -17.39804,
+  "lon": -66.2555,
+  "dist_km": 12.4,
+  "osm": "https://www.openstreetmap.org/way/361647442"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias de Aceite",
+  "detail": "food;beverage;food_oil;fat;soap",
+  "lat": -17.39684,
+  "lon": -66.25629,
+  "dist_km": 12.5,
+  "osm": "https://www.openstreetmap.org/way/352754351"
+ },
+ {
+  "kind": "Industria",
+  "name": "Empacar",
+  "detail": "bottle",
+  "lat": -17.37759,
+  "lon": -66.25262,
+  "dist_km": 12.5,
+  "osm": "https://www.openstreetmap.org/way/510631303"
+ },
+ {
+  "kind": "Industria",
+  "name": "Corporación Industrial Dillman",
+  "detail": "factory",
+  "lat": -17.38379,
+  "lon": -66.25537,
+  "dist_km": 12.6,
+  "osm": "https://www.openstreetmap.org/way/226170002"
+ },
+ {
+  "kind": "Industria",
+  "name": "Porcelana JEIS",
+  "detail": "building_supplies",
+  "lat": -17.39411,
+  "lon": -66.25687,
+  "dist_km": 12.6,
+  "osm": "https://www.openstreetmap.org/way/621390068"
+ },
+ {
+  "kind": "Industria",
+  "name": "Unilever Andina Bolivia",
+  "detail": "chemical;soap;shampoo",
+  "lat": -17.39063,
+  "lon": -66.25728,
+  "dist_km": 12.7,
+  "osm": "https://www.openstreetmap.org/way/225136738"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Alimentos UV",
+  "detail": "",
+  "lat": -17.32987,
+  "lon": -66.22656,
+  "dist_km": 12.7,
+  "osm": "https://www.openstreetmap.org/way/308644742"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas",
+  "detail": "water_works",
+  "lat": -17.31934,
+  "lon": -66.21522,
+  "dist_km": 12.7,
+  "osm": "https://www.openstreetmap.org/way/527184342"
+ },
+ {
+  "kind": "Industria",
+  "name": "Aserradero",
+  "detail": "sawmill",
+  "lat": -17.39273,
+  "lon": -66.25896,
+  "dist_km": 12.8,
+  "osm": "https://www.openstreetmap.org/way/461731034"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.39597,
+  "lon": -66.2607,
+  "dist_km": 13.0,
+  "osm": "https://www.openstreetmap.org/way/625649432"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.39718,
+  "lon": -66.26235,
+  "dist_km": 13.1,
+  "osm": "https://www.openstreetmap.org/way/625649434"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.40022,
+  "lon": -66.26344,
+  "dist_km": 13.2,
+  "osm": "https://www.openstreetmap.org/way/621390053"
+ },
+ {
+  "kind": "Industria",
+  "name": "IKI",
+  "detail": "cylinders;storage tank;metal_structures",
+  "lat": -17.39394,
+  "lon": -66.26444,
+  "dist_km": 13.4,
+  "osm": "https://www.openstreetmap.org/node/5941562622"
+ },
+ {
+  "kind": "Industria",
+  "name": "Empresa Nacional Boliviana Constructora",
+  "detail": "metallic_constructions;beams",
+  "lat": -17.39319,
+  "lon": -66.26568,
+  "dist_km": 13.5,
+  "osm": "https://www.openstreetmap.org/way/229582905"
+ },
+ {
+  "kind": "Industria",
+  "name": "DISMAT",
+  "detail": "factory",
+  "lat": -17.35198,
+  "lon": -66.2603,
+  "dist_km": 14.3,
+  "osm": "https://www.openstreetmap.org/way/593922768"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Aguas Curubamba Alta",
+  "detail": "water purification",
+  "lat": -17.40307,
+  "lon": -66.0045,
+  "dist_km": 14.3,
+  "osm": "https://www.openstreetmap.org/way/595168461"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "flour",
+  "lat": -17.36228,
+  "lon": -66.27587,
+  "dist_km": 15.4,
+  "osm": "https://www.openstreetmap.org/node/12508695895"
+ },
+ {
+  "kind": "Industria",
+  "name": "Estación de Compresión Huayñacota",
+  "detail": "gas",
+  "lat": -17.54689,
+  "lon": -66.1512,
+  "dist_km": 15.5,
+  "osm": "https://www.openstreetmap.org/way/681702064"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Tratamiento de Agua Potable Jove Rancho",
+  "detail": "water_works",
+  "lat": -17.31512,
+  "lon": -66.25619,
+  "dist_km": 16.1,
+  "osm": "https://www.openstreetmap.org/way/504669934"
+ },
+ {
+  "kind": "Industria",
+  "name": "Productos La Mejicana",
+  "detail": "food",
+  "lat": -17.40163,
+  "lon": -66.29134,
+  "dist_km": 16.2,
+  "osm": "https://www.openstreetmap.org/node/12441969539"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias Manaco",
+  "detail": "shoes;leather",
+  "lat": -17.39637,
+  "lon": -66.29242,
+  "dist_km": 16.3,
+  "osm": "https://www.openstreetmap.org/way/377761249"
+ },
+ {
+  "kind": "Industria",
+  "name": "Central Hidroeléctrica Misicuni",
+  "detail": "",
+  "lat": -17.31479,
+  "lon": -66.26165,
+  "dist_km": 16.6,
+  "osm": "https://www.openstreetmap.org/way/522803086"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta de Asfalto",
+  "detail": "asphalt_plant",
+  "lat": -17.33379,
+  "lon": -66.27629,
+  "dist_km": 16.7,
+  "osm": "https://www.openstreetmap.org/way/619558924"
+ },
+ {
+  "kind": "Industria",
+  "name": "Granja Avícola",
+  "detail": "poultry_farm",
+  "lat": -17.55303,
+  "lon": -66.08711,
+  "dist_km": 17.0,
+  "osm": "https://www.openstreetmap.org/way/449768921"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "machinery",
+  "lat": -17.39823,
+  "lon": -66.30283,
+  "dist_km": 17.4,
+  "osm": "https://www.openstreetmap.org/node/10290626069"
+ },
+ {
+  "kind": "Industria",
+  "name": "MAXAM Fanexa",
+  "detail": "explosives",
+  "lat": -17.53367,
+  "lon": -66.25041,
+  "dist_km": 18.3,
+  "osm": "https://www.openstreetmap.org/way/376839660"
+ },
+ {
+  "kind": "Industria",
+  "name": "Avícola El Carmen",
+  "detail": "meat",
+  "lat": -17.41044,
+  "lon": -66.32401,
+  "dist_km": 19.6,
+  "osm": "https://www.openstreetmap.org/way/503897681"
+ },
+ {
+  "kind": "Industria",
+  "name": "Frigorífico PREMET",
+  "detail": "meat",
+  "lat": -17.40969,
+  "lon": -66.32504,
+  "dist_km": 19.7,
+  "osm": "https://www.openstreetmap.org/way/503897680"
+ },
+ {
+  "kind": "Industria",
+  "name": "Cerámica Rio Grande",
+  "detail": "bricks;roof_tiles;building_materials",
+  "lat": -17.55683,
+  "lon": -66.24011,
+  "dist_km": 19.7,
+  "osm": "https://www.openstreetmap.org/way/539347804"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.55636,
+  "lon": -66.24797,
+  "dist_km": 20.1,
+  "osm": "https://www.openstreetmap.org/way/539347802"
+ },
+ {
+  "kind": "Industria",
+  "name": "Sociedad Metalúrgica Sometal",
+  "detail": "mineral",
+  "lat": -17.5555,
+  "lon": -66.25086,
+  "dist_km": 20.2,
+  "osm": "https://www.openstreetmap.org/way/539347755"
+ },
+ {
+  "kind": "Industria",
+  "name": "Empresa Nacional Boliviana Constructora",
+  "detail": "tower;metal_frame",
+  "lat": -17.55822,
+  "lon": -66.24729,
+  "dist_km": 20.2,
+  "osm": "https://www.openstreetmap.org/way/539347794"
+ },
+ {
+  "kind": "Industria",
+  "name": "Planta Tratamiento Aguas Residuales Parque Santiváñez",
+  "detail": "wastewater_plant",
+  "lat": -17.5543,
+  "lon": -66.25322,
+  "dist_km": 20.3,
+  "osm": "https://www.openstreetmap.org/way/486400999"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.55546,
+  "lon": -66.25245,
+  "dist_km": 20.3,
+  "osm": "https://www.openstreetmap.org/way/539347747"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias Gaval",
+  "detail": "wire",
+  "lat": -17.55639,
+  "lon": -66.25151,
+  "dist_km": 20.3,
+  "osm": "https://www.openstreetmap.org/way/539347753"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.55858,
+  "lon": -66.24816,
+  "dist_km": 20.3,
+  "osm": "https://www.openstreetmap.org/way/539347790"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.5584,
+  "lon": -66.24783,
+  "dist_km": 20.3,
+  "osm": "https://www.openstreetmap.org/way/539347792"
+ },
+ {
+  "kind": "Industria",
+  "name": "Juárez Guzmán",
+  "detail": "mineral;fertilizer",
+  "lat": -17.55925,
+  "lon": -66.24659,
+  "dist_km": 20.3,
+  "osm": "https://www.openstreetmap.org/way/539347795"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.55596,
+  "lon": -66.25291,
+  "dist_km": 20.4,
+  "osm": "https://www.openstreetmap.org/way/539347751"
+ },
+ {
+  "kind": "Industria",
+  "name": "Ceramibol",
+  "detail": "bricks",
+  "lat": -17.55885,
+  "lon": -66.24866,
+  "dist_km": 20.4,
+  "osm": "https://www.openstreetmap.org/way/539347788"
+ },
+ {
+  "kind": "Industria",
+  "name": "Plastiforte",
+  "detail": "tanks;pipes",
+  "lat": -17.55739,
+  "lon": -66.25219,
+  "dist_km": 20.5,
+  "osm": "https://www.openstreetmap.org/way/539347766"
+ },
+ {
+  "kind": "Industria",
+  "name": "Maprin",
+  "detail": "mineral;building_materials",
+  "lat": -17.55802,
+  "lon": -66.25264,
+  "dist_km": 20.5,
+  "osm": "https://www.openstreetmap.org/way/539347767"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industria Bolivia de Calcareos",
+  "detail": "mineral;lime",
+  "lat": -17.56041,
+  "lon": -66.24872,
+  "dist_km": 20.5,
+  "osm": "https://www.openstreetmap.org/way/539347782"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.56014,
+  "lon": -66.24824,
+  "dist_km": 20.5,
+  "osm": "https://www.openstreetmap.org/way/539347784"
+ },
+ {
+  "kind": "Industria",
+  "name": "Laminco",
+  "detail": "fertilizer;mineral",
+  "lat": -17.5594,
+  "lon": -66.24938,
+  "dist_km": 20.5,
+  "osm": "https://www.openstreetmap.org/way/539347785"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "food",
+  "lat": -17.55935,
+  "lon": -66.25066,
+  "dist_km": 20.5,
+  "osm": "https://www.openstreetmap.org/way/539347796"
+ },
+ {
+  "kind": "Industria",
+  "name": "Empresa Nacional Automotríz",
+  "detail": "vehicles",
+  "lat": -17.56255,
+  "lon": -66.2471,
+  "dist_km": 20.6,
+  "osm": "https://www.openstreetmap.org/way/486400990"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "food",
+  "lat": -17.5593,
+  "lon": -66.25163,
+  "dist_km": 20.6,
+  "osm": "https://www.openstreetmap.org/way/539347798"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industria Sigma Corp",
+  "detail": "pharmaceutical",
+  "lat": -17.55998,
+  "lon": -66.25253,
+  "dist_km": 20.7,
+  "osm": "https://www.openstreetmap.org/way/539347773"
+ },
+ {
+  "kind": "Industria",
+  "name": "Industrias Alimenticias La Moderna",
+  "detail": "food;pasta",
+  "lat": -17.56096,
+  "lon": -66.25182,
+  "dist_km": 20.8,
+  "osm": "https://www.openstreetmap.org/way/539347774"
+ },
+ {
+  "kind": "Industria",
+  "name": "",
+  "detail": "factory",
+  "lat": -17.56139,
+  "lon": -66.25147,
+  "dist_km": 20.8,
+  "osm": "https://www.openstreetmap.org/way/539347777"
+ },
+ {
+  "kind": "Industria",
+  "name": "Ense Organics",
+  "detail": "food",
+  "lat": -17.5647,
+  "lon": -66.25314,
+  "dist_km": 21.2,
+  "osm": "https://www.openstreetmap.org/node/12027921740"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Isla 1",
+  "detail": "sediment",
+  "lat": -17.41286,
+  "lon": -66.13724,
+  "dist_km": 0.6,
+  "osm": "https://www.openstreetmap.org/way/1357686693"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Sedimento 1",
+  "detail": "sediment",
+  "lat": -17.40544,
+  "lon": -66.13341,
+  "dist_km": 0.7,
+  "osm": "https://www.openstreetmap.org/way/1360938422"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Sedimento 4",
+  "detail": "sediment",
+  "lat": -17.40267,
+  "lon": -66.13412,
+  "dist_km": 0.8,
+  "osm": "https://www.openstreetmap.org/way/1360938421"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Sedimento 5",
+  "detail": "sediment",
+  "lat": -17.40072,
+  "lon": -66.13538,
+  "dist_km": 0.9,
+  "osm": "https://www.openstreetmap.org/way/1360938420"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Sedimentos 3",
+  "detail": "sediment",
+  "lat": -17.41298,
+  "lon": -66.12734,
+  "dist_km": 1.4,
+  "osm": "https://www.openstreetmap.org/way/1357686694"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "clay",
+  "lat": -17.46748,
+  "lon": -66.12699,
+  "dist_km": 6.7,
+  "osm": "https://www.openstreetmap.org/relation/18149856"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "stone",
+  "lat": -17.49631,
+  "lon": -66.08993,
+  "dist_km": 11.1,
+  "osm": "https://www.openstreetmap.org/way/450378797"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "mine",
+  "lat": -17.49654,
+  "lon": -66.08937,
+  "dist_km": 11.1,
+  "osm": "https://www.openstreetmap.org/way/911364116"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "clay",
+  "lat": -17.41185,
+  "lon": -66.24785,
+  "dist_km": 11.5,
+  "osm": "https://www.openstreetmap.org/way/1552061411"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "clay",
+  "lat": -17.41191,
+  "lon": -66.24706,
+  "dist_km": 11.5,
+  "osm": "https://www.openstreetmap.org/way/1552061412"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "clay",
+  "lat": -17.41235,
+  "lon": -66.24713,
+  "dist_km": 11.5,
+  "osm": "https://www.openstreetmap.org/way/1552061413"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "clay",
+  "lat": -17.41313,
+  "lon": -66.25016,
+  "dist_km": 11.8,
+  "osm": "https://www.openstreetmap.org/way/1552061409"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "soil",
+  "lat": -17.42204,
+  "lon": -66.25232,
+  "dist_km": 12.1,
+  "osm": "https://www.openstreetmap.org/way/1512404067"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Cantera de Caliza",
+  "detail": "",
+  "lat": -17.5074,
+  "lon": -66.08718,
+  "dist_km": 12.3,
+  "osm": "https://www.openstreetmap.org/way/911364104"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Cantera de Caliza",
+  "detail": "",
+  "lat": -17.50739,
+  "lon": -66.08225,
+  "dist_km": 12.6,
+  "osm": "https://www.openstreetmap.org/way/911364106"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Cantera de Piedras",
+  "detail": "stone",
+  "lat": -17.42316,
+  "lon": -66.28251,
+  "dist_km": 15.3,
+  "osm": "https://www.openstreetmap.org/way/826029220"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Empresa Municipal de Gestión de Residuos Sólidos",
+  "detail": "soil",
+  "lat": -17.44502,
+  "lon": -65.9989,
+  "dist_km": 15.4,
+  "osm": "https://www.openstreetmap.org/way/1456487952"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "aggregate",
+  "lat": -17.44054,
+  "lon": -66.28376,
+  "dist_km": 15.8,
+  "osm": "https://www.openstreetmap.org/way/973895184"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "",
+  "lat": -17.26612,
+  "lon": -66.08675,
+  "dist_km": 16.7,
+  "osm": "https://www.openstreetmap.org/way/762144808"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "Cantera Agregados",
+  "detail": "",
+  "lat": -17.58858,
+  "lon": -66.29716,
+  "dist_km": 26.1,
+  "osm": "https://www.openstreetmap.org/way/883605216"
+ },
+ {
+  "kind": "Mina o cantera",
+  "name": "",
+  "detail": "gold",
+  "lat": -17.22557,
+  "lon": -66.32491,
+  "dist_km": 28.2,
+  "osm": "https://www.openstreetmap.org/way/1577267241"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal Río Rocha - Laguna Alalay",
+  "detail": "",
+  "lat": -17.40778,
+  "lon": -66.13263,
+  "dist_km": 0.7,
+  "osm": "https://www.openstreetmap.org/way/196626826"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal Río Rocha - Laguna Alalay",
+  "detail": "",
+  "lat": -17.40632,
+  "lon": -66.12823,
+  "dist_km": 1.2,
+  "osm": "https://www.openstreetmap.org/way/196626824"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Presa Country Club Cochabamba",
+  "detail": "",
+  "lat": -17.39805,
+  "lon": -66.12744,
+  "dist_km": 1.6,
+  "osm": "https://www.openstreetmap.org/way/262168761"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Country Club Cochabamba",
+  "detail": "",
+  "lat": -17.39749,
+  "lon": -66.1274,
+  "dist_km": 1.7,
+  "osm": "https://www.openstreetmap.org/way/196626879"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.39683,
+  "lon": -66.12758,
+  "dist_km": 1.7,
+  "osm": "https://www.openstreetmap.org/way/197121690"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.39708,
+  "lon": -66.12709,
+  "dist_km": 1.7,
+  "osm": "https://www.openstreetmap.org/way/197179892"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.39894,
+  "lon": -66.12553,
+  "dist_km": 1.7,
+  "osm": "https://www.openstreetmap.org/way/197179893"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.40088,
+  "lon": -66.12388,
+  "dist_km": 1.8,
+  "osm": "https://www.openstreetmap.org/way/197121691"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.41177,
+  "lon": -66.12169,
+  "dist_km": 1.9,
+  "osm": "https://www.openstreetmap.org/way/197121692"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.3898,
+  "lon": -66.1337,
+  "dist_km": 2.1,
+  "osm": "https://www.openstreetmap.org/node/8165845094"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38961,
+  "lon": -66.13219,
+  "dist_km": 2.2,
+  "osm": "https://www.openstreetmap.org/node/7555263700"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38946,
+  "lon": -66.13258,
+  "dist_km": 2.2,
+  "osm": "https://www.openstreetmap.org/node/7555263704"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38856,
+  "lon": -66.1334,
+  "dist_km": 2.2,
+  "osm": "https://www.openstreetmap.org/node/7555263739"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38819,
+  "lon": -66.13602,
+  "dist_km": 2.2,
+  "osm": "https://www.openstreetmap.org/node/8165872834"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38802,
+  "lon": -66.13216,
+  "dist_km": 2.3,
+  "osm": "https://www.openstreetmap.org/node/7555263631"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38831,
+  "lon": -66.13244,
+  "dist_km": 2.3,
+  "osm": "https://www.openstreetmap.org/node/7555263635"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38778,
+  "lon": -66.13596,
+  "dist_km": 2.3,
+  "osm": "https://www.openstreetmap.org/node/7555263875"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38779,
+  "lon": -66.13626,
+  "dist_km": 2.3,
+  "osm": "https://www.openstreetmap.org/node/7555263893"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.3879,
+  "lon": -66.13181,
+  "dist_km": 2.4,
+  "osm": "https://www.openstreetmap.org/node/7555263628"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38753,
+  "lon": -66.13148,
+  "dist_km": 2.4,
+  "osm": "https://www.openstreetmap.org/node/7555263659"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38705,
+  "lon": -66.13144,
+  "dist_km": 2.5,
+  "osm": "https://www.openstreetmap.org/node/7555263653"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.3862,
+  "lon": -66.13162,
+  "dist_km": 2.5,
+  "osm": "https://www.openstreetmap.org/node/7555263980"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38683,
+  "lon": -66.13142,
+  "dist_km": 2.5,
+  "osm": "https://www.openstreetmap.org/node/7555263985"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.38472,
+  "lon": -66.13991,
+  "dist_km": 2.6,
+  "osm": "https://www.openstreetmap.org/node/8376482966"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.42235,
+  "lon": -66.11821,
+  "dist_km": 2.7,
+  "osm": "https://www.openstreetmap.org/way/213688210"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Centro",
+  "detail": "",
+  "lat": -17.42413,
+  "lon": -66.16132,
+  "dist_km": 3.0,
+  "osm": "https://www.openstreetmap.org/way/323731435"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Centro",
+  "detail": "",
+  "lat": -17.42586,
+  "lon": -66.16193,
+  "dist_km": 3.1,
+  "osm": "https://www.openstreetmap.org/way/323734704"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.37991,
+  "lon": -66.13343,
+  "dist_km": 3.2,
+  "osm": "https://www.openstreetmap.org/node/7965603680"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Centro",
+  "detail": "",
+  "lat": -17.41355,
+  "lon": -66.16855,
+  "dist_km": 3.2,
+  "osm": "https://www.openstreetmap.org/way/323731434"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.43729,
+  "lon": -66.1402,
+  "dist_km": 3.3,
+  "osm": "https://www.openstreetmap.org/node/3951282135"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.406,
+  "lon": -66.17123,
+  "dist_km": 3.4,
+  "osm": "https://www.openstreetmap.org/node/9198758775"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Centro",
+  "detail": "",
+  "lat": -17.43834,
+  "lon": -66.14657,
+  "dist_km": 3.5,
+  "osm": "https://www.openstreetmap.org/way/324108453"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.3799,
+  "lon": -66.12285,
+  "dist_km": 3.6,
+  "osm": "https://www.openstreetmap.org/node/1046717747"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Centro",
+  "detail": "",
+  "lat": -17.43821,
+  "lon": -66.15019,
+  "dist_km": 3.6,
+  "osm": "https://www.openstreetmap.org/way/324108454"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.37397,
+  "lon": -66.13558,
+  "dist_km": 3.8,
+  "osm": "https://www.openstreetmap.org/node/1171504679"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.373,
+  "lon": -66.13557,
+  "dist_km": 3.9,
+  "osm": "https://www.openstreetmap.org/node/1171504740"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.37335,
+  "lon": -66.13547,
+  "dist_km": 3.9,
+  "osm": "https://www.openstreetmap.org/node/1171504869"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.41164,
+  "lon": -66.17768,
+  "dist_km": 4.1,
+  "osm": "https://www.openstreetmap.org/node/9737354719"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.41174,
+  "lon": -66.17874,
+  "dist_km": 4.2,
+  "osm": "https://www.openstreetmap.org/node/9852227949"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.41186,
+  "lon": -66.1797,
+  "dist_km": 4.3,
+  "osm": "https://www.openstreetmap.org/node/313876888"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Gobierno Autónomo Municipal de Cochabamba",
+  "detail": "",
+  "lat": -17.37242,
+  "lon": -66.12254,
+  "dist_km": 4.3,
+  "osm": "https://www.openstreetmap.org/node/10913222042"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36831,
+  "lon": -66.1493,
+  "dist_km": 4.5,
+  "osm": "https://www.openstreetmap.org/node/2126669544"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36287,
+  "lon": -66.1393,
+  "dist_km": 5.0,
+  "osm": "https://www.openstreetmap.org/node/3284842301"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.45015,
+  "lon": -66.11378,
+  "dist_km": 5.4,
+  "osm": "https://www.openstreetmap.org/node/3477117910"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.45066,
+  "lon": -66.11496,
+  "dist_km": 5.4,
+  "osm": "https://www.openstreetmap.org/node/3477117925"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.45061,
+  "lon": -66.11478,
+  "dist_km": 5.4,
+  "osm": "https://www.openstreetmap.org/node/9951549045"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36338,
+  "lon": -66.11638,
+  "dist_km": 5.5,
+  "osm": "https://www.openstreetmap.org/node/5023430338"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36342,
+  "lon": -66.1163,
+  "dist_km": 5.5,
+  "osm": "https://www.openstreetmap.org/node/5023430426"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35634,
+  "lon": -66.13713,
+  "dist_km": 5.7,
+  "osm": "https://www.openstreetmap.org/node/3284841929"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35735,
+  "lon": -66.12839,
+  "dist_km": 5.7,
+  "osm": "https://www.openstreetmap.org/node/5023430172"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.3948,
+  "lon": -66.08666,
+  "dist_km": 5.7,
+  "osm": "https://www.openstreetmap.org/node/10069752767"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.36644,
+  "lon": -66.1714,
+  "dist_km": 5.7,
+  "osm": "https://www.openstreetmap.org/way/314051390"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36401,
+  "lon": -66.16875,
+  "dist_km": 5.8,
+  "osm": "https://www.openstreetmap.org/node/1643888245"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36362,
+  "lon": -66.16871,
+  "dist_km": 5.8,
+  "osm": "https://www.openstreetmap.org/node/9880288903"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36438,
+  "lon": -66.16879,
+  "dist_km": 5.8,
+  "osm": "https://www.openstreetmap.org/node/9880288904"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36314,
+  "lon": -66.16871,
+  "dist_km": 5.9,
+  "osm": "https://www.openstreetmap.org/node/1643888241"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35612,
+  "lon": -66.12773,
+  "dist_km": 5.9,
+  "osm": "https://www.openstreetmap.org/node/5023430177"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.3667,
+  "lon": -66.17546,
+  "dist_km": 6.0,
+  "osm": "https://www.openstreetmap.org/way/320254523"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.36079,
+  "lon": -66.16869,
+  "dist_km": 6.1,
+  "osm": "https://www.openstreetmap.org/node/14350738333"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Sur",
+  "detail": "",
+  "lat": -17.46199,
+  "lon": -66.12824,
+  "dist_km": 6.1,
+  "osm": "https://www.openstreetmap.org/way/151388247"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35954,
+  "lon": -66.16833,
+  "dist_km": 6.2,
+  "osm": "https://www.openstreetmap.org/node/3277949406"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35981,
+  "lon": -66.16843,
+  "dist_km": 6.2,
+  "osm": "https://www.openstreetmap.org/node/14349688100"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.36602,
+  "lon": -66.17781,
+  "dist_km": 6.2,
+  "osm": "https://www.openstreetmap.org/way/320254513"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35813,
+  "lon": -66.16788,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/node/3277949395"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35874,
+  "lon": -66.16809,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/node/3277949398"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35211,
+  "lon": -66.12665,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/node/5023430184"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35166,
+  "lon": -66.13898,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/node/13059877431"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.36566,
+  "lon": -66.179,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/way/320254511"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.36573,
+  "lon": -66.1787,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/way/320254519"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.36569,
+  "lon": -66.17885,
+  "dist_km": 6.3,
+  "osm": "https://www.openstreetmap.org/way/320277430"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35685,
+  "lon": -66.16738,
+  "dist_km": 6.4,
+  "osm": "https://www.openstreetmap.org/node/3277949384"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35743,
+  "lon": -66.16767,
+  "dist_km": 6.4,
+  "osm": "https://www.openstreetmap.org/node/3277949392"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.351,
+  "lon": -66.12639,
+  "dist_km": 6.5,
+  "osm": "https://www.openstreetmap.org/node/5023430189"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.4656,
+  "lon": -66.12018,
+  "dist_km": 6.7,
+  "osm": "https://www.openstreetmap.org/way/268167123"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.35692,
+  "lon": -66.17548,
+  "dist_km": 6.9,
+  "osm": "https://www.openstreetmap.org/node/3278649593"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34644,
+  "lon": -66.13257,
+  "dist_km": 6.9,
+  "osm": "https://www.openstreetmap.org/node/3784327033"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34616,
+  "lon": -66.16099,
+  "dist_km": 7.2,
+  "osm": "https://www.openstreetmap.org/node/3277948576"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.36089,
+  "lon": -66.18828,
+  "dist_km": 7.4,
+  "osm": "https://www.openstreetmap.org/way/320277425"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.36027,
+  "lon": -66.18897,
+  "dist_km": 7.5,
+  "osm": "https://www.openstreetmap.org/way/320277424"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34747,
+  "lon": -66.17212,
+  "dist_km": 7.6,
+  "osm": "https://www.openstreetmap.org/node/2379652974"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34436,
+  "lon": -66.16896,
+  "dist_km": 7.7,
+  "osm": "https://www.openstreetmap.org/node/2379652970"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34459,
+  "lon": -66.16915,
+  "dist_km": 7.7,
+  "osm": "https://www.openstreetmap.org/node/5788180309"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34464,
+  "lon": -66.1692,
+  "dist_km": 7.7,
+  "osm": "https://www.openstreetmap.org/node/5788180310"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34202,
+  "lon": -66.16621,
+  "dist_km": 7.9,
+  "osm": "https://www.openstreetmap.org/node/2379652966"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34222,
+  "lon": -66.16645,
+  "dist_km": 7.9,
+  "osm": "https://www.openstreetmap.org/node/2379652967"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34198,
+  "lon": -66.16617,
+  "dist_km": 7.9,
+  "osm": "https://www.openstreetmap.org/node/3278549957"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.43298,
+  "lon": -66.06889,
+  "dist_km": 7.9,
+  "osm": "https://www.openstreetmap.org/node/3562574993"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.34218,
+  "lon": -66.1664,
+  "dist_km": 7.9,
+  "osm": "https://www.openstreetmap.org/node/5788180280"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.35779,
+  "lon": -66.19344,
+  "dist_km": 8.0,
+  "osm": "https://www.openstreetmap.org/way/320292875"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.37776,
+  "lon": -66.06923,
+  "dist_km": 8.1,
+  "osm": "https://www.openstreetmap.org/node/4177464742"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.37863,
+  "lon": -66.06924,
+  "dist_km": 8.1,
+  "osm": "https://www.openstreetmap.org/node/4177464746"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33696,
+  "lon": -66.16121,
+  "dist_km": 8.2,
+  "osm": "https://www.openstreetmap.org/node/2379652954"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33641,
+  "lon": -66.16078,
+  "dist_km": 8.3,
+  "osm": "https://www.openstreetmap.org/node/2379652953"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33667,
+  "lon": -66.16097,
+  "dist_km": 8.3,
+  "osm": "https://www.openstreetmap.org/node/4238060958"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33481,
+  "lon": -66.15999,
+  "dist_km": 8.4,
+  "osm": "https://www.openstreetmap.org/node/5351359897"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.40296,
+  "lon": -66.05687,
+  "dist_km": 8.7,
+  "osm": "https://www.openstreetmap.org/node/497163695"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32819,
+  "lon": -66.14491,
+  "dist_km": 8.9,
+  "osm": "https://www.openstreetmap.org/node/9210917823"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.43542,
+  "lon": -66.06032,
+  "dist_km": 8.9,
+  "osm": "https://www.openstreetmap.org/node/9953876777"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.35651,
+  "lon": -66.20634,
+  "dist_km": 9.1,
+  "osm": "https://www.openstreetmap.org/way/294604017"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.35675,
+  "lon": -66.20834,
+  "dist_km": 9.3,
+  "osm": "https://www.openstreetmap.org/way/294604018"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Gobierno Autónomo Departamental de Cochabamba",
+  "detail": "",
+  "lat": -17.34254,
+  "lon": -66.19701,
+  "dist_km": 9.5,
+  "osm": "https://www.openstreetmap.org/node/3281552454"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Gobierno Autónomo Departamental de Cochabamba",
+  "detail": "",
+  "lat": -17.34129,
+  "lon": -66.1963,
+  "dist_km": 9.6,
+  "osm": "https://www.openstreetmap.org/node/11066402298"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33146,
+  "lon": -66.19021,
+  "dist_km": 10.1,
+  "osm": "https://www.openstreetmap.org/node/5395813235"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32935,
+  "lon": -66.18776,
+  "dist_km": 10.1,
+  "osm": "https://www.openstreetmap.org/node/12145355370"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.35655,
+  "lon": -66.21709,
+  "dist_km": 10.1,
+  "osm": "https://www.openstreetmap.org/way/249846726"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.35622,
+  "lon": -66.21889,
+  "dist_km": 10.2,
+  "osm": "https://www.openstreetmap.org/way/249846733"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32602,
+  "lon": -66.18481,
+  "dist_km": 10.3,
+  "osm": "https://www.openstreetmap.org/node/3281552230"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.35592,
+  "lon": -66.22064,
+  "dist_km": 10.4,
+  "osm": "https://www.openstreetmap.org/way/249846728"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33091,
+  "lon": -66.21138,
+  "dist_km": 11.5,
+  "osm": "https://www.openstreetmap.org/node/3139524539"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32726,
+  "lon": -66.20696,
+  "dist_km": 11.5,
+  "osm": "https://www.openstreetmap.org/node/7234619952"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal de Riego Principal del Norte",
+  "detail": "",
+  "lat": -17.35687,
+  "lon": -66.2339,
+  "dist_km": 11.5,
+  "osm": "https://www.openstreetmap.org/way/249846725"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31761,
+  "lon": -66.20212,
+  "dist_km": 12.1,
+  "osm": "https://www.openstreetmap.org/node/4237641291"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32074,
+  "lon": -66.21118,
+  "dist_km": 12.3,
+  "osm": "https://www.openstreetmap.org/node/1177490386"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.29884,
+  "lon": -66.11282,
+  "dist_km": 12.4,
+  "osm": "https://www.openstreetmap.org/node/1581506912"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32043,
+  "lon": -66.2112,
+  "dist_km": 12.4,
+  "osm": "https://www.openstreetmap.org/node/4281387034"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31822,
+  "lon": -66.21101,
+  "dist_km": 12.5,
+  "osm": "https://www.openstreetmap.org/node/4281387009"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Toma de Agua Khora",
+  "detail": "",
+  "lat": -17.31743,
+  "lon": -66.21057,
+  "dist_km": 12.6,
+  "osm": "https://www.openstreetmap.org/node/796510853"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32757,
+  "lon": -66.22326,
+  "dist_km": 12.6,
+  "osm": "https://www.openstreetmap.org/node/4869025103"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31771,
+  "lon": -66.21073,
+  "dist_km": 12.6,
+  "osm": "https://www.openstreetmap.org/node/5125700743"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.3148,
+  "lon": -66.20878,
+  "dist_km": 12.7,
+  "osm": "https://www.openstreetmap.org/node/5125700770"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Chuncara",
+  "detail": "",
+  "lat": -17.29956,
+  "lon": -66.09828,
+  "dist_km": 12.8,
+  "osm": "https://www.openstreetmap.org/way/141725584"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Laguna Thinki 4",
+  "detail": "",
+  "lat": -17.29864,
+  "lon": -66.09228,
+  "dist_km": 13.1,
+  "osm": "https://www.openstreetmap.org/way/55584453"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Chaki Laguna",
+  "detail": "",
+  "lat": -17.29764,
+  "lon": -66.09356,
+  "dist_km": 13.2,
+  "osm": "https://www.openstreetmap.org/way/141725583"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.51739,
+  "lon": -66.08725,
+  "dist_km": 13.3,
+  "osm": "https://www.openstreetmap.org/node/2371546549"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.2958,
+  "lon": -66.09369,
+  "dist_km": 13.3,
+  "osm": "https://www.openstreetmap.org/way/141725581"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.51859,
+  "lon": -66.08736,
+  "dist_km": 13.4,
+  "osm": "https://www.openstreetmap.org/node/646034252"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31732,
+  "lon": -66.22234,
+  "dist_km": 13.4,
+  "osm": "https://www.openstreetmap.org/way/63951210"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.41388,
+  "lon": -66.26714,
+  "dist_km": 13.6,
+  "osm": "https://www.openstreetmap.org/node/313877044"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Represa Taquiña",
+  "detail": "",
+  "lat": -17.28407,
+  "lon": -66.15174,
+  "dist_km": 13.8,
+  "osm": "https://www.openstreetmap.org/way/320613630"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32543,
+  "lon": -66.04074,
+  "dist_km": 13.9,
+  "osm": "https://www.openstreetmap.org/way/141630249"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Mercedes",
+  "detail": "",
+  "lat": -17.28562,
+  "lon": -66.10791,
+  "dist_km": 14.0,
+  "osm": "https://www.openstreetmap.org/way/55584446"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Laguna Taquiña",
+  "detail": "locality",
+  "lat": -17.28259,
+  "lon": -66.15028,
+  "dist_km": 14.0,
+  "osm": "https://www.openstreetmap.org/way/159503846"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Laguna Larati",
+  "detail": "locality",
+  "lat": -17.34439,
+  "lon": -66.0235,
+  "dist_km": 14.1,
+  "osm": "https://www.openstreetmap.org/way/52728573"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31603,
+  "lon": -66.23225,
+  "dist_km": 14.2,
+  "osm": "https://www.openstreetmap.org/node/10994930664"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31522,
+  "lon": -66.23257,
+  "dist_km": 14.3,
+  "osm": "https://www.openstreetmap.org/node/3137832048"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33375,
+  "lon": -66.02857,
+  "dist_km": 14.3,
+  "osm": "https://www.openstreetmap.org/node/6158092258"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33296,
+  "lon": -66.02874,
+  "dist_km": 14.3,
+  "osm": "https://www.openstreetmap.org/node/6158092522"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.52679,
+  "lon": -66.08582,
+  "dist_km": 14.3,
+  "osm": "https://www.openstreetmap.org/way/228478090"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Laguna Taquiña 2",
+  "detail": "locality",
+  "lat": -17.27967,
+  "lon": -66.14262,
+  "dist_km": 14.3,
+  "osm": "https://www.openstreetmap.org/way/320613604"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31325,
+  "lon": -66.23276,
+  "dist_km": 14.5,
+  "osm": "https://www.openstreetmap.org/node/3137832037"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.33111,
+  "lon": -66.02858,
+  "dist_km": 14.5,
+  "osm": "https://www.openstreetmap.org/node/6158092526"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31313,
+  "lon": -66.23279,
+  "dist_km": 14.5,
+  "osm": "https://www.openstreetmap.org/node/8361592066"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Presa México",
+  "detail": "",
+  "lat": -17.52812,
+  "lon": -66.08575,
+  "dist_km": 14.5,
+  "osm": "https://www.openstreetmap.org/way/268167117"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31067,
+  "lon": -66.23199,
+  "dist_km": 14.6,
+  "osm": "https://www.openstreetmap.org/node/3137832021"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31113,
+  "lon": -66.23193,
+  "dist_km": 14.6,
+  "osm": "https://www.openstreetmap.org/node/3137832024"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31176,
+  "lon": -66.23232,
+  "dist_km": 14.6,
+  "osm": "https://www.openstreetmap.org/node/3137832029"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.32992,
+  "lon": -66.0275,
+  "dist_km": 14.6,
+  "osm": "https://www.openstreetmap.org/node/6158092529"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30909,
+  "lon": -66.23147,
+  "dist_km": 14.7,
+  "osm": "https://www.openstreetmap.org/node/3137832003"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Puka Laguna",
+  "detail": "",
+  "lat": -17.29202,
+  "lon": -66.07019,
+  "dist_km": 14.8,
+  "osm": "https://www.openstreetmap.org/way/55584451"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse de Yana Laguna",
+  "detail": "",
+  "lat": -17.29512,
+  "lon": -66.06373,
+  "dist_km": 14.9,
+  "osm": "https://www.openstreetmap.org/way/55584450"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31638,
+  "lon": -66.24961,
+  "dist_km": 15.5,
+  "osm": "https://www.openstreetmap.org/node/2981936738"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Laguna Koncho",
+  "detail": "",
+  "lat": -17.34741,
+  "lon": -66.00171,
+  "dist_km": 16.0,
+  "osm": "https://www.openstreetmap.org/way/141610524"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31653,
+  "lon": -66.01967,
+  "dist_km": 16.2,
+  "osm": "https://www.openstreetmap.org/node/4402645905"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31414,
+  "lon": -66.2576,
+  "dist_km": 16.3,
+  "osm": "https://www.openstreetmap.org/node/11206950709"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.3137,
+  "lon": -66.25764,
+  "dist_km": 16.4,
+  "osm": "https://www.openstreetmap.org/node/7771821893"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.2771,
+  "lon": -66.21314,
+  "dist_km": 16.5,
+  "osm": "https://www.openstreetmap.org/way/101997967"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Laguna La Angostura",
+  "detail": "",
+  "lat": -17.54531,
+  "lon": -66.07108,
+  "dist_km": 16.9,
+  "osm": "https://www.openstreetmap.org/way/29068527"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse La Cumbre",
+  "detail": "",
+  "lat": -17.27192,
+  "lon": -66.21923,
+  "dist_km": 17.3,
+  "osm": "https://www.openstreetmap.org/way/55584449"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.26346,
+  "lon": -66.20415,
+  "dist_km": 17.5,
+  "osm": "https://www.openstreetmap.org/way/55584448"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.26473,
+  "lon": -66.20943,
+  "dist_km": 17.6,
+  "osm": "https://www.openstreetmap.org/way/101997982"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.2499,
+  "lon": -66.11188,
+  "dist_km": 17.8,
+  "osm": "https://www.openstreetmap.org/way/101997902"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Huallatani",
+  "detail": "",
+  "lat": -17.28246,
+  "lon": -66.01715,
+  "dist_km": 19.0,
+  "osm": "https://www.openstreetmap.org/way/101997931"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Laguna Jatun Toro",
+  "detail": "",
+  "lat": -17.23727,
+  "lon": -66.17235,
+  "dist_km": 19.3,
+  "osm": "https://www.openstreetmap.org/way/258824850"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Presa Achocalla",
+  "detail": "",
+  "lat": -17.31382,
+  "lon": -65.98616,
+  "dist_km": 19.3,
+  "osm": "https://www.openstreetmap.org/way/303981264"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.40975,
+  "lon": -66.32302,
+  "dist_km": 19.5,
+  "osm": "https://www.openstreetmap.org/node/10613336385"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Achocalla",
+  "detail": "locality",
+  "lat": -17.3073,
+  "lon": -65.98446,
+  "dist_km": 19.8,
+  "osm": "https://www.openstreetmap.org/way/101997973"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Chiri Cueva",
+  "detail": "",
+  "lat": -17.31865,
+  "lon": -65.97023,
+  "dist_km": 20.4,
+  "osm": "https://www.openstreetmap.org/way/141610552"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Presa Chiri Cueva",
+  "detail": "",
+  "lat": -17.32011,
+  "lon": -65.97017,
+  "dist_km": 20.4,
+  "osm": "https://www.openstreetmap.org/way/303981262"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30446,
+  "lon": -65.9786,
+  "dist_km": 20.5,
+  "osm": "https://www.openstreetmap.org/way/141629800"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30432,
+  "lon": -65.9777,
+  "dist_km": 20.6,
+  "osm": "https://www.openstreetmap.org/way/141629705"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30537,
+  "lon": -65.97737,
+  "dist_km": 20.6,
+  "osm": "https://www.openstreetmap.org/way/141629707"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30377,
+  "lon": -65.97833,
+  "dist_km": 20.6,
+  "osm": "https://www.openstreetmap.org/way/141629709"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30418,
+  "lon": -65.97814,
+  "dist_km": 20.6,
+  "osm": "https://www.openstreetmap.org/way/141629710"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30259,
+  "lon": -65.97806,
+  "dist_km": 20.7,
+  "osm": "https://www.openstreetmap.org/way/141629704"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Presa Runtu Qhocha",
+  "detail": "",
+  "lat": -17.31497,
+  "lon": -65.96959,
+  "dist_km": 20.7,
+  "osm": "https://www.openstreetmap.org/way/303981259"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Pujru Qhocha",
+  "detail": "",
+  "lat": -17.30815,
+  "lon": -65.97279,
+  "dist_km": 20.8,
+  "osm": "https://www.openstreetmap.org/way/141610671"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Runtu Qhocha",
+  "detail": "",
+  "lat": -17.31272,
+  "lon": -65.97016,
+  "dist_km": 20.8,
+  "osm": "https://www.openstreetmap.org/way/141629693"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31728,
+  "lon": -65.96528,
+  "dist_km": 21.0,
+  "osm": "https://www.openstreetmap.org/way/303981268"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Kara Khota",
+  "detail": "",
+  "lat": -17.31495,
+  "lon": -65.96527,
+  "dist_km": 21.1,
+  "osm": "https://www.openstreetmap.org/way/141610522"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31159,
+  "lon": -65.96722,
+  "dist_km": 21.1,
+  "osm": "https://www.openstreetmap.org/way/141610537"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.3116,
+  "lon": -65.96779,
+  "dist_km": 21.1,
+  "osm": "https://www.openstreetmap.org/way/141610540"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31232,
+  "lon": -65.96651,
+  "dist_km": 21.1,
+  "osm": "https://www.openstreetmap.org/way/141610545"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.31897,
+  "lon": -65.96297,
+  "dist_km": 21.1,
+  "osm": "https://www.openstreetmap.org/way/141610564"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Presa Kara Khota",
+  "detail": "",
+  "lat": -17.31681,
+  "lon": -65.96465,
+  "dist_km": 21.1,
+  "osm": "https://www.openstreetmap.org/way/303981258"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30638,
+  "lon": -65.96923,
+  "dist_km": 21.2,
+  "osm": "https://www.openstreetmap.org/way/141610576"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Embalse Kara Khota 2",
+  "detail": "",
+  "lat": -17.31969,
+  "lon": -65.96054,
+  "dist_km": 21.3,
+  "osm": "https://www.openstreetmap.org/way/141610539"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30652,
+  "lon": -65.96864,
+  "dist_km": 21.3,
+  "osm": "https://www.openstreetmap.org/way/141610577"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.30407,
+  "lon": -65.96722,
+  "dist_km": 21.5,
+  "osm": "https://www.openstreetmap.org/way/141610574"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.23828,
+  "lon": -66.23927,
+  "dist_km": 21.6,
+  "osm": "https://www.openstreetmap.org/node/6148015308"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.51876,
+  "lon": -65.96436,
+  "dist_km": 22.2,
+  "osm": "https://www.openstreetmap.org/node/4653064848"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.51911,
+  "lon": -65.96432,
+  "dist_km": 22.2,
+  "osm": "https://www.openstreetmap.org/node/4653064854"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.23867,
+  "lon": -65.9555,
+  "dist_km": 27.0,
+  "osm": "https://www.openstreetmap.org/node/5884001531"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.23872,
+  "lon": -65.9551,
+  "dist_km": 27.1,
+  "osm": "https://www.openstreetmap.org/node/5884001530"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.23862,
+  "lon": -65.95356,
+  "dist_km": 27.2,
+  "osm": "https://www.openstreetmap.org/node/1745119488"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "",
+  "detail": "",
+  "lat": -17.23917,
+  "lon": -65.95224,
+  "dist_km": 27.2,
+  "osm": "https://www.openstreetmap.org/node/5884001532"
+ },
+ {
+  "kind": "Represa o canal",
+  "name": "Canal Palca-Candelaria",
+  "detail": "",
+  "lat": -17.20053,
+  "lon": -65.9996,
+  "dist_km": 27.4,
+  "osm": "https://www.openstreetmap.org/way/159975910"
+ }
+]
