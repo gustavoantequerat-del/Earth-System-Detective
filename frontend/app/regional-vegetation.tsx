@@ -10,6 +10,7 @@ import { api, displayDate, number, signed } from './data';
 import { levels, severity, severityFor, type Analysis, type Atlas, type Level, type Region, type RegionLayer,
   type RegionalTimeline, type Verdict } from './regional-vegetation-data';
 import { RegionalDetails } from './regional-vegetation-charts';
+import { accentRgb, extrudedMaterial, sceneLighting } from './map-effects';
 
 const cameraHome = { longitude: -64.75, latitude: -16.65, zoom: 4.95, minZoom: 3.6, maxZoom: 11, bearing: 0, pitch: 0 };
 const layerNames: Record<RegionLayer, string> = {
@@ -92,8 +93,8 @@ function TemporalAtlas({ atlas, selected, select }: { atlas: Atlas; selected?: s
   const layers = [
     new GeoJsonLayer<Region>({
       id: 'provincias-vegetacion', data: atlas.geometry, pickable: true, filled: true, stroked: true, extruded: !flat,
-      autoHighlight: true, getFillColor: ({ properties }) => color(properties),
-      getLineColor: ({ properties }) => properties.pcode === selected ? [241, 255, 149] : [60, 79, 113, 225],
+      autoHighlight: true, highlightColor: [255, 255, 255, 70], getFillColor: ({ properties }) => color(properties),
+      getLineColor: ({ properties }) => properties.pcode === selected ? accentRgb : [12, 40, 46, 230], material: extrudedMaterial,
       getLineWidth: ({ properties }) => properties.pcode === selected ? 3 : 1,
       lineWidthUnits: 'pixels', lineWidthMinPixels: 1,
       getElevation: ({ properties }) => {
@@ -153,7 +154,7 @@ function TemporalAtlas({ atlas, selected, select }: { atlas: Atlas; selected?: s
             </div>
           </div>)}
       <div className="regional-map">
-        {!gpuError ? <DeckGL initialViewState={view} controller={{ dragRotate: !flat, touchRotate: !flat, scrollZoom: false }}
+        {!gpuError ? <DeckGL initialViewState={view} controller={{ dragRotate: !flat, touchRotate: !flat, scrollZoom: false }} effects={[sceneLighting]}
           onViewStateChange={({ viewState }) => { camera.current = viewState as MapViewState; }}
           onError={(error) => { if (/webgl|device|context/i.test(error.message)) setGpuError(true); }} layers={layers}
           getTooltip={({ object }) => {

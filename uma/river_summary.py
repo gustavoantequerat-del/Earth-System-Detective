@@ -94,14 +94,14 @@ def quality(df: pd.DataFrame, gj: dict, osm: list[dict], results: list[dict]) ->
                    "warn": bool(gaps),
                    "detail": "Sin huecos." if not gaps else
                    "; ".join(f"{v}: falta {', '.join(map(str, m))}" for v, m in gaps.items()) +
-                   " (sin mosaico Landsat de junio a octubre; en los gráficos se interpola y se marca)."})
+                   " (no hay mosaico Landsat de estiaje; en los gráficos el valor se interpola y se marca)."})
     green = _pivot(df, "green_ha")
     zero_first = [r for r in green.columns if green[r].iloc[0] == 0 and green[r].iloc[1:6].mean() > 50]
     checks.append({"label": "Cobertura Landsat del primer año", "ok": True, "warn": bool(zero_first),
                    "detail": "Sin anomalías." if not zero_first else
                    f"1985 marca 0 ha verdes en {', '.join(zero_first)} con valores altos en los años siguientes: "
-                   "es falta de imágenes, no ausencia de riego. La referencia 1985-2000 promedia 16 años y "
-                   "amortigua este efecto."})
+                   "se debe a falta de imágenes, no a ausencia de riego. El periodo de referencia 1985-2000 "
+                   "promedia 16 años y atenúa este efecto."})
     # continuidad de la geometria del cauce
     feats = {f["properties"]["reach"]: f for f in gj["features"]}
     breaks = []
@@ -111,7 +111,7 @@ def quality(df: pd.DataFrame, gj: dict, osm: list[dict], results: list[dict]) ->
         if math.dist(end, start) > 0.01:
             breaks.append(f"{a}-{b}")
     checks.append({"label": "Cauce continuo de T1 a T5 (HydroSHEDS)", "ok": not breaks,
-                   "detail": "Cada tramo empieza donde termina el anterior." if not breaks else
+                   "detail": "Cada tramo comienza donde termina el anterior." if not breaks else
                    "Cortes en " + ", ".join(breaks)})
     # el resumen coincide con lo que usa el motor
     by = {r["body_id"]: r for r in results}
@@ -122,8 +122,8 @@ def quality(df: pd.DataFrame, gj: dict, osm: list[dict], results: list[dict]) ->
                        "detail": f"Veredicto publicado: {r['state'] if r else 'sin resultado'}."})
     urban = sum(1 for x in osm if x["kind"] == "Canal o acequia" and x.get("lake") == "uru_uru" and not x.get("reach"))
     checks.append({"label": "Inventario OpenStreetMap", "ok": True, "warn": True,
-                   "detail": f"{len(osm):,} elementos. {urban} canales cerca de Uru Uru no tocan el río: muchos son "
-                             "desagües de la ciudad de Oruro. OpenStreetMap es colaborativo y puede estar incompleto."})
+                   "detail": f"{len(osm):,} elementos. {urban} canales próximos a Uru Uru no conectan con el río: en buena parte "
+                             "son drenaje urbano de Oruro. OpenStreetMap es colaborativo y puede estar incompleto."})
     return checks
 
 
@@ -188,13 +188,13 @@ def build(data_dir: Path) -> dict:
         "osm_totals": {k: sum(1 for x in osm if x["kind"] == k) for k in KINDS},
         "quality": quality(df, gj, osm, results),
         "sources": [
-            {"name": "MapBiomas Agua Bolivia (colección 2)", "use": "Agua en el cauce y represas, franja de 1 km",
+            {"name": "MapBiomas Agua Bolivia (colección 2)", "use": "Superficie de agua en el cauce (franja de 1 km) y cuerpos artificiales",
              "url": "https://bolivia.mapbiomas.org/"},
-            {"name": "Landsat 5, 7, 8 y 9 (USGS/NASA)", "use": "Verde en época seca (NDVI > 0,3, junio a octubre), franja de 5 km",
+            {"name": "Landsat 5, 7, 8 y 9 (USGS/NASA)", "use": "Vegetación activa en estiaje (NDVI > 0,3, junio a octubre), franja de 5 km",
              "url": "https://landsat.gsfc.nasa.gov/"},
             {"name": "HydroSHEDS Free Flowing Rivers (Grill et al. 2019)", "use": "Trazado del cauce, uso consuntivo y regulación",
              "url": "https://www.hydrosheds.org/"},
-            {"name": "OpenStreetMap", "use": "Canales, tomas, represas, minas y plantas de tratamiento",
+            {"name": "OpenStreetMap", "use": "Infraestructura hídrica, minas y plantas de tratamiento",
              "url": "https://www.openstreetmap.org/"},
         ],
     }

@@ -9,12 +9,13 @@ import { ArrowDown, ArrowUpRight, Bell, CircleHelp, Droplet, Layers, LocateFixed
 import { api, diagnosisMeaning, firstSuspect, signed, states, visibleStates, waterChange,
   type BodyDetail, type Method, type Place, type Snapshot, type State, type WatchSignal, type WaterBody } from './data';
 import { LakeSearch } from './lake-search';
+import { accentRgb, extrudedMaterial, sceneLighting } from './map-effects';
 import { lakeMarker } from './lake-marker';
 import { Status } from './ui';
 
 const esri = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 const terrain = 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png';
-const country = { longitude: -64.6, latitude: -16.6, zoom: 5.4, pitch: 40, bearing: 0 };
+const country = { longitude: -64.9, latitude: -17.2, zoom: 5.35, pitch: 48, bearing: -8 };
 const placeColors: Record<string, [number, number, number]> = {
   'Mina o cantera': [255, 61, 102], Industria: [221, 100, 255],
   'Ciudad o pueblo': [255, 214, 71], 'Represa o canal': [57, 206, 248],
@@ -38,7 +39,7 @@ export default function MapView({ snapshot, method, bodies, searchBodies, select
   const [year, setYear] = useState(2024);
   const [fires, setFires] = useState(false);
   const [national, setNational] = useState(snapshot.national.length > 0);
-  const [artificial, setArtificial] = useState(Boolean(snapshot.artificial?.points.length));
+  const [artificial, setArtificial] = useState(false);
   const [textureResult, setTextureResult] = useState<{ key: string; url?: string; error?: string }>();
   const [bodyElevations, setBodyElevations] = useState<Elevation[]>([]);
   const [local, setLocal] = useState<{ id: string; places: Place[]; elevations: Elevation[] }>();
@@ -94,7 +95,7 @@ export default function MapView({ snapshot, method, bodies, searchBodies, select
   const heights = new Map([...bodyElevations, ...(local?.id === selectedId ? local?.elevations ?? [] : [])]
     .map((item) => [heightKey(item), item.elevation]));
   const z = (point: { lat: number; lon: number }) => heights.get(heightKey(point)) ?? estimatedElevation(point);
-  const elevationScale = selected ? 15 : 900;
+  const elevationScale = selected ? 18 : 1250;
   const columns: Column[] = bodies.map((body) => {
     const loss = Math.max(0, -body.trend.change_pct) + 5;
     const ground = z(body) + 30;
@@ -125,17 +126,25 @@ export default function MapView({ snapshot, method, bodies, searchBodies, select
       p.body.lon, p.body.lat, (p.position[2] ?? 0) + 110,
     ], radius: selected ? 1050 : 22500, diskResolution: 32, extruded: !camera.flat,
     getElevation: selected ? 100 : 1650, getFillColor: (p) => waterAlerts.get(p.body.body_id)?.level === 'prioridad'
-      ? [255, 136, 62, 200] : [187, 225, 108, 170], pickable: false }),
+      ? [255, 136, 62, 190] : [...accentRgb, 150], pickable: false, material: extrudedMaterial }),
     new ScatterplotLayer<LakePoint>({ id: 'barrido', data: nationalPoints, getPosition: (p) => p.position,
-      getRadius: (p) => p.radius, getFillColor: (p) => p.color, radiusMinPixels: 5, radiusMaxPixels: 18,
-      stroked: true, getLineColor: (p) => p.body.body_id === selectedId ? [228, 255, 116] : [255, 255, 255],
-      lineWidthMinPixels: 1.4, pickable: true, autoHighlight: true,
+      billboard: true, radiusUnits: 'pixels', getRadius: (p) => p.body.body_id === selectedId ? 9 : Math.min(7.5, 3.2 + Math.sqrt(p.body.ha ?? 0) / 14),
+      getFillColor: (p) => [...p.color, 225], stroked: true, getLineColor: (p) => p.body.body_id === selectedId ? accentRgb : [8, 24, 28, 210],
+      lineWidthUnits: 'pixels', getLineWidth: (p) => p.body.body_id === selectedId ? 2.5 : 1.2, pickable: true, autoHighlight: true,
+      highlightColor: [255, 255, 255, 90], updateTriggers: { getRadius: selectedId, getLineColor: selectedId, getLineWidth: selectedId },
+      parameters: { depthCompare: 'always', depthWriteEnabled: false },
       onClick: ({ object }) => { if (object) select(object.body.body_id); } }),
     new ScatterplotLayer<Point>({ id: 'artificial', data: artificialPoints, getPosition: (p) => p.position,
-      getRadius: (p) => p.radius, getFillColor: (p) => p.color, radiusMinPixels: 2, radiusMaxPixels: 14, pickable: true }),
+      billboard: true, radiusUnits: 'pixels', getRadius: 2.6, getFillColor: [34, 220, 255, 170], pickable: true,
+      parameters: { depthCompare: 'always', depthWriteEnabled: false } }),
+    new ScatterplotLayer<Column>({ id: 'cuerpos-halo', data: columns, getPosition: (p) => p.position,
+      radiusUnits: 'pixels', getRadius: (p) => p.body.body_id === selectedId ? 30 : 22, getFillColor: (p) => [...p.color, 55],
+      stroked: true, getLineColor: (p) => [...p.color, 170], lineWidthMinPixels: 1.5, pickable: false,
+      parameters: { depthWriteEnabled: false }, updateTriggers: { getRadius: selectedId } }),
     new ColumnLayer<Column>({ id: 'cuerpos', data: columns, getPosition: (p) => p.position,
-      getFillColor: (p) => p.color, getElevation: (p) => p.loss, elevationScale,
-      radius: selected ? 450 : 12000, pickable: true, autoHighlight: true, extruded: true,
+      getFillColor: (p) => p.color, getElevation: (p) => p.loss, elevationScale, material: extrudedMaterial,
+      radius: selected ? 450 : 11000, diskResolution: 36, pickable: true, autoHighlight: true, extruded: true,
+      highlightColor: [255, 255, 255, 70],
       onClick: ({ object }) => { if (object) select(object.body.body_id); } }),
     new ScatterplotLayer<Point>({ id: 'alrededores', data: places, getPosition: (p) => p.position,
       getRadius: (p) => p.radius, getFillColor: (p) => p.color, radiusMinPixels: 6, pickable: true }),
@@ -146,12 +155,13 @@ export default function MapView({ snapshot, method, bodies, searchBodies, select
       onClick: ({ object }) => { if (object) select(object.body.body_id); } }),
     new ScatterplotLayer<Column>({ id: 'alert-orbits', data: flagged, getPosition: (p) => p.iconPosition,
       radiusUnits: 'pixels', getRadius: 11, getPixelOffset: [0, -1], filled: false, stroked: true, lineWidthMinPixels: 3,
-      getLineColor: (p) => waterAlerts.get(p.body.body_id)?.level === 'prioridad' ? [255, 169, 102] : [224, 255, 121],
+      getLineColor: (p) => waterAlerts.get(p.body.body_id)?.level === 'prioridad' ? [255, 169, 102] : accentRgb,
       parameters: { depthCompare: 'always', depthWriteEnabled: false }, pickable: false }),
     new TextLayer<Column>({ id: 'etiquetas', data: selected ? columns.filter((p) => p.body.body_id === selectedId) : columns,
       getPosition: (p) => p.iconPosition,
-      getText: (p) => p.name.split(' (')[0], getColor: [240, 248, 249], getSize: 13, fontWeight: 700,
-      getPixelOffset: [0, 14], background: true, getBackgroundColor: [10, 19, 25, 228], backgroundPadding: [7, 4],
+      getText: (p) => p.name.split(' (')[0], getColor: [240, 250, 249], getSize: 13, fontWeight: 700,
+      getPixelOffset: [0, 16], background: true, getBackgroundColor: [7, 24, 28, 232], backgroundPadding: [8, 5],
+      getBorderColor: (p) => [...p.color, 200], getBorderWidth: 1,
       parameters: { depthCompare: 'always', depthWriteEnabled: false },
       fontFamily: 'Inter, sans-serif', fontSettings: { sdf: true }, characterSet: 'auto', billboard: true, pickable: true,
       onClick: ({ object }) => { if (object) select(object.body.body_id); } }),
@@ -189,7 +199,7 @@ export default function MapView({ snapshot, method, bodies, searchBodies, select
         {mode !== 'esri' && !activeTexture && <p role="status" className="map-notice">Cargando capa de Earth Engine…</p>}
         {activeTexture?.error && <p role="alert" className="map-notice">{activeTexture.error} Se muestra el fondo satelital de Esri.</p>}
         <div className="map-frame">
-          {!gpuError ? <DeckGL initialViewState={view} controller={{ dragRotate: !camera.flat, touchRotate: !camera.flat }} layers={layers}
+          {!gpuError ? <DeckGL initialViewState={view} controller={{ dragRotate: !camera.flat, touchRotate: !camera.flat }} layers={layers} effects={[sceneLighting]}
             onError={(error) => { if (/webgl|device|context/i.test(error.message)) setGpuError(true); }}
             getTooltip={({ object }: { object?: Point | LakePoint }) => {
               if (!object) return null;
@@ -202,6 +212,10 @@ export default function MapView({ snapshot, method, bodies, searchBodies, select
               ].filter(Boolean).join('\n') : `${object.name}\n${object.description}` };
             }} />
             : <p className="map-notice" role="status">El navegador no pudo iniciar WebGL. Puedes elegir un cuerpo de agua en la lista.</p>}
+          {!gpuError && <div className="map-overlay-legend" aria-hidden="true">
+            <b>Diagnóstico</b>
+            {mapStates.filter((state) => counts[state]).map((state) => <span key={state}><i style={{ background: `rgb(${states[state].rgb.join(',')})` }} />{states[state].label}<em>{counts[state]}</em></span>)}
+          </div>}
           <div className="attribution">{mode === 'esri' || !activeTexture?.url ? 'Esri World Imagery' : 'Google Earth Engine'} · AWS Terrain Tiles</div>
         </div>
         <div className="map-footer">

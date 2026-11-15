@@ -1,84 +1,94 @@
 'use client';
 
-import { useId } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { ChevronDown, Droplets, Flame, House, Leaf, Waves } from 'lucide-react';
-import { LayoutGroup, motion, useReducedMotion } from 'motion/react';
+import { Check, ChevronDown, Droplets, Flame, House, Leaf, Waves } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 
-const destinations = [
+export const waterModules = {
+  lagos: { label: 'Lagos', Icon: Droplets, description: 'Diagnóstico de cada lago: cuánta agua perdió y por qué.' },
+  rios: { label: 'Ríos', Icon: Waves, description: 'El Desaguadero tramo a tramo: dónde disminuye el agua y qué presiones hay.' },
+} as const;
+export type WaterModule = keyof typeof waterModules;
+type Section = 'inicio' | 'agua' | 'incendios' | 'vegetacion';
+type Links = Record<Exclude<Section, 'agua'> | WaterModule, string>;
+
+const plain = [
   { key: 'inicio', label: 'Inicio', Icon: House },
-  { key: 'agua', label: 'Cuerpos de agua', Icon: Droplets },
   { key: 'incendios', label: 'Incendios', Icon: Flame },
   { key: 'vegetacion', label: 'Vegetación', Icon: Leaf },
 ] as const;
 
-export const waterModules = {
-  lagos: { label: 'Lagos', Icon: Droplets },
-  rios: { label: 'Ríos', Icon: Waves },
-} as const;
-export type WaterModule = keyof typeof waterModules;
-type Section = typeof destinations[number]['key'];
-type Links = Record<Exclude<Section, 'agua'> | WaterModule, string>;
-
-function Sphere({ id, Icon, reducedMotion }: { id: string; Icon: typeof House; reducedMotion: boolean | null }) {
-  return <motion.span aria-hidden="true" className="mission-sphere"
-    layoutId={reducedMotion ? undefined : 'nav-sphere'} transition={{ type: 'spring', stiffness: 300, damping: 30 }}>
-    <svg viewBox="0 0 120 80" focusable="false">
-      <defs>
-        <linearGradient id={id + '-bubble'} x1="32" y1="8" x2="88" y2="72" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#a7f3e4" /><stop offset=".48" stopColor="#0f9d8f" /><stop offset="1" stopColor="#0b4f5c" />
-        </linearGradient>
-        <radialGradient id={id + '-shine'} cx="0" cy="0" r="1" gradientTransform="translate(50 28) rotate(58) scale(29)">
-          <stop stopColor="white" stopOpacity=".65" /><stop offset="1" stopColor="white" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <path d="M0 66H12C22 66 27 62 29 53C31 47 30 40 32 32C36 17 46 8 60 8C74 8 84 17 88 32C90 40 89 47 91 53C93 62 98 66 108 66H120Z" fill="#0d2a31" />
-      <circle cx="60" cy="44" r="25" fill={`url(#${id}-bubble)`} stroke="#d5fbf3" strokeOpacity=".48" />
-      <circle cx="60" cy="44" r="24" fill={`url(#${id}-shine)`} />
-    </svg>
-    <Icon size={17} strokeWidth={2.2} />
-  </motion.span>;
+function Pill({ reducedMotion }: { reducedMotion: boolean | null }) {
+  return <motion.span aria-hidden="true" className="nav-pill" layoutId={reducedMotion ? undefined : 'nav-pill'}
+    transition={{ type: 'spring', stiffness: 420, damping: 36 }} />;
 }
 
 export function MissionNav({ active, water, links }: { active: Section; water: WaterModule; links: Links }) {
-  const id = useId();
-  const router = useRouter();
+  const menuId = useId();
   const reducedMotion = useReducedMotion();
+  const [open, setOpen] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const inWater = active === 'agua';
+  const Current = inWater ? waterModules[water].Icon : Droplets;
+
+  useEffect(() => {
+    if (!open) return;
+    const outside = (event: PointerEvent) => { if (!root.current?.contains(event.target as Node)) setOpen(false); };
+    const escape = (event: KeyboardEvent) => { if (event.key === 'Escape') { setOpen(false); trigger.current?.focus(); } };
+    document.addEventListener('pointerdown', outside);
+    document.addEventListener('keydown', escape);
+    root.current?.querySelector<HTMLAnchorElement>('[role="menuitem"]')?.focus();
+    return () => { document.removeEventListener('pointerdown', outside); document.removeEventListener('keydown', escape); };
+  }, [open]);
+
+  const item = (key: typeof plain[number]['key'], label: string, Icon: typeof House) =>
+    <Link key={key} href={links[key]} className="nav-item" aria-current={active === key ? 'page' : undefined}>
+      {active === key && <Pill reducedMotion={reducedMotion} />}
+      <Icon aria-hidden="true" size={18} /><span>{label}</span>
+    </Link>;
+
   return <header className="mission-header">
     <div className="mission-navbar">
       <Link className="mission-brand" href={links.inicio} aria-label="Ir al inicio del Detector de huella humana">
-        <Image src="/brand/nasa-space-apps.svg" alt="NASA Space Apps Challenge" width={136} height={47} unoptimized />
+        <Image src="/brand/nasa-space-apps.svg" alt="" width={112} height={39} unoptimized />
+        <span className="brand-title"><b>Detector de huella humana</b><small>Observatorio del agua · Bolivia</small></span>
       </Link>
       <nav className="mission-nav" aria-label="Navegación principal">
-        <LayoutGroup id={id}>
-          {destinations.map(({ key, label, Icon }) => {
-            const current = key === active;
-            if (key === 'agua') {
-              const ModuleIcon = waterModules[water].Icon;
-              return <div key={key} className="mission-nav-select" data-current={current || undefined}>
-                {current ? <Sphere id={id} Icon={ModuleIcon} reducedMotion={reducedMotion} />
-                  : <ModuleIcon aria-hidden="true" size={17} className="mission-nav-icon" />}
-                <label>
-                  <span className="mission-nav-select-label">{label}</span>
-                  <select aria-label="Elegir el tipo de cuerpo de agua" value={current ? water : ''}
-                    onChange={(event) => router.push(links[event.target.value as WaterModule])}>
-                    {!current && <option value="" disabled>Lagos o ríos</option>}
-                    {(Object.keys(waterModules) as WaterModule[]).map((module) =>
-                      <option key={module} value={module}>{waterModules[module].label}</option>)}
-                  </select>
-                  <ChevronDown aria-hidden="true" size={15} className="mission-nav-chevron" />
-                </label>
-              </div>;
-            }
-            return <Link key={key} href={links[key]} aria-current={current ? 'page' : undefined}>
-              {current && <Sphere id={id} Icon={Icon} reducedMotion={reducedMotion} />}
-              {!current && <Icon aria-hidden="true" size={17} className="mission-nav-icon" />}
-              <span>{label}</span>
-            </Link>;
-          })}
-        </LayoutGroup>
+        {item('inicio', 'Inicio', House)}
+        <div className="nav-water" ref={root}>
+          <button ref={trigger} type="button" className="nav-item" aria-haspopup="menu" aria-expanded={open} aria-controls={menuId}
+            data-current={inWater || undefined} onClick={() => setOpen((value) => !value)}
+            onKeyDown={(event) => { if (event.key === 'ArrowDown') { event.preventDefault(); setOpen(true); } }}>
+            {inWater && <Pill reducedMotion={reducedMotion} />}
+            <Current aria-hidden="true" size={18} />
+            <span>{inWater ? waterModules[water].label : 'Lagos y ríos'}</span>
+            <ChevronDown aria-hidden="true" size={15} className="nav-chevron" />
+          </button>
+          {open && <div className="nav-menu" id={menuId} role="menu" aria-label="Cuerpos de agua"
+            onKeyDown={(event) => {
+              if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+              event.preventDefault();
+              const items = [...event.currentTarget.querySelectorAll<HTMLAnchorElement>('[role="menuitem"]')];
+              const index = items.indexOf(document.activeElement as HTMLAnchorElement);
+              items[(index + (event.key === 'ArrowDown' ? 1 : items.length - 1)) % items.length]?.focus();
+            }}>
+            <p className="nav-menu-title">Cuerpos de agua</p>
+            {(Object.keys(waterModules) as WaterModule[]).map((module) => {
+              const { label, Icon, description } = waterModules[module];
+              const selected = inWater && module === water;
+              return <Link key={module} role="menuitem" href={links[module]} className="nav-menu-item"
+                aria-current={selected ? 'page' : undefined} onClick={() => setOpen(false)}>
+                <span className="nav-menu-icon"><Icon size={19} aria-hidden="true" /></span>
+                <span><b>{label}</b><small>{description}</small></span>
+                {selected && <Check size={17} aria-hidden="true" className="nav-menu-check" />}
+              </Link>;
+            })}
+          </div>}
+        </div>
+        {plain.slice(1).map(({ key, label, Icon }) => item(key, label, Icon))}
       </nav>
     </div>
   </header>;

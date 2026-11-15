@@ -35,10 +35,11 @@ const guides = {
     { title: 'Compara las imágenes', text: 'Las fotos muestran el paisaje en dos fechas. El mapa de cambios indica dónde aparecieron cambios de cobertura y cuántas hectáreas abarca cada tipo.', target: 'land-cover-images' },
   ],
   rios: [
-    { title: 'Empieza por la respuesta', text: 'El veredicto dice por qué le falta agua a la laguna. La torta muestra qué parte de la pérdida explica cada factor; pasa el mouse sobre los colores.', target: 'rivers-verdict-title' },
-    { title: 'Sigue el viaje del agua', text: 'Cada tarjeta es un tramo del río. El nivel azul muestra cuánta agua queda en el cauce. Toca un tramo para ver su evolución.', target: 'rivers-flow-title' },
-    { title: 'Mira qué hay alrededor', text: 'El mapa muestra canales, tomas, minas y reservorios registrados. Usa los botones para mostrar u ocultar cada tipo.', target: 'rivers-map-title' },
-    { title: 'Revisa la confiabilidad', text: 'Antes de usar los datos, revisa los controles de calidad y las fuentes. Puedes descargar la tabla en CSV o el análisis completo.', target: 'rivers-quality-title' },
+    { title: 'Empieza por el diagnóstico', text: 'El encabezado indica dónde se origina la pérdida de agua. La torta reparte el déficit entre sus factores; pasa el cursor por los colores.', target: 'rivers-verdict-title' },
+    { title: 'Revisa las implicancias', text: 'Recomendaciones derivadas de los resultados: dónde medir, qué verificar en campo y a qué escala gestionar.', target: 'rivers-actions-title' },
+    { title: 'Recorre el río', text: 'Cada tarjeta es un tramo. El relleno indica la superficie de agua actual frente a la de referencia. Selecciona un tramo para ver su serie anual.', target: 'rivers-flow-title' },
+    { title: 'Ubica las presiones', text: 'El mapa muestra canales, tomas, minas y reservorios registrados. Usa los botones para mostrar u ocultar cada tipo.', target: 'rivers-map-title' },
+    { title: 'Comprueba la calidad', text: 'Antes de usar los datos, revisa los controles automáticos y las fuentes. Puedes descargar la tabla por tramo (CSV) o el análisis completo (JSON).', target: 'rivers-quality-title' },
   ],
   provincias: [
     { title: 'Elige una provincia', text: 'Toca el mapa o usa el selector. Verás su diagnóstico de largo plazo, la relación entre la lluvia y el verdor y los periodos de mayor déficit.', target: 'atlas-region' },
