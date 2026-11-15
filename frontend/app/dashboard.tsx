@@ -37,6 +37,9 @@ const FireHistory = dynamic(() => import('./fire-history'), {
     <h2>Mapa histórico de focos</h2><p className="loading" role="status">Cargando el mapa…</p>
   </section>,
 });
+const Rivers = dynamic(() => import('./rivers'), {
+  loading: () => <p className="loading" role="status">Cargando el análisis del río…</p>,
+});
 const RecentFires = dynamic(() => import('./environment').then((module) => module.RecentFires));
 const lakeViews = {
   mapa: { name: 'Lagos de Bolivia', label: 'Mapa 3D', icon: MapIcon, description: 'Encuentra lagos por nombre, ubícalos en el mapa y mira cuánto cambió su superficie de agua. Las gotas flotantes llevan a los casos con ficha completa.' },
@@ -46,6 +49,7 @@ const lakeViews = {
 const views = {
   panorama: { name: 'Análisis de los lagos', description: 'Mira cuántos lagos se analizaron, qué diagnósticos se encontraron y qué casos puedes explorar a fondo.' },
   ...lakeViews,
+  rios: { name: 'Ríos: tramos y causas', description: 'Sigue el agua desde el Titicaca hasta las lagunas Uru Uru y Poopó. Mira en qué tramo se pierde, qué obras hay en el camino y qué tan confiables son los datos.' },
   vigilancia: { name: 'Incendios', description: 'Ubica los focos de calor de Bolivia en el mapa histórico y revisa el reporte semanal guardado alrededor de los lagos.' },
   vegetacion: { name: 'Vegetación', description: 'Explora cómo se relacionaron la lluvia y el verdor en las provincias de Bolivia. En las cuencas de los lagos puedes comparar imágenes y cambios de bosque, cultivos y pasturas.' },
 } as const;
@@ -63,7 +67,7 @@ export function Dashboard() {
   const router = useRouter();
   const params = useSearchParams();
   const candidate = params.get('vista');
-  const view = candidate === 'lagos' ? 'mapa' : candidate === 'incendios' ? 'vigilancia'
+  const view = candidate === 'lagos' ? 'mapa' : candidate === 'incendios' ? 'vigilancia' : candidate === 'rio' ? 'rios'
     : candidate && Object.hasOwn(views, candidate) ? candidate as View : 'panorama';
   const lakeSection = view === 'mapa' || view === 'monitoreo' || view === 'ficha';
   const requestedMethod: Method = params.get('metodo') === 'conservador' ? 'conservative' : 'balance';
@@ -123,6 +127,7 @@ export function Dashboard() {
   const links = {
     inicio: locationFor('panorama', method),
     lagos: locationFor('mapa', method, selected),
+    rios: locationFor('rios', method, selected === 'uru_uru' || selected === 'poopo' ? selected : null),
     incendios: locationFor('vigilancia', method),
     vegetacion: locationFor('vegetacion', method),
   };
@@ -148,9 +153,10 @@ export function Dashboard() {
 
   return <div className="shell">
     <a className="skip-link" href="#contenido">Ir al contenido</a>
-    <MissionNav links={links} active={lakeSection ? 'lagos' : view === 'vigilancia' ? 'incendios' : view === 'vegetacion' ? 'vegetacion' : 'inicio'} />
+    <MissionNav links={links} water={view === 'rios' ? 'rios' : 'lagos'}
+      active={lakeSection || view === 'rios' ? 'agua' : view === 'vigilancia' ? 'incendios' : view === 'vegetacion' ? 'vegetacion' : 'inicio'} />
     <main id="contenido" className={view === 'panorama' ? 'main-content mission-home' : 'main-content mission-subpage'}>
-      {view === 'panorama' && <MissionHome lakes={links.lagos} fires={links.incendios} vegetation={links.vegetacion}
+      {view === 'panorama' && <MissionHome lakes={links.lagos} rivers={links.rios} fires={links.incendios} vegetation={links.vegetacion}
         alerts={<Alerts watchlist={watchlist} link={openAlert} />} />}
       {lakeSection && <nav className="lake-nav" aria-label="Explorar lagos">
         {(Object.entries(lakeViews) as [keyof typeof lakeViews, typeof lakeViews[keyof typeof lakeViews]][]).map(([key, { label, icon: Icon }]) =>
@@ -182,11 +188,11 @@ export function Dashboard() {
           </fieldset>}
         </div>}
       </header>
-      {currentError && view !== 'vigilancia' && (view !== 'vegetacion' || vegetationByLake) && <div className="notice danger" role="alert">
+      {currentError && view !== 'vigilancia' && view !== 'rios' && (view !== 'vegetacion' || vegetationByLake) && <div className="notice danger" role="alert">
         <p>{currentError}</p>
         <button type="button" onClick={() => { setError(undefined); setAttempt((value) => value + 1); }}>Reintentar</button>
       </div>}
-      {!snapshot && !currentError && view !== 'vigilancia' && (view !== 'vegetacion' || vegetationByLake) && <p className="loading" role="status">Cargando datos del detector…</p>}
+      {!snapshot && !currentError && view !== 'vigilancia' && view !== 'rios' && (view !== 'vegetacion' || vegetationByLake) && <p className="loading" role="status">Cargando datos del detector…</p>}
       {snapshot?.sample && <p className="notice">Datos ficticios de prueba.</p>}
       {snapshot && method === 'conservative' && (view === 'panorama' || lakeSection) && <p className="notice model-note">
         <span>Modelo conservador aplicado a los casos con análisis completo. <Link href={locationFor('mapa', 'balance')}>Ver el barrido nacional en el mapa.</Link></span>
@@ -220,6 +226,7 @@ export function Dashboard() {
           : <p className="notice">No hay cuerpos de agua con datos de vegetación.</p>)
           : <RegionalVegetation selected={province} select={selectProvince} />}
       </>}
+      {view === 'rios' && <Rivers lake={selected} selectLake={(id) => router.replace(locationFor('rios', method, id), { scroll: false })} />}
       {view === 'vigilancia' && <>
         <nav className="section-jump" aria-label="Qué encontrarás en Incendios">
           <a className="button-link" href="#mapa-incendios"><MapIcon size={17} aria-hidden="true" /> Mapa histórico <ArrowDown size={15} aria-hidden="true" /></a>
@@ -239,7 +246,7 @@ export function Dashboard() {
         </section>
       </>}
       {view === 'panorama' && <SourceInventory />}
-      <footer>Los diagnósticos se basan en coincidencia y consistencia estadística. Fuentes: Landsat, NASA POWER y FIRMS, NOAA, JRC, MapBiomas Bolivia, Hansen, HydroBASINS y OpenStreetMap.</footer>
+      <footer>Los diagnósticos se basan en coincidencia y consistencia estadística, no en pruebas de campo: sirven para priorizar inspecciones y decisiones. Fuentes: Landsat, NASA POWER y FIRMS, NOAA, JRC, MapBiomas Bolivia, Hansen, HydroSHEDS, HydroBASINS y OpenStreetMap.</footer>
     </main>
     <Guide key={view === 'vegetacion' && !vegetationByLake ? 'provincias' : view}
       view={view === 'vegetacion' && !vegetationByLake ? 'provincias' : view} />

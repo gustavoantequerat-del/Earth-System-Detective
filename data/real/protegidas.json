@@ -1,0 +1,52 @@
+{
+ "poopo": {
+  "ramsar": "Lagos Poopó y Uru Uru",
+  "ramsar_aprox": false,
+  "areas": [
+   "Poopo (Patrimonio Nacional y Reserva Ecologica)"
+  ]
+ },
+ "uru_uru": {
+  "ramsar": "Lagos Poopó y Uru Uru",
+  "ramsar_aprox": false,
+  "areas": []
+ },
+ "concepcion": {
+  "ramsar": "Laguna Concepción",
+  "ramsar_aprox": false,
+  "areas": [
+   "Laguna Concepcion (Área Protegida Municipal)"
+  ]
+ },
+ "titicaca_menor": {
+  "ramsar": "Lago Titicaca",
+  "ramsar_aprox": true,
+  "areas": []
+ },
+ "pozuelos": {
+  "ramsar": "Laguna de los Pozuelos",
+  "ramsar_aprox": false,
+  "areas": [
+   "Laguna de los Pozuelos - Zona núcleo (Reserva de la Biósfera)",
+   "Laguna de los Pozuelos (Sitio Ramsar, Humedal de Importancia Internacional)",
+   "Laguna de los Pozuelos (Monumento Natural)"
+  ]
+ },
+ "chiquitania_este": {
+  "ramsar": null,
+  "ramsar_aprox": false,
+  "areas": []
+ },
+ "andino_peru": {
+  "ramsar": null,
+  "ramsar_aprox": false,
+  "areas": []
+ },
+ "san_matias": {
+  "ramsar": "Pantanal Boliviano",
+  "ramsar_aprox": true,
+  "areas": [
+   "San Matías (Área Natural de Manejo Integrado)"
+  ]
+ }
+}

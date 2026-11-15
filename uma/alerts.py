@@ -36,7 +36,7 @@ from uma.suspects_upstream import basin_geometry
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "real"
-RISK = {"Huella humana", "Alerta temprana", "Incalculable"}
+RISK = {"Huella humana", "Alerta temprana", "Incalculable", "Aguas arriba"}
 MIN_FOCOS = 5
 FACTOR = 2.0
 BASE_YEARS = 5
