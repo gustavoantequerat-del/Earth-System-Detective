@@ -1,0 +1,122 @@
+# ─────────────────────────────────────────────────────────────
+# Python (backend)
+# ─────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Entornos virtuales
+.venv/
+venv/
+ENV/
+env/
+.python-version
+
+# Testing / cobertura
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+*.cover
+
+# Jupyter
+.ipynb_checkpoints/
+
+# FastAPI / uvicorn
+*.log
+logs/
+
+# ─────────────────────────────────────────────────────────────
+# Node / Next.js (frontend)
+# ─────────────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+.next/
+out/
+build/
+.turbo/
+.vercel/
+*.tsbuildinfo
+
+# Next.js env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js cache
+.next/cache/
+
+# ─────────────────────────────────────────────────────────────
+# Datos y generados (no trackear binarios pesados)
+# ─────────────────────────────────────────────────────────────
+# CSV completos de HDX (~50-200 MB) → no van al repo.
+# Se bajan de data.humdata.org según se documenta en README.
+# data/*.csv
+# data/*.csv.gz
+# !data/.gitkeep
+
+# GeoJSON pesados (~30 MB cada uno) → no van al repo.
+# Se bajan de HDX (COD-AB) según se documenta en README.
+bol_admin_boundaries.geojson/*.geojson
+
+# # GeoJSON simplificado generado por scripts/prepare_geojson.py
+# data/bol_admin2_simplified.geojson
+# data/bol_admin2_simplified.geojson.gz
+# data/regions_meta.json
+
+# ─────────────────────────────────────────────────────────────
+# Sistema operativo
+# ─────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ─────────────────────────────────────────────────────────────
+# IDEs / editores
+# ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ─────────────────────────────────────────────────────────────
+# Otros
+# ─────────────────────────────────────────────────────────────
+*.bak
+*.orig
+*.tmp

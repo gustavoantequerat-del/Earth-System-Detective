@@ -1,0 +1,7 @@
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pandas>=2.0
+numpy>=1.26
+pymannkendall>=1.4.3
+scipy>=1.11
+shapely>=2.0

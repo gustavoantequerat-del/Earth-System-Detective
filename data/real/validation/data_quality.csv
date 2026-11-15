@@ -1,0 +1,9 @@
+body_id,eligible,input_n,analyzed_n,base_observed_n,imputed_water_n,imputed_fraction,legacy_quality,state,selected_model,control_eligible,cv_n
+poopo,True,40,39,15,1,0.025,Se infieren imputaciones por nodata_pct > 20; otras imputaciones históricas pueden no estar marcadas.,Sin perdida anomala detectada,dinamico_ar1,False,5
+uru_uru,True,40,39,15,1,0.025,Se infieren imputaciones por nodata_pct > 20; otras imputaciones históricas pueden no estar marcadas.,Sin perdida anomala detectada,dinamico_ar1,False,5
+concepcion,True,40,39,15,1,0.025,Se infieren imputaciones por nodata_pct > 20; otras imputaciones históricas pueden no estar marcadas.,Sin perdida anomala detectada,ridge,False,5
+titicaca_menor,True,40,39,15,2,0.05,Se infieren imputaciones por nodata_pct > 20; otras imputaciones históricas pueden no estar marcadas.,Sin perdida anomala detectada,dinamico_ar1,False,5
+pozuelos,True,40,39,15,1,0.025,Se infieren imputaciones por nodata_pct > 20; otras imputaciones históricas pueden no estar marcadas.,Sin perdida anomala detectada,climatologia,False,5
+chiquitania_este,True,40,39,15,0,0.0,Se infieren imputaciones por nodata_pct > 20; otras imputaciones históricas pueden no estar marcadas.,Perdida no explicada,climatologia,False,5
+andino_peru,True,40,39,15,1,0.025,Se infieren imputaciones por nodata_pct > 20; otras imputaciones históricas pueden no estar marcadas.,Sin perdida anomala detectada,dinamico_ar1,False,5
+san_matias,True,40,39,15,1,0.025,Se infieren imputaciones por nodata_pct > 20; otras imputaciones históricas pueden no estar marcadas.,Sin perdida anomala detectada,ols,False,5

@@ -513,15 +513,21 @@ def backtest(df, baseline_end: int) -> dict:
             "mae_pct": float(100 * err.abs().mean() / df["water_ha"].mean())}
 
 
-def run(bodies: pd.DataFrame, series: pd.DataFrame, suspects: pd.DataFrame, baseline_end: int = 2000) -> list[dict]:
+def run(bodies: pd.DataFrame, series: pd.DataFrame, suspects: pd.DataFrame, baseline_end: int = 2000,
+        *, conservative: bool = False) -> list[dict]:
     suspects = tag_areas(suspects)
+    if conservative:
+        from . import safeguarded
     results = []
     for _, b in bodies.iterrows():
         ctrl = b.get("control_id")
         ctrl = ctrl if isinstance(ctrl, str) and ctrl else None
         up = b.get("upstream_bodies", "")
         up = up if isinstance(up, str) else ""
-        r = analyze_body(b.body_id, series, suspects, ctrl, baseline_end, up)
+        if conservative:
+            r = safeguarded.analyze_body(b.body_id, series, suspects, ctrl, baseline_end)
+        else:
+            r = analyze_body(b.body_id, series, suspects, ctrl, baseline_end, up)
         r.update({"name": b["name"], "lat": float(b.lat), "lon": float(b.lon), "kind": b.kind,
                   "department": b.get("department", ""), "control_id": ctrl})
         results.append(r)
@@ -529,4 +535,4 @@ def run(bodies: pd.DataFrame, series: pd.DataFrame, suspects: pd.DataFrame, base
     adj = holm({r["body_id"]: r["trend"]["p"] for r in results})
     for r in results:
         r["trend"]["p_holm"] = adj[r["body_id"]]
-    return results
+    return safeguarded.adjust_evidence(results) if conservative else results

@@ -1,0 +1,10 @@
+control_id,pseudo_cutoff,selected_model,model_reliable,alarm,coverage,reviewed_as_unaffected,warning
+andino_peru,2000,dinamico_ar1,True,False,0.9130434782608695,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.
+andino_peru,2005,dinamico_ar1,True,True,0.8421052631578947,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.
+andino_peru,2010,dinamico_ar1,True,False,0.7857142857142857,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.
+pozuelos,2000,climatologia,True,False,1.0,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.
+pozuelos,2005,dinamico_ar1,True,False,0.42105263157894735,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.
+pozuelos,2010,dinamico_ar1,True,False,0.42857142857142855,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.
+san_matias,2000,ols,True,False,0.13043478260869565,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.
+san_matias,2005,dinamico_ar1,True,False,0.5263157894736842,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.
+san_matias,2010,dinamico_ar1,True,False,0.8571428571428571,False,Exploratorio; control no confirmado. No es tasa validada de falsos positivos.

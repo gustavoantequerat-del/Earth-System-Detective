@@ -1,0 +1,16 @@
+{
+  "interval_level": 0.8,
+  "bootstrap_draws": 400,
+  "block_length": 3,
+  "min_baseline_observed": 12,
+  "min_cv_predictions": 5,
+  "max_imputed_fraction": 0.2,
+  "max_control_mae_baseline_pct": 20.0,
+  "min_control_coverage": 0.6,
+  "min_pre_control_correlation": 0.5,
+  "min_effect_pct": 10.0,
+  "consecutive_low_years": 2,
+  "control_reviews": {},
+  "documented_interventions": [],
+  "note": "Umbrales operativos provisionales, no estandares cientificos universales. Control aprobado requiere approved=true, source y reviewer. Las intervenciones requieren body_id, suspect, year, source y reviewed=true; no se inventan confirmaciones."
+}

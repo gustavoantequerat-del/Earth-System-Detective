@@ -112,7 +112,9 @@ def main():
         monthly.append(m)
     mdf = pd.concat(monthly)
     mdf.to_csv(out / "nasa_power_monthly.csv", index=False)
-    full = mdf.groupby(["body_id", "year"]).filter(lambda g: len(g) == 12)  # solo anos completos
+    full = mdf.groupby(["body_id", "year"]).filter(
+        lambda g: len(g) == 12 and g.month.nunique() == 12
+        and g[["precip_mm", "temp_c"]].notna().all().all())  # doce meses válidos, no solo doce filas
     annual = full.groupby(["body_id", "year"]).agg(precip_mm=("precip_mm", "sum"), temp_c=("temp_c", "mean")).reset_index()
     annual.round(2).to_csv(out / "nasa_power.csv", index=False)
     print(f"  {len(annual)} filas anuales -> {out / 'nasa_power.csv'}")

@@ -53,6 +53,10 @@ CREATE TABLE IF NOT EXISTS reviews (
   body_id TEXT, run_id INTEGER, created_at TEXT,
   reviewer TEXT, outcome TEXT, comment TEXT
 );
+CREATE TABLE IF NOT EXISTS diagnostics (
+  run_id INTEGER, body_id TEXT, diagnostics_json TEXT,
+  PRIMARY KEY (run_id, body_id)
+);
 """
 
 DATASETS = {
@@ -63,9 +67,10 @@ DATASETS = {
                    "DMSP-OLS + VIIRS V21/V22, WorldPop, Landsat NDVI",
     "agua_subterranea": "NASA GRACE/GRACE-FO MASCON",
 }
-ALERT_STATES = {"Huella humana", "Alerta temprana"}
-# la huella del codigo cubre todo lo que produce o transforma los datos, no solo el motor
-CODE_FILES = ["engine.py", "gee_extract.py", "nasa_power.py", "upstream.py", "suspects_upstream.py", "twins.py"]
+ALERT_STATES = {"Huella humana", "Alerta temprana", "Indicios de intervencion humana",
+                "Evidencia reforzada de intervencion", "Perdida no explicada"}
+CODE_FILES = ["engine.py", "gee_extract.py", "nasa_power.py", "upstream.py", "suspects_upstream.py",
+              "twins.py", "climate_blend.py", "hydro_extra.py"]
 
 
 def connect(data_dir: Path) -> sqlite3.Connection:
@@ -85,21 +90,32 @@ def _sha(paths) -> str:
 
 
 def record_run(data_dir: Path, results: list[dict], baseline_end: int, note: str = "",
-               params: dict | None = None, created_at: str | None = None) -> int:
+               params: dict | None = None, created_at: str | None = None, *, input_dir: Path | None = None) -> int:
     data_dir = Path(data_dir)
+    inputs = Path(input_dir) if input_dir is not None else data_dir
     con = connect(data_dir)
     now = created_at or dt.datetime.now().isoformat(timespec="seconds")
     from uma import engine
-    params = {"alpha": engine.ALPHA, "min_effect_pct": engine.MIN_EFFECT_PCT,
-              "max_lag_years": engine.MAX_LAG_YEARS, **(params or {})}
+    settings = {"alpha": engine.ALPHA, "min_effect_pct": engine.MIN_EFFECT_PCT,
+                "max_lag_years": engine.MAX_LAG_YEARS}
+    code_paths = [ROOT / "uma" / f for f in CODE_FILES] + [ROOT / "run_engine.py"]
+    if any(r.get("method_version") for r in results):
+        from uma.validation import policy
+        settings["evidence_policy"] = policy()
+        code_paths.extend([ROOT / "uma/validation.py", ROOT / "uma/safeguarded.py", ROOT / "config/evidence_policy.json"])
+    settings.update(params or {})
     cur = con.execute(
         "INSERT INTO runs(created_at, note, baseline_end, params_json, datasets_json, inputs_sha256, code_sha256) "
         "VALUES (?,?,?,?,?,?,?)",
-        (now, note, baseline_end, json.dumps(params), json.dumps(DATASETS, ensure_ascii=False),
-         _sha([data_dir / f for f in ("bodies.csv", "series.csv", "suspects.csv")]),
-         _sha([ROOT / "uma" / f for f in CODE_FILES])))
+        (now, note, baseline_end, json.dumps(settings), json.dumps(DATASETS, ensure_ascii=False),
+         _sha([inputs / f for f in ("bodies.csv", "series.csv", "suspects.csv", "basins.csv")]), _sha(code_paths)))
     run_id = cur.lastrowid
     for r in results:
+        if r.get("method_version"):
+            keys = ("selected_model", "model_comparison", "model_validation", "quality", "control_validation",
+                    "backtest", "independent_evidence", "method_version")
+            con.execute("INSERT INTO diagnostics VALUES (?,?,?)", (
+                run_id, r["body_id"], json.dumps({k: r.get(k) for k in keys}, ensure_ascii=False)))
         con.execute("INSERT INTO verdicts VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", (
             run_id, r["body_id"], r["name"], r.get("control_id"), r["state"], r["confidence"], r["n_pass"],
             r["trend"]["change_pct"], r["trend"]["sen_ha_per_year"], r["trend"]["p"], r["climate_r2"],

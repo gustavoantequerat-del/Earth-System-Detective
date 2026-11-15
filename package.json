@@ -1,0 +1,12 @@
+{
+  "name": "earth-system-detective",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "engines": { "node": "^20.9.0 || 22.x || 24.x" },
+  "scripts": {
+    "build": "npm run build --workspace backend && npm run build --workspace frontend",
+    "start": "npm run start --workspace frontend",
+    "start:dev": "npm run start:dev --workspace backend",
+    "dev:frontend": "npm run dev --workspace frontend"
+  }
+}

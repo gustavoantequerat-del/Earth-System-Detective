@@ -1,8 +1,83 @@
 # Detector de huella humana en el agua de Bolivia
 
 NASA Space Apps 2026, reto *Be an Earth System Trend Detective*.
-Separa cuánto de la pérdida de un cuerpo de agua explica el clima (sequía, El Niño) y cuánto no,
-y audita qué actividad humana es la sospechosa.
+Compara la evolución del agua con referencias climáticas, detecta anomalías con incertidumbre
+y evalúa indicios de presión humana. No asigna automáticamente una causa a un residuo.
+
+La implementación conservadora y sus límites están documentados en [VALIDACION_MODELO.md](VALIDACION_MODELO.md).
+Los resultados actuales están en [data/real/validation/REPORT.md](data/real/validation/REPORT.md).
+
+## Arranque del dashboard
+
+Usa Node.js 20.9+, 22 o 24 y npm. Desde la carpeta raíz instala las dependencias y compila el frontend:
+
+```bash
+npm ci
+npm run build
+```
+
+En una terminal inicia NestJS en el puerto 3001:
+
+```bash
+npm run start:dev
+```
+
+En otra terminal inicia Next.js y abre [localhost:3000](http://localhost:3000):
+
+```bash
+npm run start
+```
+
+Para editar el frontend con recarga automática, usa `npm run dev:frontend`. Los dos servidores arrancan con Node.js
+y NestJS carga los datos procesados que incluye el repositorio. Los scripts científicos de Python se ejecutan aparte
+para descargar nuevas series, recalcular los diagnósticos, generar el barrido y actualizar los reportes de incendios.
+
+La barra superior lleva a **Panorama**, **Mapa 3D**, **Monitoreo**, **Fichas** e **Incendios**.
+En el mapa, usa **Balance hídrico** para explorar el barrido nacional y **Modelo conservador** para consultar
+los resultados de `mapa3`. El método y el cuerpo de agua seleccionado quedan en la URL. Puedes abrir directamente
+el [mapa con el modelo conservador](http://localhost:3000/?vista=mapa&metodo=conservador).
+
+### Vercel
+
+Importa el repositorio con el preset **Services** y la **raíz del repo** como Root Directory. Selecciona
+`developer` como rama de producción. El `vercel.json` de la raíz dirige `/api/*` a NestJS y las páginas a
+Next.js en el mismo dominio. Los datos precalculados y las imágenes se incluyen en el backend, por lo que la
+demo arranca con Node.js. Deja `BACKEND_URL` sin definir para usar el enrutamiento del proyecto.
+
+La auditoría de la demo es de solo lectura. El archivo SQLite empaquetado permite consultar el historial.
+Para agregar revisiones en Vercel hace falta una base persistente. Las capas en vivo de Earth Engine se
+habilitan al configurar `GEE_SERVICE_ACCOUNT_KEY` y, si corresponde, `UMA_GEE_PROJECT`.
+
+Inicio muestra alertas calculadas a partir de los archivos de agua y pérdida de bosque. Las alertas de
+FIRMS proceden del reporte guardado y los simulacros se identifican como tales. En las fichas, **NASA
+reciente** consulta NASA POWER y el catálogo Earthdata CMR sin clave. Con acceso de Earth Engine se puede
+comparar el mismo mes con GPM IMERG, CHIRPS y ERA5-Land. Configura `FIRMS_MAP_KEY` en el entorno del
+backend para activar las detecciones de VIIRS NOAA-20 cerca de los lagos. Las claves se guardan en
+variables de entorno de NestJS y Vercel.
+
+**Incendios** reproduce los 312 meses del mapa MODIS de `mapa3` con barras 3D, escala de color fija,
+control de velocidad y pausa. **Vegetación → Por provincia** integra el mapa, los diagnósticos de
+lluvia y NDVI y la serie temporal de `vegetacion-agua`. La vista **Cuencas de lagos** mantiene sus
+propias series e imágenes. Los archivos originales de esa rama viven en `Naseros/`.
+
+El atlas se prepara sin cambiar el análisis original. Para regenerar el archivo comprimido tras
+actualizar sus CSV, instala las dependencias científicas de `Naseros/requirements.txt` y ejecuta
+`python backend/scripts/export-regional-vegetation.py`. El servicio desplegado lee el archivo
+precalculado desde NestJS.
+
+### Configuración local
+
+- **NestJS** (`backend/`) sirve diagnósticos, series de agua, imágenes, vigilancia e historial y guarda las
+  revisiones en el archivo `uma.db` existente. Usa `data/real` si contiene resultados, con `data/sample` como respaldo.
+  Define `UMA_DATA` en `.env` para usar otra carpeta de datos. El barrido nacional y sus puntos de agua artificial
+  aparecen si se generan `data/national/results.json` y `data/national/agua_artificial.json`, respectivamente.
+- **Next.js** (`frontend/`) reenvía `/api` a NestJS. Si cambias el puerto del backend, configura
+  `BACKEND_URL=http://127.0.0.1:<puerto>` en `frontend/.env.local` y recompila Next.js.
+- **Mapa en vivo**. Copia `.env.example` a `.env` y configura `GOOGLE_APPLICATION_CREDENTIALS` con la ruta de un
+  archivo JSON de una cuenta de servicio con acceso a Earth Engine. También puedes usar `GEE_SERVICE_ACCOUNT_KEY`
+  con el contenido de ese JSON. `UMA_GEE_PROJECT` permite elegir otro proyecto. Con esta configuración aparecen los
+  modos Landsat y MapBiomas y la capa de incendios FIRMS. El mapa satelital de Esri y el relieve de AWS usan sus
+  servicios públicos.
 
 ## Estructura
 
@@ -22,14 +97,12 @@ y audita qué actividad humana es la sospechosa.
 | `uma/audit.py` | P2 Modelo | Auditoría en SQLite (`data/real/uma.db`): corridas, veredictos, alertas, revisiones |
 | `uma/synthetic.py` | P2/P3 | Datos de prueba ficticios con el mismo formato |
 | `run_engine.py` | P2 | CSV → `results.json` + registro de auditoría |
-| `app/app.py` | P3 Interfaz | Entrada de Streamlit: tema, navegación superior y despacho de vistas |
-| `app/theme.py`, `app/ui.py` | P3 Interfaz | Paleta, estilos, partículas de fondo; tarjetas y gráficos SVG animados |
-| `app/data.py`, `app/nav.py` | P3 Interfaz | Carga de datos con caché; navegación entre vistas |
-| `app/views/` | P3 Interfaz | Panorama (tablero y vistas agregadas), Mapa 3D, Monitoreo, Ficha y Vigilancia |
-| `app/map3d.py`, `app/icons.py` | P3 Interfaz | Capas del mapa 3D y comparador; iconos Lucide (`app/icons/`, ISC) |
+| `frontend/` | P3 Interfaz | Next.js: panorama, mapa 3D, alertas, ficha, antes/después, alrededores, historial |
+| `backend/` | API | NestJS: acceso a datos locales, imágenes, auditoría SQLite y capas de Earth Engine |
+| `app/` | P3 Interfaz original | Dashboard Streamlit con tema, vistas agregadas y mapa 3D |
 | `gee/extraer_series.py` | P1 Datos | Cómo correr lo mismo desde Google Colab |
 
-## Arranque
+## Arranque de la interfaz original
 
 ```bash
 python -m venv .venv
@@ -110,7 +183,7 @@ Todos los IDs de Earth Engine se verificaron en el catálogo público el 2026-11
 5. Revisar `data/real/check.csv`: si la superficie máxima de agua de un área es 0 o absurda, corregir las
    coordenadas o el radio en `config/bodies.csv` y volver a correr con `--only <body_id>`.
 
-La app usa `data/real` automáticamente cuando existe `results.json`. Para la capa Landsat en vivo sobre el mapa 3D:
+La app usa `data/real` automáticamente cuando existe `results.json`. Para la capa Landsat en vivo en la interfaz original de Streamlit:
 
 ```bash
 set UMA_GEE_PROJECT=TU-PROYECTO && .venv\Scripts\streamlit run app/app.py
@@ -135,6 +208,8 @@ comparador antes/después.
 artificial_water_ha`. `area` dice si se midió en la `cuenca_aporte` o en la `subcuenca_local`.
 
 ## Cómo decide el motor
+
+### Balance hídrico
 
 1. **Prueba 1, clima.** Modelo `agua ~ lluvia + lluvia(t-1) + temperatura + ONI` entrenado solo en el periodo base
    (por defecto hasta 2000). Pasa si el residuo cae de forma significativa (Mann-Kendall p < 0.05) y en más de 10%
@@ -212,3 +287,19 @@ casi seca en 1994-1996. Como las dos fuentes de lluvia discrepan, `uma/climate_b
 
 Reglas de evidencia de los sospechosos: un sospechoso medido en hectáreas tiene que crecer al menos el 10% del agua
 perdida (si no, queda como débil), y "antecede la caída" si ya había crecido 1.5 veces alrededor del quiebre del agua.
+## Modelo conservador
+
+1. **Calidad y validación.** Excluye agua imputada del ajuste y compara climatología, OLS, Ridge y regresión con memoria residual AR(1), usando solo cortes dentro del período base. Si la calidad o la validación son insuficientes, lo comunica.
+2. **Anomalía.** Contrasta tendencia residual y efecto material, exige persistencia bajo una banda bootstrap aproximada y corrige los contrastes entre cuerpos de agua. Publica la cobertura posterior de las bandas.
+3. **Control.** Una gemela es candidata hasta documentar su elegibilidad independiente. Se revisan similitud previa, error y cobertura; si falla, su prueba no se habilita.
+4. **Presión.** Exige crecimiento, antecedencia y signo negativo en la asociación de cambios anuales, con corrección de Holm y contrastes temporales exploratorios.
+5. **Conclusión.** No basta con aprobar dos pruebas. Hay estados de evidencia insuficiente, pérdida no explicada e indicios; la evidencia reforzada exige documentación independiente revisada. La diferencia de tendencias no se reparte numéricamente como causa humana.
+
+La política está en `config/evidence_policy.json`; sus umbrales son provisionales y configurables. Las revisiones de controles y los eventos documentados comienzan vacíos: no se inventan confirmaciones. Los placebos en controles candidatos son exploratorios y no constituyen una tasa confirmada de falsos positivos. No hay métricas de clasificación humana contra etiquetas independientes disponibles.
+
+La evaluación posterior usa clima observado: es retrospectiva y condicional, no un pronóstico operativo de lluvia. Las bandas no se declaran calibradas. La documentación detalla qué datos y revisiones faltan para una atribución confirmatoria.
+En Next.js, selecciona **Modelo conservador** para ver los resultados, bandas, pruebas y auditoría de este método.
+El barrido nacional publicado corresponde al método de balance hídrico. Para generar nuevas corridas
+conservadoras con las entradas actuales, ejecuta `python run_engine.py data/real 2000 --conservative`.
+Se guardan en `data/real/validation/`, con su propio JSON, auditoría y tablas de validación.
+Consulta [la metodología conservadora y sus límites](VALIDACION_MODELO.md).

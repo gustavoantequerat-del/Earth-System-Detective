@@ -10,6 +10,19 @@ __pycache__/
 service-account*.json
 .streamlit/secrets.toml
 .env
+.env.local
+
+# Next.js y NestJS
+node_modules/
+.npm-cache/
+.next/
+.vercel/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+uma.db-journal
+uma.db-wal
+uma.db-shm
 
 # registros de extraccion (se regeneran)
 data/real/*_log*.txt

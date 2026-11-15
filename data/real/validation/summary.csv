@@ -1,0 +1,9 @@
+body_id,modelo,estado,cv_n,mae_ha,mae_base_pct,coverage
+poopo,dinamico_ar1,Sin perdida anomala detectada,5,36490.70621841641,18.94190556021565,1.0
+uru_uru,dinamico_ar1,Sin perdida anomala detectada,5,3319.02886873942,37.55026384501718,0.8260869565217391
+concepcion,ridge,Sin perdida anomala detectada,5,2476.2892619634767,41.57303895561068,0.391304347826087
+titicaca_menor,dinamico_ar1,Sin perdida anomala detectada,5,4017.774836945238,4.708476276064056,0.9130434782608695
+pozuelos,climatologia,Sin perdida anomala detectada,5,3074.569624201345,46.68738032053793,1.0
+chiquitania_este,climatologia,Perdida no explicada,5,254.06081442626044,57.86098686679195,0.0
+andino_peru,dinamico_ar1,Sin perdida anomala detectada,5,880.1905138565998,33.14748173393352,0.9130434782608695
+san_matias,ols,Sin perdida anomala detectada,5,36.96735544795547,2.664560638583315,0.13043478260869565

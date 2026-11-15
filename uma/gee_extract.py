@@ -233,7 +233,11 @@ def dry_crops(basin):
                   .reduceRegion(ee.Reducer.sum(), basin, S(120), maxPixels=1e11, tileScale=4).get("area").getInfo())
         rows.append({"year": y, "value": v or 0.0})
     df = pd.DataFrame(rows)
-    df["value"] = df["value"].astype(float).interpolate(limit_direction="both")
+    missing = df["value"].isna()
+    df["value"] = df["value"].astype(float).interpolate(limit_area="inside")
+    df["value_status"] = "observed"
+    df.loc[missing & df.value.notna(), "value_status"] = "interpolated"
+    df.loc[df.value.isna(), "value_status"] = "unavailable"
     return df
 
 
@@ -476,7 +480,11 @@ def main(argv=None):
         else:
             w = jrc
         w.loc[w.nodata_pct > 20, "water_ha"] = None  # anos con muchos huecos subestiman el agua
-        w["water_ha"] = w["water_ha"].interpolate(limit_direction="both")
+        w["water_imputed"] = w.water_ha.isna()
+        w["water_ha"] = w["water_ha"].interpolate(limit_area="inside")
+        w["water_status"] = "observed"
+        w.loc[w.water_imputed & w.water_ha.notna(), "water_status"] = "interpolated"
+        w.loc[w.water_ha.isna(), "water_status"] = "unavailable"
         if "water_ha_jrc" in w:
             both = w.dropna(subset=["water_ha_jrc"])
             if len(both) > 5:
@@ -503,12 +511,19 @@ def main(argv=None):
             try:
                 d = fn(basin)
                 v = d.set_index("year")["value"].astype(float).reindex(YEARS)
-                if name in FLOW_SUSPECTS:   # flujos (ha por ano): sin dato = 0
-                    v = v.fillna(0)
-                else:                       # niveles (ha, personas, luz): se extiende el primer y ultimo valor
-                    v = v.ffill().bfill().fillna(0)
+                status = pd.Series("observed", index=v.index)
+                status.loc[v.isna()] = "unavailable"
+                if "value_status" in d:
+                    status = d.set_index("year").value_status.reindex(YEARS).fillna("unavailable")
+                # Hansen omite años sin pérdida: cero solo dentro de cobertura conocida.
+                if name == "forest_loss_ha":
+                    zero = v.isna() & (v.index >= 2001) & (v.index <= 2024)
+                    v.loc[zero] = 0.
+                    status.loc[zero] = "zero_within_product_coverage"
+                # No extender población, luz ni usos de suelo fuera de su cobertura.
                 d = v.reset_index()
                 d.columns = ["year", "value"]
+                d["value_status"] = status.to_numpy()
                 d.insert(0, "body_id", b.body_id)
                 d.insert(2, "suspect", name)
                 suspects.append(d)
