@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -49,7 +49,7 @@ const lakeViews = {
 const views = {
   panorama: { name: 'Análisis de los lagos', description: 'Mira cuántos lagos se analizaron, qué diagnósticos se encontraron y qué casos puedes explorar a fondo.' },
   ...lakeViews,
-  rios: { name: 'Ríos: tramos y causas', description: 'Sigue el agua desde el Titicaca hasta las lagunas Uru Uru y Poopó. Mira en qué tramo se pierde, qué obras hay en el camino y qué tan confiables son los datos.' },
+  rios: { name: 'Ríos: tramos y causas', description: 'Análisis del río Desaguadero desde el Titicaca hasta Uru Uru y Poopó: en qué tramo disminuye el agua, qué presiones humanas hay en su entorno y con qué grado de certeza se sabe.' },
   vigilancia: { name: 'Incendios', description: 'Ubica los focos de calor de Bolivia en el mapa histórico y revisa el reporte semanal guardado alrededor de los lagos.' },
   vegetacion: { name: 'Vegetación', description: 'Explora cómo se relacionaron la lluvia y el verdor en las provincias de Bolivia. En las cuencas de los lagos puedes comparar imágenes y cambios de bosque, cultivos y pasturas.' },
 } as const;
@@ -258,16 +258,18 @@ function Monitor({ snapshot, weekly, method, openDetails }: { snapshot: Snapshot
   const [state, setState] = useState<State | ''>('');
   const [mode, setMode] = useState('');
   const [minimum, setMinimum] = useState('');
+  const [limit, setLimit] = useState(30);
   const query = searchKey(search);
   const controls = new Set(snapshot.results.map((body) => body.control_id).filter(Boolean));
   const stateList = visibleStates(method, [...snapshot.results, ...snapshot.national]);
   const fires = new Map(weekly?.report?.rows.map((body) => [body.body_id, body]));
-  const rows = [
+  const base = [
     ...snapshot.results.map((body) => ({ body, mode: controls.has(body.body_id) && !humanEvidenceStates.includes(body.state) ? 'Gemela de control' : 'Completo' })),
     ...snapshot.national.map((body) => ({ body, mode: 'Barrido nacional' })),
-  ].filter((row) => (!state || row.body.state === state) && (!mode || row.mode === mode) &&
-    searchKey(row.body.name).includes(query) &&
-    (!Number(minimum) || row.body.trend.change_pct <= -Math.abs(Number(minimum))))
+  ].filter((row) => (!mode || row.mode === mode) && searchKey(row.body.name).includes(query) &&
+    (!Number(minimum) || row.body.trend.change_pct <= -Math.abs(Number(minimum))));
+  const summary = stateList.map((item) => ({ state: item, count: base.filter((row) => row.body.state === item).length })).filter((item) => item.count);
+  const rows = base.filter((row) => !state || row.body.state === state)
     .sort((a, b) => stateList.indexOf(a.body.state) - stateList.indexOf(b.body.state) || a.body.trend.change_pct - b.body.trend.change_pct)
     .map(({ body, mode }) => {
       const fire = fires.get(body.body_id);
@@ -276,8 +278,11 @@ function Monitor({ snapshot, weekly, method, openDetails }: { snapshot: Snapshot
       return {
         body, mode, share, suspect: firstSuspect(body),
         fire: fire ? `${fire.alerta ? 'Alerta · ' : ''}${Object.entries(fire.areas).map(([area, a]) => `${area}: ${a.focos}`).join(' · ')}` : '',
+        fireCount: fire ? Math.max(...Object.values(fire.areas).map((a) => a.focos)) : null, fireAlert: Boolean(fire?.alerta),
       };
     });
+  const maxArea = Math.max(1, ...rows.map(({ body }) => body.ha ?? body.baseline_mean_ha ?? 0));
+  const qualityColor = (level?: string) => /alta|buena|elegible/i.test(level ?? '') ? 'var(--ok)' : /media/i.test(level ?? '') ? 'var(--amber)' : /baja|poca/i.test(level ?? '') ? 'var(--danger)' : '#7f9aa0';
 
   return <>
     <div className="toolbar panel" id="filtros-monitoreo" tabIndex={-1}>
@@ -299,18 +304,47 @@ function Monitor({ snapshot, weekly, method, openDetails }: { snapshot: Snapshot
         'Superficie (ha)': body.ha ?? body.baseline_mean_ha ?? null, Latitud: body.lat, Longitud: body.lon,
       })))}><Download size={16} aria-hidden="true" /> Descargar CSV</button>
     </div>
-    {!!rows.length && <div className="table-wrap"><table>
-      <thead><tr>{['Cuerpo de agua', 'Estado', 'Análisis', 'Cambio', 'Confianza', 'Clima explica', 'Sospechoso principal',
-        'Calidad', 'Incendios 7 días', 'Superficie (ha)'].map((label) => <th scope="col" key={label}>{label}</th>)}</tr></thead>
-      <tbody>{rows.map(({ body, mode, share, fire, suspect }) => <tr key={body.body_id}>
-        <td>{mode === 'Barrido nacional' ? body.name : <button className="table-link" type="button" onClick={() => openDetails(body.body_id)}>
-          {body.name}<ArrowUpRight size={14} aria-hidden="true" /></button>}</td><td><Status state={body.state} /></td>
-        <td>{mode}</td><td>{signed(body.trend.change_pct)}%</td><td>{body.confidence} · {body.n_pass}/3</td>
-        <td>{share == null ? '—' : `${share}%`}</td><td>{suspect?.label ?? '—'}{suspect?.evidence && <small>{suspect.evidence}</small>}</td>
-        <td>{body.data_quality?.level ?? (body.quality ? (body.quality.eligible ? 'Elegible' : 'Poca calidad') : '—')}</td>
-        <td>{fire || '—'}</td><td>{number(body.ha ?? body.baseline_mean_ha ?? 0)}</td>
-      </tr>)}</tbody>
+    {!!summary.length && <section className="panel monitor-summary" aria-label="Resumen por diagnóstico">
+      <header><h2>Distribución por diagnóstico</h2><span className="muted">Haz clic en un color para filtrar la tabla</span></header>
+      <div className="state-stack" data-filtered={state ? '' : undefined}>
+        {summary.map(({ state: item, count }) => <button key={item} type="button" aria-pressed={state === item}
+          aria-label={`${states[item].label}: ${count}`} title={`${states[item].label}: ${count}`}
+          style={{ flexGrow: count, background: `rgb(${states[item].rgb.join(',')})`, '--seg': `rgb(${states[item].rgb.join(',')})` } as CSSProperties}
+          onClick={() => setState(state === item ? '' : item)} />)}
+      </div>
+      <div className="state-chips">{summary.map(({ state: item, count }) => <button key={item} type="button" aria-pressed={state === item}
+        onClick={() => setState(state === item ? '' : item)}><i style={{ background: `rgb(${states[item].rgb.join(',')})` }} />{states[item].label} <b>{count}</b></button>)}</div>
+    </section>}
+    {!!rows.length && <div className="table-wrap"><table className="monitor-table">
+      <thead><tr>{['Cuerpo de agua', 'Estado', 'Cambio de superficie', 'Pruebas · confianza', 'Explica el clima', 'Sospechoso principal',
+        'Calidad', 'Incendios 7 días', 'Superficie (ha)', 'Análisis'].map((label) => <th scope="col" key={label}>{label}</th>)}</tr></thead>
+      <tbody>{rows.slice(0, limit).map(({ body, mode, share, fire, fireCount, fireAlert, suspect }) => {
+        const change = body.trend.change_pct;
+        const width = Math.min(50, Math.abs(change) / 100 * 50);
+        const area = body.ha ?? body.baseline_mean_ha ?? 0;
+        const quality = body.data_quality?.level ?? (body.quality ? (body.quality.eligible ? 'Elegible' : 'Poca calidad') : '');
+        return <tr key={body.body_id}>
+          <td>{mode === 'Barrido nacional' ? body.name : <button className="table-link" type="button" onClick={() => openDetails(body.body_id)}>
+            {body.name}<ArrowUpRight size={14} aria-hidden="true" /></button>}</td>
+          <td><Status state={body.state} /></td>
+          <td><span className="change-cell"><span style={{ color: change < 0 ? 'var(--danger)' : 'var(--accent-blue)' }}>{signed(change)} %</span>
+            <span className="change-track" aria-hidden="true"><i style={{ width: `${width}%`, [change < 0 ? 'right' : 'left']: '50%',
+              background: change < 0 ? 'var(--danger)' : 'var(--accent-blue)' }} /></span></span></td>
+          <td><span className="pips" aria-label={`${body.n_pass} de 3 pruebas`}>{[0, 1, 2].map((index) => <i key={index} className={index < body.n_pass ? 'on' : undefined} />)}</span>{body.confidence}</td>
+          <td>{share == null ? <span className="cell-empty">—</span> : <span className="meter"><b>{share} %</b><span aria-hidden="true"><i style={{ width: `${Math.max(0, Math.min(100, share))}%` }} /></span></span>}</td>
+          <td>{suspect?.label ?? '—'}{suspect?.evidence && <small>{suspect.evidence}</small>}</td>
+          <td>{quality ? <span className="quality-dot" style={{ '--q': qualityColor(quality) } as CSSProperties}>{quality}</span> : '—'}</td>
+          <td>{fire ? <span className={fireAlert ? 'fire-badge alert' : 'fire-badge'} title={fire}><Flame size={13} aria-hidden="true" />{fireAlert ? 'Alerta · ' : ''}{fireCount} focos</span> : <span className="cell-empty">—</span>}</td>
+          <td><span className="area-cell">{number(area)}<i aria-hidden="true" style={{ width: `${Math.max(3, Math.sqrt(area / maxArea) * 100)}%` }} /></span></td>
+          <td className="muted">{mode}</td>
+        </tr>;
+      })}</tbody>
     </table></div>}
+    {rows.length > limit && <div className="table-more">
+      <span className="muted">Mostrando {limit} de {rows.length}</span>
+      <button type="button" onClick={() => setLimit((value) => value + 30)}>Mostrar 30 más</button>
+      <button type="button" onClick={() => setLimit(rows.length)}>Mostrar todos</button>
+    </div>}
   </>;
 }
 

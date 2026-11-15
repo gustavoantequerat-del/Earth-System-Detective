@@ -7,6 +7,7 @@ import { ColumnLayer, PolygonLayer, ScatterplotLayer, TextLayer } from '@deck.gl
 import { Box, CalendarDays, CircleHelp, Map as MapIcon, Minus, Plus, RotateCcw } from 'lucide-react';
 import { api, number, signed } from './data';
 import { FireTimeline, type FireFrame } from './fire-timeline';
+import { accentRgb, extrudedMaterial, sceneLighting } from './map-effects';
 
 type Coordinates = [longitude: number, latitude: number];
 type Archive = {
@@ -188,11 +189,14 @@ function FireArchive({ archive }: { archive: Archive }) {
   const layers = [
     new PolygonLayer<Position[]>({ id: 'bolivia-fire-boundary', data: archive.boundary.map((ring) =>
       ring.map(([lon, lat]) => [lon, lat, flat ? 0 : -16000] as Position)), getPolygon: (ring) => ring,
-      extruded: !flat, getElevation: 13500, getFillColor: [45, 75, 117], getLineColor: [130, 163, 212], lineWidthMinPixels: 1.4 }),
+      extruded: !flat, getElevation: 13500, getFillColor: [24, 60, 68], getLineColor: [104, 186, 196], lineWidthMinPixels: 1.4, material: extrudedMaterial }),
     new PolygonLayer<Coordinates[]>({ id: 'bolivia-fire-border', data: archive.boundary, getPolygon: (ring) => ring,
-      filled: false, getLineColor: [130, 163, 212], lineWidthMinPixels: 1.2 }),
+      filled: false, getLineColor: [95, 224, 200, 60], lineWidthMinPixels: 7 }),
+    new PolygonLayer<Coordinates[]>({ id: 'bolivia-fire-border-line', data: archive.boundary, getPolygon: (ring) => ring,
+      filled: false, getLineColor: [150, 228, 214], lineWidthMinPixels: 1.4 }),
     new ColumnLayer<typeof cells[number]>({ id: 'fire-grid', data: cells, getPosition: (cell) => cell.position,
-      radius: 8800, diskResolution: 4, angle: 45, extruded: !flat, pickable: true, autoHighlight: true,
+      radius: 8800, diskResolution: 4, angle: 45, extruded: !flat, pickable: true, autoHighlight: true, material: extrudedMaterial,
+      highlightColor: [255, 255, 255, 90],
       getElevation: (cell) => elevation(cell.score),
       getFillColor: (cell) => heatColor(cell.score, maximum),
       updateTriggers: { getElevation: [maximum, height], getFillColor: [maximum] },
@@ -200,10 +204,10 @@ function FireArchive({ archive }: { archive: Archive }) {
       onClick: ({ object }) => { if (object?.score) setPicked(object.index); } }),
     new ScatterplotLayer<typeof cells[number]>({ id: 'selected-fire-zone', data: active ? [active] : [],
       getPosition: (cell) => [cell.position[0], cell.position[1], flat ? 0 : elevation(cell.score)],
-      radiusUnits: 'pixels', getRadius: 15, getLineColor: [240, 255, 154], filled: false, stroked: true, lineWidthMinPixels: 2.5,
+      radiusUnits: 'pixels', getRadius: 15, getLineColor: accentRgb, filled: false, stroked: true, lineWidthMinPixels: 2.5,
       parameters: { depthCompare: 'always', depthWriteEnabled: false } }),
     new TextLayer({ id: 'fire-place-names', data: cities, getPosition: (city) => city.position, getText: (city) => city.name,
-      getSize: 12, getColor: [239, 247, 255], background: true, getBackgroundColor: [8, 18, 38, 223],
+      getSize: 12, getColor: [236, 248, 246], background: true, getBackgroundColor: [6, 24, 28, 225],
       backgroundPadding: [4, 2], billboard: true, characterSet: 'auto',
       parameters: { depthCompare: 'always', depthWriteEnabled: false } }),
   ];
@@ -254,7 +258,7 @@ function FireArchive({ archive }: { archive: Archive }) {
         setSpeed={setSpeed} setHeight={setHeight} flat={flat} maximum={maximum} comparison={comparison} unit={scaleUnit} />
     <div className="fire-map-stage">
       {unavailable ? <p className="map-notice" role="status">El mapa interactivo necesita WebGL. Los datos del periodo están debajo.</p>
-        : <DeckGL initialViewState={view} controller={{ scrollZoom: false, dragRotate: !flat, touchRotate: !flat }} layers={layers}
+        : <DeckGL initialViewState={view} controller={{ scrollZoom: false, dragRotate: !flat, touchRotate: !flat }} layers={layers} effects={[sceneLighting]}
           onViewStateChange={({ viewState }) => { camera.current = viewState as MapViewState; }}
           onError={(error) => { if (/context|webgl|device/i.test(error.message)) setUnavailable(true); }}
           getTooltip={({ object }) => object?.score ? { text: `${periodLabel}\n${shownValue(object)}\n${number(Math.abs(object.position[1]), 2)}° S · ${number(Math.abs(object.position[0]), 2)}° O`,

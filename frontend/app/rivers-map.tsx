@@ -11,7 +11,7 @@ import { escapeHtml, kindColors, waterTone } from './rivers-palette';
 const esri = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 const view = { longitude: -67.95, latitude: -17.75, zoom: 7.1, pitch: 0, bearing: 0 };
 const lakes = [
-  { name: 'Lago Titicaca (Menor)', position: [-68.85, -16.4] as [number, number] },
+  { name: 'Lago Titicaca (Huiñaimarca)', position: [-68.85, -16.4] as [number, number] },
   { name: 'Uru Uru', position: [-67.12, -18.07] as [number, number] },
   { name: 'Poopó', position: [-67.05, -18.85] as [number, number] },
 ];
@@ -68,7 +68,7 @@ export default function RiversMap({ data, lakeReaches, selected, onSelect, kinds
     const object = info.object as Path | Point | undefined;
     if (!object) return setHover(null);
     const html = 'path' in object
-      ? `<b>${object.reach} · ${escapeHtml(object.name)}</b><br/>Agua en el cauce: ${object.pct == null ? 'sin dato' : `${object.pct > 0 ? '+' : ''}${number(object.pct)} %`}<br/><small>Clic para ver el tramo</small>`
+      ? `<b>${object.reach} · ${escapeHtml(object.name)}</b><br/>Superficie de agua en el cauce: ${object.pct == null ? 'sin dato' : `${object.pct > 0 ? '+' : ''}${number(object.pct)} %`}<br/><small>Clic para ver el detalle del tramo</small>`
       : `<b>${escapeHtml(object.name || object.kind)}</b><br/>${escapeHtml(object.kind)}${object.dist_river_km != null ? ` · a ${number(object.dist_river_km, 1)} km del río` : ''}`;
     setHover({ x: info.x, y: info.y, html });
   }
