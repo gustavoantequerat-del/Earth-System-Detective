@@ -25,6 +25,7 @@ STATES = {  # color e icono Lucide de cada estado
     "Huella humana": {"color": "#ff7a7a", "icon": "footprints"},
     "Alerta temprana": {"color": "#c4a1ff", "icon": "siren"},
     "Incalculable": {"color": "#ffd166", "icon": "circle-help"},
+    "Aguas arriba": {"color": "#60a5fa", "icon": "waves"},
     "Causa climatica": {"color": "#ffa26b", "icon": "cloud-sun-rain"},
     "Intacto": {"color": "#5ee6a8", "icon": "shield-check"},
 }
@@ -34,6 +35,8 @@ ACTION = {
     "Alerta temprana": "Actuar ya, cuando proteger todavia es barato.",
     "Incalculable": "Revisar: el agua cae, pero con los datos disponibles no se puede calcular la causa con "
                     "confianza. Los motivos explican que falta.",
+    "Aguas arriba": "Mirar la fuente: le llega menos agua por el rio. Cuidar el rio y la laguna que la alimenta, "
+                    "y controlar lo que se saca en el camino.",
     "Causa climatica": "Adaptarse: cosecha de agua, reservorios y planes de sequia.",
     "Intacto": "Seguimiento.",
 }

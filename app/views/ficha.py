@@ -36,9 +36,17 @@ def render(options: list[str], by_id: dict) -> None:
                        format_func=lambda i: f"{by_id[i]['name']} · {by_id[i]['state']}")
     r = by_id[sel]
     _header(r)
+    _explain(r)
+    _pdf_button(r)
+    from views import rio
+    has_rio = rio.available(sel)
+    names, icons_ = TABS + (["El rio"] if has_rio else []), TAB_ICONS + (["waves"] if has_rio else [])
     ui.md(ic.css_rules([(f'[data-testid="stTabs"] [role="tab"]:nth-of-type({i + 1}) [data-testid="stMarkdownContainer"] p',
-                         n, th.ACCENT_2, 16) for i, n in enumerate(TAB_ICONS)]))
-    tabs = st.tabs(TABS)
+                         n, th.ACCENT_2, 16) for i, n in enumerate(icons_)]))
+    tabs = st.tabs(names)
+    if has_rio:
+        with tabs[6]:
+            rio.render(sel)
     with tabs[0]:
         _before_after(sel, r)
     with tabs[1]:
@@ -71,18 +79,79 @@ def _header(r: dict) -> None:
                   f"<b style='color:{color};font-size:1.4rem'>{r['trend']['change_pct']:+.0f}%</b></div>"
                   + ui.sparkline(r["observed"], color, height=70))
             chips = [ui.chip(f"Tendencia {r['trend']['sen_ha_per_year']:+,.0f} ha/ano", "trending-down")]
-            if top:
+            if r.get("upstream_source"):
+                chips.append(ui.chip(f"Fuente: {r['upstream_source']['name'].split(' (')[0]}", "waves", "#60a5fa"))
+            elif top:
                 chips.append(ui.chip(top["label"], "search"))
             q = r.get("data_quality") or {}
             if q.get("r_jrc") is not None:
                 chips.append(ui.chip(f"Calidad {q['level']} (r={q['r_jrc']:.2f})", "gauge"))
             if data.share_pct(r) is not None:
-                chips.append(ui.chip(f"Clima explica {data.share_pct(r)}%", "cloud-sun-rain"))
+                chips.append(ui.chip(("Fuente y clima explican" if r.get("upstream_source") else "Clima explica")
+                                     + f" {data.share_pct(r)}%", "cloud-sun-rain"))
+            rb = r.get("robustness")
+            if rb:
+                chips.append(ui.chip(f"Robustez {rb['agree']}/{rb['of']} memorias", "gauge",
+                                     "#5ee6a8" if rb["agree"] >= 5 else "#ffd166"))
+            prot = data.protection(r["body_id"])
+            if prot["ramsar"]:
+                chips.append(ui.chip(f"Sitio Ramsar: {prot['ramsar']}", "shield-check", "#5ee6a8"))
+            elif prot["areas"]:
+                chips.append(ui.chip(f"Area protegida: {prot['areas'][0].split(' (')[0]}", "shield-check", "#5ee6a8"))
             ui.md("".join(chips))
         if r.get("why"):
             title = "Por que es incalculable" if r["state"] == "Incalculable" else "Lo que hay que saber"
             ui.md(f"<div class='why'><div class='h' style='margin:0'>{ic.svg('triangle-alert', '#ffd166', 18, 2.4)}"
                   f"{title}</div><ul>" + "".join(f"<li>{w}</li>" for w in r["why"]) + "</ul></div>")
+
+
+def _explain(r: dict) -> None:
+    """Explicacion en lenguaje sencillo (Claude si hay clave; si no, plantilla con los mismos datos)."""
+    import ai
+    with st.expander("Explicamelo facil", icon=":material/record_voice_over:"):
+        lang = st.segmented_control("Idioma", list(ai.LANGS), default="Espanol", key=f"lang_{r['body_id']}",
+                                    label_visibility="collapsed") or "Espanol"
+        key = f"exp_{r['body_id']}_{lang}"
+        if ai.available():
+            if key not in st.session_state and st.button("Explicar con IA", type="primary", key=f"b_{key}"):
+                st.session_state[key] = st.write_stream(ai.stream(
+                    "Explica a una persona sin estudios tecnicos que le esta pasando a esta laguna, por que, que tan "
+                    "seguro esta el detector y que se puede hacer.", ai.body_context(r), lang))
+            elif key in st.session_state:
+                st.markdown(st.session_state[key])
+            if key in st.session_state:
+                ai.speak_button(st.session_state[key], lang)
+                st.caption("Generado por IA (Claude) a partir de los datos de esta ficha. Puede equivocarse.")
+        else:
+            txt = ai.plain_summary(r)
+            st.markdown(txt)
+            ai.speak_button(txt)
+            st.caption("Explicacion armada con los datos. Con una clave de Anthropic se activa la explicacion con IA "
+                       "en espanol, quechua, aymara o ingles.")
+
+
+@st.cache_data(show_spinner=False)
+def _pdf(body_id: str, results_mtime: float) -> bytes:
+    import report
+    r = next(x for x in data.results() if x["body_id"] == body_id)
+    return report.build(r, data.protection(body_id), data.CTX, data.IMG, data.context_meta(body_id),
+                        data.fires_for(body_id), th.ACTION[r["state"]])
+
+
+def _pdf_button(r: dict) -> None:
+    c1, c2 = st.columns([1, 3])
+    with c1:
+        if st.button("Preparar ficha PDF", width="stretch", key=f"pdfprep_{r['body_id']}"):
+            st.session_state[f"pdf_{r['body_id']}"] = True
+    with c2:
+        if st.session_state.get(f"pdf_{r['body_id']}"):
+            with st.spinner("Armando el PDF..."):
+                pdf = _pdf(r["body_id"], data._mtime(data.DATA / "results.json"))
+            st.download_button("Descargar ficha PDF", pdf, file_name=f"ficha_{r['body_id']}.pdf",
+                               mime="application/pdf", type="primary", key=f"pdfdl_{r['body_id']}")
+        else:
+            ui.md("<div class='muted' style='padding-top:8px'>Una pagina para llevar a la reunion: veredicto, pruebas, "
+                  "sospechosos, proteccion legal, antes y despues, y fuentes.</div>")
 
 
 def _before_after(sel: str, r: dict) -> None:
@@ -143,6 +212,7 @@ def _climate(r: dict) -> None:
     with g2, st.container(border=True):
         ui.md(ui.heading("chart-column", "De donde viene el cambio", 3))
         color = {"Lluvia menos evaporacion": "#ffa26b", "El Nino": "#ffd166", "Huella humana": "#ff7a7a",
+             "Menos agua desde aguas arriba": "#60a5fa",
                  "Incalculable": "#8b93b8"}
         items = [(k, v, color.get(k, th.MUTED)) for k, v in r["decomposition_ha"].items()]
         m = max((abs(v) for _, v, _ in items), default=1)

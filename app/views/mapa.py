@@ -21,15 +21,19 @@ def _zguess(lat: float, lon: float) -> int:
 def _layers_menu(national: list[dict], art: dict | None):
     live_ok = map3d.ee_ready()
     with st.popover("Capas del mapa", width="content"):
-        modes = (["Agua natural y artificial", "Landsat + agua"] if live_ok else []) + ["Satelite actual"]
-        mode = st.radio("Fondo sobre el relieve 3D", modes)
-        year = st.slider("Ano", 1985, 2025, 2024, disabled=mode == "Satelite actual")
+        view3d = st.segmented_control("Vista", ["3D con relieve", "2D rapido"], default="3D con relieve",
+                                      key="map_dim") != "2D rapido"
+        modes = (["Agua natural y artificial", "Imagen mas reciente (Sentinel-2)", "Landsat + agua"]
+                 if live_ok else []) + ["Satelite (Esri)"]
+        mode = st.radio("Fondo", modes, disabled=not view3d,
+                        help="En 2D se usa un mapa base oscuro liviano, ideal para celular.")
+        year = st.slider("Ano", 1985, 2025, 2024, disabled=not view3d or not mode.startswith(("Agua", "Landsat")))
         fires = st.toggle("Focos de calor NASA FIRMS (7 dias)", False, disabled=not live_ok, key="chk_fires")
         show_art = st.toggle("Puntos de agua artificial", art is not None, disabled=art is None, key="chk_art")
         show_nat = st.toggle(f"Barrido nacional ({len(national)})", bool(national), disabled=not national, key="chk_nat")
         if not live_ok:
             st.caption("Earth Engine no esta autenticado: solo la imagen satelital de fondo.")
-    return mode, year, fires, show_art, show_nat
+    return mode, year, fires, show_art, show_nat, view3d
 
 
 def render(visible: list[dict], by_id: dict, national: list[dict]) -> None:
@@ -38,12 +42,12 @@ def render(visible: list[dict], by_id: dict, national: list[dict]) -> None:
     with head:
         ui.md(ui.heading("map", "Mapa de alertas"))
     with menu:
-        mode, year, fires, show_art, show_nat = _layers_menu(national, art)
+        mode, year, fires, show_art, show_nat, view3d = _layers_menu(national, art)
 
     texture = map3d.ESRI
-    if mode != "Satelite actual":
-        with st.spinner(f"Generando la capa {year} en Earth Engine..."):
-            kind = "agua" if mode.startswith("Agua") else "landsat"
+    if view3d and mode != "Satelite (Esri)":
+        kind = "agua" if mode.startswith("Agua") else "reciente" if mode.startswith("Imagen") else "landsat"
+        with st.spinner("Generando la capa en Earth Engine..."):
             texture = map3d.live_texture(year, kind, fires, datetime.date.today().isoformat()) or map3d.ESRI
 
     rows = [{"body_id": r["body_id"], "name": r["name"], "label": r["name"].split(" (")[0], "lat": r["lat"],
@@ -63,7 +67,8 @@ def render(visible: list[dict], by_id: dict, national: list[dict]) -> None:
                              "z": _zguess(a["lat"], a["lon"]), "r": r_m, "r_glow": r_m * 4})
 
     current = by_id.get(st.session_state.sel)
-    deck = map3d.build_deck(rows, current, texture, data.places(st.session_state.sel), nat_rows, art_rows)
+    deck = map3d.build_deck(rows, current, texture, data.places(st.session_state.sel), nat_rows, art_rows,
+                            mode3d=view3d)
     event = st.pydeck_chart(deck, on_select="rerun", selection_mode="single-object", key="map3d", height=640)
     picked = (event.selection.get("objects", {}) or {}).get("cuerpos") if event else None
     if picked and picked[0]["body_id"] != st.session_state.sel:

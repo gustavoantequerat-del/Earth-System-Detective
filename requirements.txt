@@ -7,3 +7,5 @@ pydeck
 altair
 earthengine-api
 pillow
+fpdf2
+anthropic

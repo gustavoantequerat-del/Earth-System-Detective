@@ -3,14 +3,19 @@ from __future__ import annotations
 
 import streamlit as st
 
-VIEWS = ["Panorama", "Mapa", "Monitoreo", "Ficha", "Vigilancia"]
-ICONS = ["layout-dashboard", "map", "list", "scan-search", "flame"]
+VIEWS = ["Panorama", "Mapa", "Cerca de mi", "Pregunta", "Monitoreo", "Ficha", "Vigilancia", "Verificacion"]
+ICONS = ["layout-dashboard", "map", "crosshair", "search", "list", "scan-search", "flame", "shield-check"]
+ALIASES = {"cerca": "Cerca de mi", "verificacion": "Verificacion", "pregunta": "Pregunta", "mapa": "Mapa", "ficha": "Ficha",
+           "monitoreo": "Monitoreo", "vigilancia": "Vigilancia", "panorama": "Panorama"}
 
 
 def init() -> None:
     if "goto" in st.session_state:  # pedido de cambio de vista desde un boton
         st.session_state.nav = st.session_state.pop("goto")
-    st.session_state.setdefault("nav", VIEWS[0])
+    if "nav" not in st.session_state:  # enlace directo: ?vista=cerca, ?vista=ficha&laguna=concepcion
+        st.session_state.nav = ALIASES.get(st.query_params.get("vista", "").lower(), VIEWS[0])
+        if st.query_params.get("laguna"):
+            st.session_state.sel = st.query_params["laguna"]
     st.session_state.setdefault("sel", None)
 
 

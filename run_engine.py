@@ -23,13 +23,19 @@ if src.name == "sample" and not (src / "series.csv").exists():
 
 bodies = pd.read_csv(src / "bodies.csv", dtype={"control_id": str}).fillna({"control_id": ""})
 if (src / "basins.csv").exists():  # que cuerpos de agua reciben agua por rio de otro de la lista
-    up = pd.read_csv(src / "basins.csv", dtype={"upstream_bodies": str}).fillna("")[["body_id", "upstream_bodies"]]
+    up = pd.read_csv(src / "basins.csv", dtype={"upstream_bodies": str}).fillna("")[["body_id", "upstream_bodies", "upstream_km2"]]
     bodies = bodies.merge(up, on="body_id", how="left").fillna({"upstream_bodies": ""})
 series = pd.read_csv(src / "series.csv")
 suspects = pd.read_csv(src / "suspects.csv") if (src / "suspects.csv").exists() else \
     pd.DataFrame(columns=["body_id", "year", "suspect", "value"])
 
-results = engine.run(bodies, series, suspects, baseline_end)
+inflow = {}
+if (src / "rio_tramos.csv").exists():  # agua medida en el rio antes de la laguna (uma/rivers.py)
+    from uma.rivers import RIVER_INFLOW
+    rt = pd.read_csv(src / "rio_tramos.csv")
+    w = rt[rt["var"] == "water_ha"].pivot(index="year", columns="reach", values="value")
+    inflow = {b: (label, w[reach]) for b, (reach, label) in RIVER_INFLOW.items() if reach in w}
+results = engine.run_ensemble(bodies, series, suspects, baseline_end, inflow)
 (src / "results.json").write_text(json.dumps(results, indent=1, ensure_ascii=False), encoding="utf-8")
 
 from uma import audit

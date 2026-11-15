@@ -43,6 +43,16 @@ def elevation(lat: float, lon: float, z: int = 10) -> float:
 _EE_OK: bool | None = None
 
 
+def _service_account() -> dict | None:
+    try:
+        import streamlit as st
+        if "gee_service_account" in st.secrets:
+            return dict(st.secrets["gee_service_account"])
+    except Exception:  # sin archivo de secretos
+        pass
+    return None
+
+
 def ee_ready() -> bool:
     global _EE_OK
     if _EE_OK is None:
@@ -52,7 +62,12 @@ def ee_ready() -> bool:
             cfg = Path(__file__).resolve().parent.parent / "config" / "settings.json"
             project = os.environ.get("UMA_GEE_PROJECT") or (
                 json.loads(cfg.read_text(encoding="utf-8")).get("gee_project") if cfg.exists() else None)
-            ee.Initialize(project=project)
+            key = _service_account()
+            if key:  # publicacion web: cuenta de servicio guardada en los secretos de Streamlit
+                creds = ee.ServiceAccountCredentials(key["client_email"], key_data=json.dumps(key))
+                ee.Initialize(creds, project=project or key.get("project_id"))
+            else:    # computadora con `earthengine authenticate`
+                ee.Initialize(project=project)
             ee.Number(1).getInfo()  # confirma que la conexion funciona
             _EE_OK = True
         except Exception:
@@ -66,8 +81,24 @@ NATURAL_RGB = [30, 64, 175]
 ARTIFICIAL_RGB = [34, 229, 255]
 
 
-@lru_cache(maxsize=64)
+_TILE_CACHE: dict = {}
+TILE_TTL_S = 2 * 3600
+
+
 def live_texture(year: int, mode: str = "landsat", fires: bool = False, day: str = "") -> str | None:
+    """Direccion de teselas de Earth Engine, guardada 2 horas (las direcciones expiran despues)."""
+    import time
+    key = (year, mode, fires, day)
+    hit = _TILE_CACHE.get(key)
+    if hit and time.time() - hit[0] < TILE_TTL_S:
+        return hit[1]
+    url = _live_texture(year, mode, fires, day)
+    if url:
+        _TILE_CACHE[key] = (time.time(), url)
+    return url
+
+
+def _live_texture(year: int, mode: str = "landsat", fires: bool = False, day: str = "") -> str | None:
     """Teselas de Earth Engine para pintar sobre el relieve.
 
     mode "agua": relieve sombreado (NASADEM) con el agua de MapBiomas Agua del ano: natural en azul oscuro,
@@ -80,6 +111,19 @@ def live_texture(year: int, mode: str = "landsat", fires: bool = False, day: str
     import ee
     from uma.gee_extract import MB_WATER, landsat_dry, landsat_vis
     bolivia = ee.Geometry.Rectangle([-70.5, -23.5, -57.0, -9.5])
+    if mode == "reciente":
+        end = ee.Date(day) if day else ee.Date(0)
+
+        def clear(i):  # quita nubes, sombras y cirros con la clasificacion de escena de Sentinel-2
+            scl = i.select("SCL")
+            return i.updateMask(scl.neq(3).And(scl.neq(8)).And(scl.neq(9)).And(scl.neq(10)))
+        s2 = (ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED").filterBounds(bolivia)
+              .filterDate(end.advance(-90, "day"), end.advance(1, "day"))
+              .filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 40)).map(clear).median())
+        img = s2.select(["B4", "B3", "B2"]).visualize(min=0, max=3000, gamma=1.2)
+        country = (ee.FeatureCollection("FAO/GAUL/2015/level0").filter(ee.Filter.eq("ADM0_NAME", "Bolivia"))
+                   .geometry().simplify(2000).buffer(15000))
+        return img.clip(country).getMapId()["tile_fetcher"].url_format
     if mode == "agua":
         dem = ee.Image("NASA/NASADEM_HGT/001").select("elevation")
         img = ee.Terrain.hillshade(dem).visualize(min=60, max=255, palette=["1b1f24", "8a929c"])
@@ -102,16 +146,27 @@ def live_texture(year: int, mode: str = "landsat", fires: bool = False, day: str
 
 
 # ------------------------------------------------------------------ deck
-def build_deck(rows: list[dict], selected: dict | None, texture: str, places: list | None = None,
-               national: list | None = None, artificial: list | None = None, height_scale: float = 1.0) -> pdk.Deck:
+CARTO_DARK_STYLE = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
+
+
+def build_deck(rows: list[dict], selected: dict | None, texture: str | None, places: list | None = None,
+               national: list | None = None, artificial: list | None = None, height_scale: float = 1.0,
+               mode3d: bool = True) -> pdk.Deck:
     """rows: dicts con name, lat, lon, state, color, change, loss (perdida %, >= 0)."""
     for r in rows:
-        r["z"] = elevation(round(r["lat"], 3), round(r["lon"], 3))
+        r["z"] = elevation(round(r["lat"], 3), round(r["lon"], 3)) if mode3d else 0
         r["halo"] = list(r["color"]) + [70]
         r["label"] = plain(r.get("label", r["name"]))
-    terrain = pdk.Layer("TerrainLayer", id="relieve", elevation_decoder=DECODER, elevation_data=TERRAIN,
-                        texture=texture, max_zoom=13, strategy="no-overlap")
-    layers = [terrain]
+    if not mode3d:  # 2D: todo al nivel del suelo, sin descargar relieve
+        for r in rows:
+            r["z"] = 0
+        for coll in (national or [], artificial or []):
+            for x in coll:
+                x["z"] = 0
+    layers = []
+    if mode3d:
+        layers.append(pdk.Layer("TerrainLayer", id="relieve", elevation_decoder=DECODER, elevation_data=TERRAIN,
+                                texture=texture, max_zoom=13, strategy="no-overlap", mesh_max_error=6))
     if artificial:  # agua artificial de todo el pais: brillo + punto, en celeste neon
         layers.append(pdk.Layer("ScatterplotLayer", id="artificial_brillo", data=artificial,
                                 get_position="[lon, lat, z]", get_fill_color=ARTIFICIAL_RGB + [60],
@@ -147,11 +202,13 @@ def build_deck(rows: list[dict], selected: dict | None, texture: str, places: li
         layers.append(pdk.Layer("TextLayer", id="nombres", data=[x for x in pts if x["name"] != "(sin nombre)"],
                                 get_position="[lon, lat, z]", get_text="name", get_size=13, get_color=[255, 255, 255],
                                 get_pixel_offset=[0, -16], background=True, get_background_color=[0, 0, 0, 170]))
+    pitch = (60 if selected else 40) if mode3d else 0
     if selected:
-        view = pdk.ViewState(latitude=selected["lat"], longitude=selected["lon"], zoom=9.3, pitch=60, bearing=-20)
+        view = pdk.ViewState(latitude=selected["lat"], longitude=selected["lon"], zoom=9.3, pitch=pitch,
+                             bearing=-20 if mode3d else 0)
     else:
-        view = pdk.ViewState(latitude=-16.6, longitude=-64.6, zoom=5.4, pitch=40, bearing=0)
-    return pdk.Deck(layers=layers, initial_view_state=view, map_style=None,
+        view = pdk.ViewState(latitude=-16.6, longitude=-64.6, zoom=5.4, pitch=pitch, bearing=0)
+    return pdk.Deck(layers=layers, initial_view_state=view, map_style=None if mode3d else CARTO_DARK_STYLE,
                     tooltip={"html": "<b>{name}</b><br/>{state} · {change}",
                              "style": {"backgroundColor": "#111", "color": "white", "fontSize": "14px"}})
 

@@ -212,3 +212,61 @@ casi seca en 1994-1996. Como las dos fuentes de lluvia discrepan, `uma/climate_b
 
 Reglas de evidencia de los sospechosos: un sospechoso medido en hectáreas tiene que crecer al menos el 10% del agua
 perdida (si no, queda como débil), y "antecede la caída" si ya había crecido 1.5 veces alrededor del quiebre del agua.
+
+## Publicar en la web (Streamlit Community Cloud, gratis)
+
+1. Entrar a https://share.streamlit.io con la cuenta de GitHub y elegir **Create app**.
+2. Repositorio `gustavoantequerat-del/Earth-System-Detective`, rama `main`, archivo principal `app/app.py`.
+3. En **Advanced settings** elegir Python 3.13 y, si se quiere, pegar los secretos de
+   `.streamlit/secrets.toml.example` (Telegram y la cuenta de servicio de Earth Engine).
+4. **Deploy**. La app lee los resultados ya calculados de `data/real` y `data/national`, así que funciona sin
+   Earth Engine; con la cuenta de servicio se activan las capas en vivo (agua por año, Sentinel-2 reciente, FIRMS).
+
+Enlaces directos para compartir: `?vista=cerca` (fuentes de agua cercanas a quien abre el enlace),
+`?vista=ficha&laguna=concepcion`, `?vista=verificacion`, `?vista=mapa`.
+
+## Novedades para el impacto
+
+- **Cerca de mí**: con la ubicación del navegador o un lugar escrito, lista las fuentes de agua del radio elegido,
+  de la más grave a la menos, con alertas de incendio, agua artificial y protección legal.
+- **Ficha PDF** por laguna: veredicto, motivos, las tres pruebas, sospechosos, protección legal, antes y después
+  y fuentes (`app/report.py`).
+- **Ramsar y áreas protegidas** (`uma/protected.py`, WDPA): 6 de los 8 cuerpos de agua analizados y 66 de las 300
+  lagunas del barrido nacional están en sitios Ramsar.
+- **Telegram**: botón de alerta de prueba en Vigilancia.
+- **Cómo lo verificamos**: datos contra fuentes independientes, veredictos contra estudios y prensa, límites del
+  método y corridas auditadas.
+- **Mapa**: modo 2D liviano para celular, imagen Sentinel-2 de los últimos 90 días y caché de capas de 2 horas.
+
+## Aguas arriba y el rio por tramos (`uma/rivers.py`)
+
+El Poopo y Uru Uru no viven de su lluvia: se llenan con el agua que baja del Titicaca por el Desaguadero. Con la
+lluvia local el modelo de clima del Poopo no era significativo (p = 0.30) y el lago quedaba incalculable. Ahora el
+motor agrega una entrada aguas arriba cuando la laguna recibe agua de otra que drena al menos el 30% de su cuenca:
+la superficie del Titicaca para el Poopo y el agua medida en el Desaguadero antes de Uru Uru (tramo T4). Si la
+mayor parte de la perdida llega por el rio, el veredicto es **Aguas arriba** y la ficha cita el veredicto de la
+fuente.
+
+`uma/rivers.py` sigue el cauce (HydroSHEDS) en tramos T1-T6 mas el Mauri y mide por ano el agua en el cauce, el
+verde en epoca seca a 5 km (riego) y las represas, y arma un inventario de OpenStreetMap (canales, tomas, minas,
+plantas de tratamiento). Hallazgos: el agua en el cauce a la salida del Titicaca cayo de 5,619 ha (1985) a 126 ha
+(2024) mientras el lago perdio el 21% de su superficie: el Desaguadero funciona como un rebalse. El riego junto al
+rio crece unas 800 ha (de ~2,070 a ~2,890 ha verdes en la epoca seca, con Landsat 8/9 ajustado), del orden de 5 hm3 por ano frente a los ~1,300 hm3 que el Poopo necesitaria.
+
+Otros ajustes: evaporacion sobre el espejo de los lagos poco profundos (`hydro_extra.py --lake-pet`, ERA5-Land) y
+Landsat 8/9 llevado a la escala de 5/7 (Roy et al. 2016) en el verde del rio.
+
+## Asistente con IA (Claude) y explicaciones para todos
+
+- **Explícamelo fácil** (en cada ficha) y la vista **Pregunta**: Claude (`claude-opus-5-5`) explica en lenguaje
+  sencillo, en español, quechua, aymara o inglés, usando solo los resultados del detector (`app/ai.py` le pasa el
+  veredicto, los motivos, las pruebas, los sospechosos, el río y la protección legal). Debe decir qué tan seguro
+  está el detector y no inventar cifras. Botón **Escuchar**: lee la respuesta con la voz del navegador.
+- Sin clave, la app muestra una explicación armada con plantillas a partir de los mismos datos.
+- Clave: `ANTHROPIC_API_KEY` en `.env` (local) o en los secretos de Streamlit Cloud.
+
+## Cadena aguas arriba: cuánto es humano
+
+Cuando una laguna es "Aguas arriba", la parte humana de lo que deja de llegar se acota con el veredicto de la
+fuente: como mucho, la fracción humana de la pérdida de la fuente. Si la fuente tiene confianza baja (hoy el
+Titicaca), se informa un rango desde 0. Poopó: de 0 a 87,907 ha de 110,460 ha; Uru Uru: de 0 a 3,739 ha.

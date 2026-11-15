@@ -45,7 +45,8 @@ def results() -> list[dict]:
 def national() -> list[dict]:
     rows = json_file(NATDIR / "results.json") or []
     for r in rows:  # resultados de versiones anteriores del motor
-        if r["state"] not in ("Huella humana", "Alerta temprana", "Incalculable", "Causa climatica", "Intacto"):
+        if r["state"] not in ("Huella humana", "Alerta temprana", "Incalculable", "Aguas arriba", "Causa climatica",
+                              "Intacto"):
             r["state"] = "Incalculable"
     return rows
 
@@ -96,3 +97,40 @@ def share_pct(r: dict) -> float | None:
     if sh is None or r["trend"]["change_pct"] > -10:
         return None
     return round(100 * max(min(sh, 2.0), -1.0))
+
+
+def protection(body_id: str) -> dict:
+    """Sitio Ramsar y areas protegidas del cuerpo de agua (uma/protected.py)."""
+    for f in (DATA / "protegidas.json", NATDIR / "protegidas.json"):
+        d = json_file(f) or {}
+        if body_id in d:
+            return d[body_id]
+    return {"ramsar": None, "ramsar_aprox": False, "areas": []}
+
+
+def distance_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    """Distancia sobre la Tierra (haversine)."""
+    import math
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp, dl = p2 - p1, math.radians(lon2 - lon1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 6371 * 2 * math.asin(math.sqrt(a))
+
+
+@st.cache_data(show_spinner=False, ttl=24 * 3600)
+def geocode(place: str) -> dict | None:
+    """Busca un lugar de Bolivia en OpenStreetMap (Nominatim). Solo se envia el texto escrito."""
+    import urllib.parse
+    import urllib.request
+    q = urllib.parse.urlencode({"q": place, "format": "json", "limit": 1, "countrycodes": "bo",
+                                "accept-language": "es"})
+    req = urllib.request.Request(f"https://nominatim.openstreetmap.org/search?{q}",
+                                 headers={"User-Agent": "detector-huella-humana/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            res = json.load(r)
+    except OSError:
+        return None
+    if not res:
+        return None
+    return {"lat": float(res[0]["lat"]), "lon": float(res[0]["lon"]), "name": res[0]["display_name"]}
